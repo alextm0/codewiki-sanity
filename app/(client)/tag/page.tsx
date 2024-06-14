@@ -23,9 +23,6 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Tags",
-  // title: {
-  //   absolute: "TAGS",
-  // },
   description: "Search for posts by tags on the blog"
 }
 

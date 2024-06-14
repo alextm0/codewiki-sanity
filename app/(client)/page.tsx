@@ -36,6 +36,7 @@ export const metadata = {
 
 export default async function Home() {
   // TODO: Adjust the color of the page divider
+  // TODO: Add metadata to the pages
 
   const posts: Post[] = await getPosts();
 
