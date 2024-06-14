@@ -45,7 +45,7 @@ export default function RootLayout({
       >
         <CustomThemeProvider>
           <Navbar />
-          <main className="mx-auto max-w-5xl px-6">{children}</main>
+          <main className="">{children}</main>
         </CustomThemeProvider>
       </body>
     </html>
