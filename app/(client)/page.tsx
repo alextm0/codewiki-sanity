@@ -4,6 +4,8 @@ import Header from "@/app/components/Header";
 import { Post } from "../utils/interface";
 import PostComponent from "../components/PostComponent";
 import HeroSection from "../components/HeroSection";
+import PageDivider from "../components/PageDivider";
+import Courses from "../components/CoursesSection";
 
 async function getPosts() {
   const query = `
@@ -26,11 +28,15 @@ async function getPosts() {
 export const revalidate = 60; // 1 minute
 
 export default async function Home() {
+  // TODO: Adjust the color of the page divider
+
   const posts: Post[] = await getPosts();
 
   return (
     <div>
       <HeroSection />
+      {/* <PageDivider />  */}
+      <Courses />
       <div className="mx-auto max-w-5xl px-6">
         <Header title="Articles" tags />
         <div>
