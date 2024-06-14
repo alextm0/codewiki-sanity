@@ -1,11 +1,12 @@
 import { client } from "@/sanity/lib/client";
 
-import Header from "@/app/components/Header";
+import Head from "next/head";
+
 import { Post } from "../utils/interface";
-import PostComponent from "../components/PostComponent";
 import HeroSection from "../components/HeroSection";
-import PageDivider from "../components/PageDivider";
 import Courses from "../components/CoursesSection";
+import Features from "../components/Features";
+import ArticlesSection from "../components/ArticlesGrid";
 
 async function getPosts() {
   const query = `
@@ -27,6 +28,12 @@ async function getPosts() {
 
 export const revalidate = 60; // 1 minute
 
+export const metadata = {
+  title: 'CodeWiki',
+  description:
+    'codewiki.tech - a competitive programming blog',
+};
+
 export default async function Home() {
   // TODO: Adjust the color of the page divider
 
@@ -34,15 +41,15 @@ export default async function Home() {
 
   return (
     <div>
+      <Head>
+        <title>My Blog - Home</title>
+      </Head>
       <HeroSection />
       {/* <PageDivider />  */}
       <Courses />
+      <Features />
       <div className="mx-auto max-w-5xl px-6">
-        <Header title="Articles" tags />
-        <div>
-          {posts?.length > 0 &&
-            posts?.map((post) => <PostComponent key={post?._id} post={post} />)}
-        </div>
+        {posts && <ArticlesSection blogs={{ data: posts }} />}
       </div>
     </div>
   );

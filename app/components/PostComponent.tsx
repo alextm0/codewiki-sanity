@@ -1,47 +1,67 @@
-import Link from 'next/link'
-import React from 'react'
-import { Lilita_One, VT323} from 'next/font/google'
-import { Post } from '../utils/interface'
+import Link from "next/link";
+import React from "react";
+import { Lilita_One, VT323 } from "next/font/google";
+import { Post } from "../utils/interface";
+import { AiOutlineArrowRight } from "react-icons/ai";
+
+import Image from "next/image";
+import ArticleImage from "@/public/assets/ArticleImage.png";
 
 interface Props {
   post: Post;
 }
 
-const font = Lilita_One({weight: "400", subsets: ["latin"]})
-const dateFont = VT323({weight: "400", subsets: ["latin"]})
+const font = Lilita_One({ weight: "400", subsets: ["latin"] });
+const dateFont = VT323({ weight: "400", subsets: ["latin"] });
 
-const PostComponent = ({post}: Props) => {
+const BlogPostCard = ({ post }: Props) => {
   return (
-    <div className={cardStyle}>
-      <Link href={`/posts/${post?.slug?.current}`}>
-        <h2 className={`${font.className} text-2xl dark:text-slate-300`}>{post?.title}</h2>
-        <p className={`${dateFont.className} my-2 text-purple-800`}>{new Date(post?.publishedAt).toDateString()}</p>
-        <p className='dark:text-gray-400 mb-4 line-clamp-2'>{post?.excerpt}</p>
-      </Link>
+    <div className="bg-amber-50 dark:bg-white overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:shadow-lg hover:shadow-slate-400 rounded-xl md:w-80">
+      <div className="relative h-48 w-full">
+        <Image
+          src={ArticleImage}
+          alt="Image description"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
 
-      {/* TAGS */}
+      {/* Tags */}
+      <div className="pl-4 pt-4 text-sm font-medium">
+        <div className="flex items-center ">
+          <div className="text-sm text-gray-600 font-medium">
+            <div className="m-1 rounded text-xs text-orange-500 ">
+              {post?.tags?.map((tag) => (
+                <span
+                  key={tag._id}
+                  className="mr-2 p-1 rounded-lg text-sm lowercase dark:bg-orange-100 border"
+                >
+                  #{tag.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div>
-        {post?.tags?.map((tag) => (
-          <span key={tag?._id} className='mr-2 p-1 rounded-sm text-sm lowercase dark:bg-gray-950 border dark:border-gray-900'>#{tag?.name}</span>
-        ))}
+      <div className="bg-white w-full px-4 pb-4 pt-1">
+        <div className="text-gray-900 text-xl font-bold font-quicksand">
+          {post?.title}
+        </div>
+
+        <p className="text-gray-600 font-light text-sm mt-2 mb-2 font-montserrat">
+          {post?.excerpt}
+        </p>
+
+        <div className="flex items-center">
+          <p className="text-purple-200 dark:text-slate-700 mt-5 ml-auto flex items-center gap-1 mr-3 font-medium">
+            Citeste acum
+            <AiOutlineArrowRight className="mt-[2px]" />{" "}
+          </p>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostComponent
-
-const cardStyle = `
-mb-8
-p-4
-border
-border-gray-900
-rounded-md
-shadow-sm
-shadow-purple-950
-hover:shadow-md
-hover:bg-purple-500
-hover:text-white
-hover:dark:bg-gray-950
-`
+export default BlogPostCard;
