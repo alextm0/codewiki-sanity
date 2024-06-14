@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins, Righteous } from "next/font/google";
 import "./globals.css";
 import CustomThemeProvider from "../providers/CustomThemeProvider";
 import Navbar from "../components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({
+const righteous = Righteous({
+  weight: "400",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-righteous",
+});
+
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+});
+
+const inter = Inter({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +36,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${righteous.variable} ${poppins.variable} ${inter.variable}`}
+    >
       <body
         className={`${poppins.className} h-full bg-amber-50 text-indigo-500 dark:bg-slate-950 dark:text-amber-50`}
       >
