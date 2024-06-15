@@ -37,9 +37,9 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
             </code>
           );
         },
-        img({ src, alt }) {
-          return <img src={src} alt={alt} className="my-4 rounded-md" />;
-        },
+        // img({ src, alt }) {
+        //   return <img src={src} alt={alt} className="my-4 rounded-md" />;
+        // },
         h1: ({ children }) => (
           <h1 className="text-4xl font-bold my-4">{children}</h1>
         ),
