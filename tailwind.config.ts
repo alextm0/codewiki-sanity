@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'pattern': "url('/assets/bg-pattern.png')",
+      },
+
       fontFamily: {
         righteous: ['var(--font-righteous)'],
         poppins: ['var(--font-poppins)'],

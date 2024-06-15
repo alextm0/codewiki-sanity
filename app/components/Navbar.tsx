@@ -15,14 +15,14 @@ import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Navbar() {
   return (
-    <header>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="bg-[#00044D]">
+      <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
           {/* Logo */}
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
               <div className="flex items-center gap-3">
-                <span className="font-righteous text-3xl text-slate-800 dark:text-white">
+                <span className="font-righteous text-3xl text-white">
                   CodeWiki
                 </span>
               </div>
@@ -35,7 +35,7 @@ export default function Navbar() {
               {/* Navigation links */}
               <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400 mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300">
                 <Link href="/articles">
-                  <div className="text-base font-medium text-gray-800 dark:text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
+                  <div className="text-base font-medium text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
                     Articole
                   </div>
                 </Link>
@@ -43,7 +43,7 @@ export default function Navbar() {
 
               {/* Dropdown Menu */}
               <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400 mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">
-                <div className="font-medium text-gray-800 dark:text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400 flex justify-center items-center gap-1 cursor-pointer">
+                <div className="font-medium text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400 flex justify-center items-center gap-1 cursor-pointer">
                   <Dropdown
                     classNames={{
                       content:
@@ -95,7 +95,7 @@ export default function Navbar() {
               {/* Navigation link */}
               <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400  mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300">
                 <Link href="/problems">
-                  <div className="text-base font-medium text-gray-800 dark:text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
+                  <div className="text-base font-medium text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
                     Probleme
                   </div>
                 </Link>

@@ -7,6 +7,7 @@ import HeroSection from "../components/HeroSection";
 import Courses from "../components/CoursesSection";
 import Features from "../components/Features";
 import ArticlesSection from "../components/ArticlesGrid";
+import PageDivider from "../components/PageDivider";
 
 async function getPosts() {
   const query = `
@@ -29,9 +30,8 @@ async function getPosts() {
 export const revalidate = 60; // 1 minute
 
 export const metadata = {
-  title: 'CodeWiki',
-  description:
-    'codewiki.tech - a competitive programming blog',
+  title: "CodeWiki",
+  description: "codewiki.tech - a competitive programming blog",
 };
 
 export default async function Home() {
@@ -45,12 +45,16 @@ export default async function Home() {
       <Head>
         <title>My Blog - Home</title>
       </Head>
-      <HeroSection />
-      {/* <PageDivider />  */}
+      <div className="flex-grow bg-pattern bg-cover">
+        <HeroSection />
+        <PageDivider />
+      </div>
       <Courses />
       <Features />
       <div className="mx-auto max-w-5xl px-6">
-        {posts && <ArticlesSection headerTitle="Articles" blogs={{ data: posts }} />}
+        {posts && (
+          <ArticlesSection headerTitle="Articles" blogs={{ data: posts }} />
+        )}
       </div>
     </div>
   );

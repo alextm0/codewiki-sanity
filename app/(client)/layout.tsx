@@ -53,7 +53,7 @@ export default function RootLayout({
       className={`${righteous.variable} ${poppins.variable} ${inter.variable}`}
     >
       <body
-        className={`${poppins.className} h-full bg-amber-50 text-indigo-500 dark:bg-slate-950 dark:text-amber-50`}
+        className={`${poppins.className} h-full`}
       >
         <CustomThemeProvider>
           <Navbar />
