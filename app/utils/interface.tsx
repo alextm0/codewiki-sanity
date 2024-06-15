@@ -23,3 +23,16 @@ export interface Comment {
   _createdAt: string;
   _id: string;
 }
+
+export interface Topic {
+  _type: string;
+  topicName: string;
+  details: string;
+}
+
+export interface Category {
+  name: string;
+  category: string;
+  topics: Topic[];
+}
+
