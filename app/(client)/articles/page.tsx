@@ -1,12 +1,14 @@
-import { client } from "@/sanity/lib/client";
+import React from 'react'
 
+import { client } from "@/sanity/lib/client";
 import Head from "next/head";
 
-import { Post } from "../utils/interface";
-import HeroSection from "../components/HeroSection";
-import Courses from "../components/CoursesSection";
-import Features from "../components/Features";
-import ArticlesSection from "../components/ArticlesGrid";
+import { Post } from "@/app/utils/interface";
+import HeroSection from "@/app/components/HeroSection";
+import Courses from "@/app/components/CoursesSection";
+import Features from "@/app/components/Features";
+import ArticlesSection from "@/app/components/ArticlesGrid";
+import { notFound } from "next/navigation";
 
 async function getPosts() {
   const query = `
@@ -26,32 +28,26 @@ async function getPosts() {
   return data;
 }
 
-export const revalidate = 60; // 1 minute
+export const revalidate = 60;
 
 export const metadata = {
-  title: 'CodeWiki',
+  title: 'Articole - CodeWiki',
   description:
     'codewiki.tech - a competitive programming blog',
 };
 
-export default async function Home() {
-  // TODO: Adjust the color of the page divider
-  // TODO: Add metadata to the pages
-
+export default async function Page() {
   const posts: Post[] = await getPosts();
 
   return (
     <div>
       <Head>
-        <title>My Blog - Home</title>
+        <title>Articole</title>
       </Head>
-      <HeroSection />
-      {/* <PageDivider />  */}
-      <Courses />
-      <Features />
+
       <div className="mx-auto max-w-5xl px-6">
         {posts && <ArticlesSection headerTitle="Articles" blogs={{ data: posts }} />}
       </div>
     </div>
-  );
+  )
 }

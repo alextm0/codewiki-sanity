@@ -7,17 +7,18 @@ import { Post } from "../utils/interface";
 import Header from "./Header";
 
 interface ArticlesProps {
+  headerTitle: string;
   blogs: {
     data: Post[];
   };
 }
 
-const Articles: React.FC<ArticlesProps> = ({ blogs }) => {
+const Articles: React.FC<ArticlesProps> = ({ headerTitle, blogs }) => {
   return (
     <div className="mx-auto pt-10 pb-10">
       <div className="text-center mb-5">
         <h1 className="text-gray-900 dark:text-white font-quicksand font-bold text-4xl">
-          <Header title="Articles" tags />
+          <Header title={headerTitle} tags />
         </h1>
       </div>
 

@@ -34,7 +34,7 @@ export default function Navbar() {
             <nav className="flex space-x-10">
               {/* Navigation links */}
               <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400 mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300">
-                <Link href="/articole">
+                <Link href="/articles">
                   <div className="text-base font-medium text-gray-800 dark:text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
                     Articole
                   </div>
@@ -94,7 +94,7 @@ export default function Navbar() {
 
               {/* Navigation link */}
               <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400  mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300">
-                <Link href="/probleme">
+                <Link href="/problems">
                   <div className="text-base font-medium text-gray-800 dark:text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
                     Probleme
                   </div>

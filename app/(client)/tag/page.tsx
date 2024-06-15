@@ -1,5 +1,4 @@
 import Header from "@/app/components/Header";
-import Navbar from "@/app/components/Navbar";
 import { Tag } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
@@ -28,9 +27,9 @@ export const metadata: Metadata = {
 
 const page = async () => {
   const tags: Tag[] = await getAllTags();
-  console.log(tags, "tags");
+  //console.log(tags, "tags");
   return (
-    <div>
+    <div className="max-w-[1024px] mx-auto">
       <Header title="Tags" />
       <div>
         {tags?.length > 0 &&
