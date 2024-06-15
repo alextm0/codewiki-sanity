@@ -9,6 +9,7 @@ CodeWiki CMS is a competitive programming blog platform designed for students to
 - **Comments**: Engage with readers through comments and discussions on each post.
 - **Theming**: Support for light and dark themes.
 - **Sanity Integration**: Powered by Sanity for flexible content management.
+- **TypeScript**: The project is built using TypeScript for type safety and better developer experience.
 
 ## Installation
 
