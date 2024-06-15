@@ -1,12 +1,13 @@
 import AddComment from "@/app/components/AddComment";
 import AllComments from "@/app/components/AllComments";
 import Header from "@/app/components/Header";
+import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
 import { slugify } from "@/app/utils/helpers";
 import { Post } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
-import { PortableText } from "@portabletext/react";
+import { portableTextToMarkdown } from "@/app/utils/portableTextToMarkdown";
 import { Metadata } from "next";
 import { VT323 } from "next/font/google";
 import Image from "next/image";
@@ -94,6 +95,8 @@ const page = async ({ params, searchParams }: Params) => {
     notFound();
   }
 
+  const markdownContent = portableTextToMarkdown(post.body);
+
   return (
     <div>
       <Header title={post?.title} />
@@ -112,10 +115,7 @@ const page = async ({ params, searchParams }: Params) => {
         </div>
         <Toc headings={post?.headings} />
         <div className={richTextStyles}>
-          <PortableText
-            value={post?.body}
-            components={myPortableTextComponents}
-          />
+          <MarkdownRender mdString={markdownContent} />
           <AddComment postId={post?._id} />
           <AllComments
             comments={post?.comments || []}
@@ -129,61 +129,6 @@ const page = async ({ params, searchParams }: Params) => {
 };
 
 export default page;
-
-const myPortableTextComponents = {
-  types: {
-    image: ({ value }: any) => (
-      <Image
-        src={urlForImage(value).url()}
-        alt="Post"
-        width={700}
-        height={700}
-      />
-    ),
-  },
-  block: {
-    h2: ({ value }: any) => (
-      <h2
-        id={slugify(value.children[0].text)}
-        className="text-3xl font-bold mb-3"
-      >
-        {value.children[0].text}
-      </h2>
-    ),
-    h3: ({ value }: any) => (
-      <h3
-        id={slugify(value.children[0].text)}
-        className="text-2xl font-bold mb-3"
-      >
-        {value.children[0].text}
-      </h3>
-    ),
-    h4: ({ value }: any) => (
-      <h4
-        id={slugify(value.children[0].text)}
-        className="text-2xl font-bold mb-3"
-      >
-        {value.children[0].text}
-      </h4>
-    ),
-    h5: ({ value }: any) => (
-      <h5
-        id={slugify(value.children[0].text)}
-        className="text-2xl font-bold mb-3"
-      >
-        {value.children[0].text}
-      </h5>
-    ),
-    h6: ({ value }: any) => (
-      <h6
-        id={slugify(value.children[0].text)}
-        className="text-xl font-bold mb-3"
-      >
-        {value.children[0].text}
-      </h6>
-    ),
-  },
-};
 
 const richTextStyles = `
 mt-14

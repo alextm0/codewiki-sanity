@@ -3,5 +3,26 @@
 @tailwind utilities;
 
 .no-border {
-    border: none !important;
+  border: none !important;
+}
+
+/* styles.css */
+.light .code-block {
+  background-color: #f6f8fa;
+  color: #000;
+}
+
+.dark .code-block {
+  background-color: #282c34;
+  color: #f8f8f2;
+}
+
+.light .inline-code {
+  background-color: #f6f8fa;
+  color: #000;
+}
+
+.dark .inline-code {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
 }
