@@ -8,6 +8,7 @@ import Courses from "../components/CoursesSection";
 import Features from "../components/Features";
 import ArticlesSection from "../components/ArticlesGrid";
 import PageDivider from "../components/PageDivider";
+import Contact from "../components/Contact";
 
 async function getPosts() {
   const query = `
@@ -56,6 +57,7 @@ export default async function Home() {
           <ArticlesSection headerTitle="Articles" blogs={{ data: posts }} />
         )}
       </div>
+      <Contact />
     </div>
   );
 }

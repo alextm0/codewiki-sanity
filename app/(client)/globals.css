@@ -28,3 +28,32 @@
   background-color: #2d2d2d;
   color: #f8f8f2;
 }
+
+/* Autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  @apply bg-gray-900 text-gray-600;  /* Using Tailwind CSS utility classes to apply background and text colors */
+  -webkit-box-shadow: inset 0 0 0px 1000px #1a202c; /* Inner shadow with large spread to change background color */
+  box-shadow: inset 0 0 0px 1000px #1a202c; /* Standard shadow property for other browsers */
+  transition: background-color 5000s ease-in-out 0s; /* Delay the transition to keep the background color applied */
+}
+
+input:-webkit-autofill::first-line,
+textarea:-webkit-autofill::first-line,
+select:-webkit-autofill::first-line {
+  @apply text-base placeholder-gray-600 text-gray-600; /* Tailwind CSS utility classes for first line text styling */
+}
+
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: inset 0 0 0px 1000px #1a202c, 0 0 0 1px #10b981; /* Combined inner shadow for background and outer shadow for border */
+  box-shadow: inset 0 0 0px 1000px #1a202c, 0 0 0 1px #10b981; /* Standard shadow property for other browsers */
+}
