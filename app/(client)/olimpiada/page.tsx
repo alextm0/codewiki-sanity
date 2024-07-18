@@ -7,14 +7,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 async function getAllCategories(): Promise<Category[]> {
   const query = `
-  *[_type == "category" && category == "olimpiada"] {
+  *[_type == "category" && category == "olimpiada"] | order(order asc) {
     name,
     category,
     topics[] {
       _type,
       topicName,
       details
-    }
+    },
+    order
   }
   `;
   const categories = await client.fetch(query);

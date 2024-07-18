@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import BlogPostCard from "./PostComponent";
 import { Post } from "../utils/interface";
 import Header from "./Header";

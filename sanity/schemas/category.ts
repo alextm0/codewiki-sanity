@@ -22,5 +22,10 @@ export const category = defineType({
       type: "array",
       of: [{ type: "topic" }],
     },
+    {
+      name: "order",
+      title: "Order",
+      type: "number",
+    },
   ],
 });

@@ -2,7 +2,7 @@ import Header from "@/app/components/Header";
 import { Tag } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import React from "react";
 
 async function getAllTags() {

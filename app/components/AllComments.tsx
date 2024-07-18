@@ -1,6 +1,6 @@
 import React from "react";
 import { Comment } from "../utils/interface";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 
 interface Props {
   comments: Array<Comment>;

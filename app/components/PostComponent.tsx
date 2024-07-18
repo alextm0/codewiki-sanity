@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import React from "react";
 import { Lilita_One, VT323 } from "next/font/google";
 import { Post } from "../utils/interface";

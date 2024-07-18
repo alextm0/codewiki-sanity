@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { BsArrowRight } from "react-icons/bs";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 
 import AdmitereIcon from "@/public/assets/admitere-icon.svg";
 import BacalaureatIcon from "@/public/assets/bacalaureat-icon.svg";

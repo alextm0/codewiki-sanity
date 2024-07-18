@@ -6,14 +6,19 @@ import Toc from "@/app/components/Toc";
 import { slugify } from "@/app/utils/helpers";
 import { Post } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
-import { urlForImage } from "@/sanity/lib/image";
 import { portableTextToMarkdown } from "@/app/utils/portableTextToMarkdown";
 import { Metadata } from "next";
 import { VT323 } from "next/font/google";
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
 import React from "react";
+
+import "@/app/(client)/markdown-styles.module.css";
+
+import ResourcesTable from "@/app/components/ResourcesTable";
+import ProblemSetTable from "@/app/components/ProblemSetTable";
+
+// Import globals.css
 
 const dateFont = VT323({ weight: "400", subsets: ["latin"] });
 
@@ -73,29 +78,49 @@ export async function generateMetadata({
       locale: "en_US",
       url: `https://next-cms-blog-ce.vercel.app/${params.slug}`,
       siteName: "DevBlook",
-      images: [
-        // {
-        //   url: post.image,
-        // }
-        // {
-        //   url: urlForImage(post?.body?.find((b: any) => b._type === "image")).width(1200).height(630).url(),
-        //   width: 1200,
-        //   height: 630,
-        // },
-      ],
     },
   };
 }
 
-const page = async ({ params, searchParams }: Params) => {
+const Page = async ({ params, searchParams }: Params) => {
   const commentsOrder = searchParams?.comments || "desc";
   const post: Post = await getPost(params?.slug, commentsOrder.toString());
 
   if (!post) {
     notFound();
-  }
+  }  
 
-  const markdownContent = portableTextToMarkdown(post.body);
+  const markdownContent = portableTextToMarkdown(post?.body);  
+
+  const exampleResource = {
+    source: "source",
+    title: "title",
+    link: "https://example.com",
+    description: "description",
+  };
+
+  /* interface Problem {
+  source: string;
+  name: string;
+  link: string;
+  sourceLink: string;
+  badge: 'easy' | 'normal' | 'hard' | string;
+  tags: string;
+}*/
+
+  const exampleProblemSet = {
+    problemSetName: "problemSetName",
+    problemSet: [
+      {
+        source: "source",
+        name: "name",
+        link: "https://example.com",
+        sourceLink: "https://example.com",
+        badge: "easy",
+        tags: "tags",
+      },
+    ],
+  };
 
   return (
     <div>
@@ -116,6 +141,8 @@ const page = async ({ params, searchParams }: Params) => {
         <Toc headings={post?.headings} />
         <div className={richTextStyles}>
           <MarkdownRender mdString={markdownContent} />
+          <ResourcesTable header="Resources" resource={[exampleResource]} />
+          <ProblemSetTable {...exampleProblemSet} />
           <AddComment postId={post?._id} />
           <AllComments
             comments={post?.comments || []}
@@ -128,18 +155,18 @@ const page = async ({ params, searchParams }: Params) => {
   );
 };
 
-export default page;
+export default Page;
 
 const richTextStyles = `
-mt-14
-text-justify
-max-w-2xl
-m-auto
-prose-headings:my-5
-prose-heading:text-2xl
-prose-p:mb-5
-prose-p:leading-7
-prose-li:list-disc
-prose-li:leading-7
-prose-li:ml-4
+  mt-14
+  text-justify
+  max-w-3xl
+  m-auto
+  prose-headings:my-5
+  prose-heading:text-2xl
+  prose-p:mb-5
+  prose-p:leading-7
+  prose-li:list-disc
+  prose-li:leading-7
+  prose-li:ml-4
 `;

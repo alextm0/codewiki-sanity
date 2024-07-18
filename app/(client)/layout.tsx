@@ -4,6 +4,8 @@ import "./globals.css";
 import CustomThemeProvider from "../providers/CustomThemeProvider";
 import Navbar from "../components/Navbar";
 
+import { ViewTransitions } from "next-view-transitions";
+
 const righteous = Righteous({
   weight: "400",
   subsets: ["latin"],
@@ -29,16 +31,18 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
   title: {
     default: "CodeWiki - Competitive Programming Blog",
-    template: '%s | CodeWiki - Competitive Programming Blog'
+    template: "%s | CodeWiki - Competitive Programming Blog",
   },
-  description: "CodeWiki is a comprehensive blog for students focused on competitive programming, offering tutorials, problem-solving techniques, and programming contests preparation.",
+  description:
+    "CodeWiki is a comprehensive blog for students focused on competitive programming, offering tutorials, problem-solving techniques, and programming contests preparation.",
   openGraph: {
     title: "CodeWiki - Competitive Programming Blog",
-    description: "Explore CodeWiki for the best resources on competitive programming. Learn, practice, and excel in programming contests with our expert tutorials and guides.",
+    description:
+      "Explore CodeWiki for the best resources on competitive programming. Learn, practice, and excel in programming contests with our expert tutorials and guides.",
     type: "website",
     locale: "en_US",
     url: "https://codewiki-sanity.vercel.app/",
-    siteName: "CodeWiki"
+    siteName: "CodeWiki",
   },
 };
 
@@ -48,18 +52,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${righteous.variable} ${poppins.variable} ${inter.variable}`}
-    >
-      <body
-        className={`${poppins.className} h-full`}
+    <ViewTransitions>
+      <html
+        lang="en"
+        className={`${righteous.variable} ${poppins.variable} ${inter.variable}`}
       >
-        <CustomThemeProvider>
-          <Navbar />
-          <main className="">{children}</main>
-        </CustomThemeProvider>
-      </body>
-    </html>
+        <body className={`${poppins.className} h-full`}>
+          <CustomThemeProvider>
+            <Navbar />
+            <main className="">{children}</main>
+          </CustomThemeProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

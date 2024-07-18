@@ -1,5 +1,5 @@
 import Header from "@/app/components/Header";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import React from "react";
 
 const NotFound = () => {

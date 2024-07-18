@@ -4,7 +4,6 @@ export const post = {
   name: "post",
   title: "Post",
   type: "document",
-
   fields: [
     {
       name: "title",
@@ -41,6 +40,7 @@ export const post = {
           type: "image",
           fields: [{ type: "text", name: "alt", title: "Alt" }],
         },
+        { type: "resourcesTable" },
       ],
     },
     {

@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .no-border {
   border: none !important;
 }
 
-/* styles.css */
 .light .code-block {
   background-color: #f6f8fa;
   color: #000;
@@ -28,3 +25,23 @@
   background-color: #2d2d2d;
   color: #f8f8f2;
 }
+
+.blockquote {
+  border-left: 4px solid #ddd;
+  padding-left: 1em;
+  color: #555;
+  font-style: italic;
+  margin: 1em 0;
+}
+
+.light .blockquote {
+  border-color: #ddd;
+  color: #555;
+}
+
+.dark .blockquote {
+  border-color: #555;
+  color: #bbb;
+}
+
+

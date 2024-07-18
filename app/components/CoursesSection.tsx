@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 
 import BacalaureatIcon from "@/public/assets/bacalaureat-icon.svg";
 import AdmitereIcon from "@/public/assets/admitere-icon.svg";

@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { IoSchoolSharp } from "react-icons/io5";
 import { FaUserGraduate } from "react-icons/fa";

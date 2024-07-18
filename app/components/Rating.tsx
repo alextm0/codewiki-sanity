@@ -1,7 +1,7 @@
 "use client"; // Add this line at the top
 
 import React, { useState } from "react";
-import Link from "next/link";
+import { Link } from 'next-view-transitions'
 
 interface Params {
   stars: number;
