@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { client } from "@/sanity/lib/client";
 import { Category } from "@/app/utils/interface";
 import CategorySection from "@/app/components/CategorySection";
@@ -26,10 +26,6 @@ export const revalidate = 1;
 
 export default async function Page() {
   const categories = await getAllCategories();
-  console.log(categories, "categories");
-
-  const bacalaureatCategory = categories[0];
-  console.log(bacalaureatCategory.topics, "bacalaureatCategory");
 
   return (
     <div>

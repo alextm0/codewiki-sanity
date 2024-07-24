@@ -13,7 +13,7 @@ function Courses() {
         <div data-aos="flip-up" className="max-w-xl mx-auto text-center mt-24">
           <h1 className="font-bold text-darken my-3 text-2xl dark:text-white">
             CodeWiki <span className="ml-2 mr-2"> | </span>{" "}
-            <span className="text-orange-500">Investește în educația ta</span>
+            <span className="text-[#FF725E]">Investește în educația ta</span>
           </h1>
           <p className="leading-relaxed text-gray-500 dark:text-white">
             Alege metoda de învățare potrivită nevoilor și dorințelor tale!
@@ -24,7 +24,7 @@ function Courses() {
             data-aos="fade-up"
             className="bg-white p-6 text-center rounded-xl shadow-xl hover:shadow-2xl hover:shadow-orange-100"
           >
-            <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
+            <div className="bg-[#FF725E] rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
               <Image src={AdmitereIcon} alt="" className="w-8 h-8" />
               {/* <img src={AdmitereIcon} alt="" className='w-12 h-12' /> */}
             </div>
@@ -43,7 +43,7 @@ function Courses() {
             data-aos-delay="150"
             className="bg-white shadow-xl p-6 text-center rounded-xl hover:shadow-2xl hover:shadow-orange-100"
           >
-            <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
+            <div className="bg-[#FF725E] rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
               <Image
                 src={BacalaureatIcon}
                 alt=""
@@ -65,7 +65,7 @@ function Courses() {
             data-aos-delay="300"
             className="bg-white shadow-xl p-6 text-center rounded-xl hover:shadow-2xl hover:shadow-orange-100"
           >
-            <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
+            <div className="bg-[#FF725E] rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
               <Image
                 src={OlimpiadaIcon}
                 alt=""

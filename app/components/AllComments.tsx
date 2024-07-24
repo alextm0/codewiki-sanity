@@ -10,7 +10,7 @@ interface Props {
 
 const AllComments = ({ comments, slug, commentsOrder }: Props) => {
   return (
-    <div>
+    <div className="mx-auto max-w-screen-md">
       <h3>All Comments</h3>
       {comments?.length === 0 && <p>No comments yet.</p>}
       {comments?.length > 0 && (

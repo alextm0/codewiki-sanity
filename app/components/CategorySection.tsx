@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'next-view-transitions'
 import { v4 as uuidv4 } from "uuid";
 import Rating from "./Rating";
+import { slugify } from "../utils/helpers";
 // import Rating from "./Rating";
 
 interface Topic {
@@ -30,7 +31,7 @@ const CategorySection: React.FC<CategoryPageProps> = ({
       key={uuidv4()}
       className="font-poppins flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-violet-400"
     >
-      <Link key={`/${category}/${topic.topicName}`} href={`/${category}/${topic.topicName}`}>
+      <Link key={`/${category}/${topic.topicName}`} href={slugify(`${category})/${slugify(topic.topicName)}`)}>
         <div>
           <div className="text-xl font-semibold tracking-wide text-gray-800 dark:text-gray-300">
             {topic.topicName}

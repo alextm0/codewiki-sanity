@@ -1,8 +1,14 @@
 export interface Post {
-  title: string
+  title: string;
   slug: { current: string };
   publishedAt: string;
   excerpt: string;
+  coverImage?: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
   body: any;
   tags: Array<Tag>;
   _id: string;

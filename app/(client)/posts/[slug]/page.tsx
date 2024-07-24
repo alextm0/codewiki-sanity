@@ -3,7 +3,6 @@ import AllComments from "@/app/components/AllComments";
 import Header from "@/app/components/Header";
 import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
-import { slugify } from "@/app/utils/helpers";
 import { Post } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { portableTextToMarkdown } from "@/app/utils/portableTextToMarkdown";
@@ -12,13 +11,12 @@ import { VT323 } from "next/font/google";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
 import React from "react";
-
+import Image from "next/image";
 import "@/app/(client)/markdown-styles.module.css";
 
 import ResourcesTable from "@/app/components/ResourcesTable";
 import ProblemSetTable from "@/app/components/ProblemSetTable";
-
-// Import globals.css
+import PageDivider from "@/app/components/PageDivider";
 
 const dateFont = VT323({ weight: "400", subsets: ["latin"] });
 
@@ -38,6 +36,12 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
     slug,
     publishedAt,
     excerpt,
+    coverImage {
+      asset-> {
+        url
+      },
+      alt
+    },
     _id,
     "headings": body[style in ["h2", "h3", "h4", "h5", "h6"]],
     body,
@@ -88,42 +92,12 @@ const Page = async ({ params, searchParams }: Params) => {
 
   if (!post) {
     notFound();
-  }  
+  }
 
-  const markdownContent = portableTextToMarkdown(post?.body);  
-
-  const exampleResource = {
-    source: "source",
-    title: "title",
-    link: "https://example.com",
-    description: "description",
-  };
-
-  /* interface Problem {
-  source: string;
-  name: string;
-  link: string;
-  sourceLink: string;
-  badge: 'easy' | 'normal' | 'hard' | string;
-  tags: string;
-}*/
-
-  const exampleProblemSet = {
-    problemSetName: "problemSetName",
-    problemSet: [
-      {
-        source: "source",
-        name: "name",
-        link: "https://example.com",
-        sourceLink: "https://example.com",
-        badge: "easy",
-        tags: "tags",
-      },
-    ],
-  };
+  const markdownContent = portableTextToMarkdown(post?.body);
 
   return (
-    <div>
+    <div className="font-inter">
       <Header title={post?.title} />
       <div className="text-center">
         <span className={`${dateFont?.className} text-purple-500`}>
@@ -132,17 +106,33 @@ const Page = async ({ params, searchParams }: Params) => {
         <div className="mt-5">
           {post?.tags?.map((tag) => (
             <Link key={tag?._id} href={`/tag/${tag.slug.current}`}>
-              <span className="mr-2 p-1 rounded-sm text-sm lowercase dark:bg-gray-950 border dark:border-gray-900">
-                #{tag.name}
+              <span className="font-poppins mr-2 p-1 rounded-sm text-sm lowercase dark:bg-gray-950 border dark:border-gray-900">
+                {tag.name}
               </span>
             </Link>
           ))}
         </div>
         <Toc headings={post?.headings} />
+
+        {/* Cover Image Display with adjusted width */}
+        {post?.coverImage && (
+          <div className="my-8 mx-auto max-w-4xl relative overflow-hidden">
+            <div className="-mx-4 sm:-mx-8 md:-mx-12 lg:-mx-16">
+              <Image
+                src={post.coverImage.asset.url}
+                alt={post.coverImage.alt || "Cover Image"}
+                width={1300}
+                height={500}
+                layout="responsive"
+                objectFit="cover"
+                className="rounded-md"
+              />
+            </div>
+          </div>
+        )}
+
         <div className={richTextStyles}>
           <MarkdownRender mdString={markdownContent} />
-          <ResourcesTable header="Resources" resource={[exampleResource]} />
-          <ProblemSetTable {...exampleProblemSet} />
           <AddComment postId={post?._id} />
           <AllComments
             comments={post?.comments || []}
@@ -160,7 +150,7 @@ export default Page;
 const richTextStyles = `
   mt-14
   text-justify
-  max-w-3xl
+  max-w-4xl
   m-auto
   prose-headings:my-5
   prose-heading:text-2xl

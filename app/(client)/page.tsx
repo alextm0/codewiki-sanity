@@ -9,6 +9,8 @@ import Features from "../components/Features";
 import ArticlesSection from "../components/ArticlesGrid";
 import PageDivider from "../components/PageDivider";
 
+import "./globals.css";
+
 async function getPosts() {
   const query = `
   *[_type == "post"] {
@@ -16,6 +18,12 @@ async function getPosts() {
     slug,
     publishedAt,
     excerpt,
+    coverImage {
+      asset-> {
+        url
+      },
+      alt
+    },
     tags[]-> {
       _id,
       slug,
@@ -26,6 +34,7 @@ async function getPosts() {
   const data = await client.fetch(query);
   return data;
 }
+
 
 export const revalidate = 60; // 1 minute
 
@@ -53,7 +62,7 @@ export default async function Home() {
       <Features />
       <div className="mx-auto max-w-5xl px-6">
         {posts && (
-          <ArticlesSection headerTitle="Articles" blogs={{ data: posts }} />
+          <ArticlesSection headerTitle="Articole recente" blogs={{ data: posts }} />
         )}
       </div>
     </div>

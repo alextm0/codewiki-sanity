@@ -31,6 +31,28 @@ export const post = {
       validation: (Rule: Rule) => Rule.max(200).error("Max 200 characters"),
     },
     {
+      name: "coverImage",
+      title: "Cover Image",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          title: "Alternative Text",
+          type: "text",
+          validation: (Rule: Rule) =>
+            Rule.required().error("Alternative text is required"),
+        },
+        {
+          name: "caption",
+          title: "Caption",
+          type: "text",
+        },
+      ],
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: "body",
       title: "Body",
       type: "array",
@@ -40,7 +62,6 @@ export const post = {
           type: "image",
           fields: [{ type: "text", name: "alt", title: "Alt" }],
         },
-        { type: "resourcesTable" },
       ],
     },
     {
@@ -48,6 +69,6 @@ export const post = {
       title: "Tags",
       type: "array",
       of: [{ type: "reference", to: [{ type: "tag" }] }],
-    },
+    },    
   ],
 };

@@ -23,7 +23,7 @@ function Features() {
               </svg>
             </div>
             <p className='text-gray-500'>
-              <span className='text-orange-500 font-medium'>
+              <span className='text-[#FF725E] font-medium'>
                 Conținut relevant și actualizat
               </span> <br/> 
                 Lucrăm regulat la articole diversificate, prezentate în mod accesibil și ușor de înțeles.
@@ -37,7 +37,7 @@ function Features() {
               </svg>
             </div>
             <p className='text-gray-500'>
-              <span className='text-orange-500 font-medium'>Calitatea conținutului</span>  <br />
+              <span className='text-[#FF725E] font-medium'>Calitatea conținutului</span>  <br />
               Suntem dedicați oferirii de conținut de calitate superioară, cu materiale riguros verificate și testate.
             </p>
           </div>
@@ -48,7 +48,7 @@ function Features() {
               </svg>
             </div>
             <p className='text-gray-500'>
-              <span className='text-orange-500 font-medium'>Feedback și suport </span> < br/>
+              <span className='text-[#FF725E] font-medium'>Feedback și suport </span> < br/>
               Oferim o modalitate ușoară și rapidă pentru utilizatorii noștri de a ne contacta.
             </p>
           </div>

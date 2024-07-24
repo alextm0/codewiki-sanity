@@ -1,31 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Righteous } from "next/font/google";
 import "./globals.css";
 import CustomThemeProvider from "../providers/CustomThemeProvider";
 import Navbar from "../components/Navbar";
 
 import { ViewTransitions } from "next-view-transitions";
-
-const righteous = Righteous({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-righteous",
-});
-
-const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-poppins",
-});
-
-const inter = Inter({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
@@ -53,11 +31,8 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html
-        lang="en"
-        className={`${righteous.variable} ${poppins.variable} ${inter.variable}`}
-      >
-        <body className={`${poppins.className} h-full`}>
+      <html lang="en" className="font-poppins">
+        <body className={`h-full`}>
           <CustomThemeProvider>
             <Navbar />
             <main className="">{children}</main>

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Link } from 'next-view-transitions'
+import Link from "next/link";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { IoSchoolSharp } from "react-icons/io5";
 import { FaUserGraduate } from "react-icons/fa";
@@ -11,7 +11,6 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
-import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Navbar() {
   return (
@@ -30,12 +29,12 @@ export default function Navbar() {
           </div>
 
           {/* Navigation Links - centered */}
-          <div className="hidden md:flex flex-grow items-center justify-center">
+          <div className="hidden md:flex flex-grow items-center justify-center font-poppins">
             <nav className="flex space-x-10">
               {/* Navigation links */}
               <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400 mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300">
                 <Link href="/articles">
-                  <div className="text-base font-medium text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
+                  <div className=" font-medium  text-gray-200 light:hover:text-gray-600 dark:hover:text-gray-400">
                     Articole
                   </div>
                 </Link>
@@ -61,9 +60,9 @@ export default function Navbar() {
                         key="olimpiada"
                         as={Link}
                         href="/olimpiada"
-                        className="no-border"
+                        className=""
                       >
-                        <div className="flex gap-2 my-2">
+                        <div className="flex gap-2 my-2 text-gray-300">
                           <RiMedal2Fill /> Olimpiada
                         </div>
                       </DropdownItem>
@@ -73,7 +72,7 @@ export default function Navbar() {
                         href="/admitere"
                         className="no-border"
                       >
-                        <div className="flex gap-2 my-2">
+                        <div className="flex gap-2 my-2 text-gray-300">
                           <FaUserGraduate /> Admitere
                         </div>
                       </DropdownItem>
@@ -83,7 +82,7 @@ export default function Navbar() {
                         href="/bacalaureat"
                         className="no-border"
                       >
-                        <div className="flex gap-2 my-2">
+                        <div className="flex gap-2 my-2 text-gray-300">
                           <IoSchoolSharp /> Bacalaureat
                         </div>
                       </DropdownItem>
@@ -105,9 +104,7 @@ export default function Navbar() {
 
           {/* Theme Toggle - right-aligned */}
           <div className="flex gap-2 justify-end lg:w-0 lg:flex-1">
-            <button>
-              <ThemeSwitcher />
-            </button>
+            <button>{/* <ThemeSwitcher /> */}</button>
           </div>
         </div>
       </div>

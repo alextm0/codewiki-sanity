@@ -30,7 +30,7 @@ export function portableTextToMarkdown(blocks: PortableTextBlock[]): string {
       if (block._type === "resourcesTable") {
         const header = block.header;
         const resources = JSON.stringify(block.resource);
-        return `<resourcesTable header="${header}" resources={${resources}} />`;
+        return `<resourcesTable header="${header}" resources='${resources}' />`;
       }
 
       if (block._type === "image") {
