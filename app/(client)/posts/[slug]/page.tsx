@@ -87,24 +87,25 @@ export async function generateMetadata({
 }
 
 const Page = async ({ params, searchParams }: Params) => {
-  const commentsOrder = searchParams?.comments || "desc";
-  const post: Post = await getPost(params?.slug, commentsOrder.toString());
+  const commentsOrder = searchParams?.comments?.toString() || "desc";
+  const post: Post = await getPost(params?.slug, commentsOrder);
 
   if (!post) {
     notFound();
+    return null;
   }
 
-  const markdownContent = portableTextToMarkdown(post?.body);
+  const markdownContent = portableTextToMarkdown(post.body || "");
 
   return (
     <div className="font-inter">
-      <Header title={post?.title} />
+      <Header title={post.title} />
       <div className="text-center">
         <span className={`${dateFont?.className} text-purple-500`}>
-          {new Date(post?.publishedAt).toDateString()}
+          {new Date(post.publishedAt).toDateString()}
         </span>
         <div className="mt-5">
-          {post?.tags?.map((tag) => (
+          {post.tags?.map((tag) => (
             <Link key={tag?._id} href={`/tag/${tag.slug.current}`}>
               <span className="font-poppins mr-2 p-1 rounded-sm text-sm lowercase dark:bg-gray-950 border dark:border-gray-900">
                 {tag.name}
@@ -112,10 +113,9 @@ const Page = async ({ params, searchParams }: Params) => {
             </Link>
           ))}
         </div>
-        <Toc headings={post?.headings} />
+        <Toc headings={post.headings} />
 
-        {/* Cover Image Display with adjusted width */}
-        {post?.coverImage && (
+        {post.coverImage?.asset?.url && (
           <div className="my-8 mx-auto max-w-4xl relative overflow-hidden">
             <div className="-mx-4 sm:-mx-8 md:-mx-12 lg:-mx-16">
               <Image
@@ -133,11 +133,11 @@ const Page = async ({ params, searchParams }: Params) => {
 
         <div className={richTextStyles}>
           <MarkdownRender mdString={markdownContent} />
-          <AddComment postId={post?._id} />
+          <AddComment postId={post._id} />
           <AllComments
-            comments={post?.comments || []}
-            slug={post?.slug?.current}
-            commentsOrder={commentsOrder.toString()}
+            comments={post.comments || []}
+            slug={post.slug?.current}
+            commentsOrder={commentsOrder}
           />
         </div>
       </div>
