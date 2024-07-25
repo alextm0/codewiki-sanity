@@ -53,9 +53,6 @@ export default async function Home() {
 
   return (
     <div>
-      <Head>
-        <title>My Blog - Home</title>
-      </Head>
       <div className="flex-grow bg-pattern bg-cover">
         <HeroSection />
         <PageDivider />

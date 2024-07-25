@@ -27,10 +27,10 @@ const extractTextFromNode = (node: any): string => {
   if (typeof node === "string") {
     return node;
   }
-  if (node.props && node.props.children) {
+  if (node?.props && node?.props?.children) {
     return extractTextFromNode(node.props.children);
   }
-  if (Array.isArray(node)) {
+  if (Array?.isArray(node)) {
     return node.map(extractTextFromNode).join("");
   }
   return "";

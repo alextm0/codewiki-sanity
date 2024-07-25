@@ -4,11 +4,7 @@ import { client } from "@/sanity/lib/client";
 import Head from "next/head";
 
 import { Post } from "@/app/utils/interface";
-import HeroSection from "@/app/components/HeroSection";
-import Courses from "@/app/components/CoursesSection";
-import Features from "@/app/components/Features";
 import ArticlesSection from "@/app/components/ArticlesGrid";
-import { notFound } from "next/navigation";
 
 async function getPosts() {
   const query = `
@@ -17,6 +13,12 @@ async function getPosts() {
     slug,
     publishedAt,
     excerpt,
+    coverImage {
+      asset-> {
+        url
+      },
+      alt
+    },
     tags[]-> {
       _id,
       slug,
@@ -46,7 +48,7 @@ export default async function Page() {
       </Head>
 
       <div className="mx-auto max-w-5xl px-6">
-        {posts && <ArticlesSection headerTitle="Articles" blogs={{ data: posts }} />}
+        {posts && <ArticlesSection headerTitle="Articole recente" blogs={{ data: posts }} />}
       </div>
     </div>
   )
