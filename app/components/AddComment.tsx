@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
-import PageDivider from "./PageDivider";
 
 interface Props {
   postId: string;
@@ -31,45 +29,33 @@ const AddComment = ({ postId }: Props) => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900 mt-20">
-      <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
+    <section className="mt-10 bg-gray-50 dark:bg-gray-900 py-8 px-4 rounded-md shadow-sm">
+      <div className="max-w-screen-sm mx-auto">
+        <h2 className="text-lg lg:text-xl font-bold text-center mb-4 text-gray-900 dark:text-white border-b-2 border-gray-200 pb-2">
           Lasă un comentariu
         </h2>
-        <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
-          Ai citit articolul nostru și ai întrebări sau sugestii? Lasă un
-          comentariu și spune-ne ce părere ai! Feedback-ul tău ne ajută să
-          îmbunătățim conținutul pentru tine și ceilalți elevi.
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-6">
+          Ai citit articolul nostru și ai întrebări sau sugestii? Lasă un comentariu și spune-ne ce părere ai!
         </p>
-        <form
-          className="space-y-8"
-          onSubmit={handleSubmit((data) => onSubmit(data))}
-        >
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label
-              htmlFor="name"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
+            <label htmlFor="name" className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
               Numele tău
             </label>
             <input
               {...register("name", { required: true })}
               id="name"
               type="text"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+              className="w-full p-2 text-sm border border-gray-300 rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Numele tău"
             />
             {errors.name && (
-              <p className="text-red-600 text-xs">Numele este obligatoriu.</p>
+              <p className="text-red-500 text-xs mt-1">Numele este obligatoriu.</p>
             )}
           </div>
           <div>
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Email-ul tău{" "}
-              <span className="text-xs">(Email-ul tău nu va fi publicat!)</span>
+            <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+              Email-ul tău <span className="text-xs">(Email-ul tău nu va fi publicat!)</span>
             </label>
             <input
               {...register("email", {
@@ -78,39 +64,32 @@ const AddComment = ({ postId }: Props) => {
               })}
               id="email"
               type="email"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+              className="w-full p-2 text-sm border border-gray-300 rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="nume@exemplu.com"
             />
             {errors.email && (
-              <p className="text-red-600 text-xs">
-                Te rugăm să introduci o adresă de email validă.
-              </p>
+              <p className="text-red-500 text-xs mt-1">Te rugăm să introduci o adresă de email validă.</p>
             )}
           </div>
-          <div className="sm:col-span-2">
-            <label
-              htmlFor="comment"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-            >
+          <div>
+            <label htmlFor="comment" className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
               Mesajul tău
             </label>
             <textarea
               {...register("comment", { required: true, minLength: 2 })}
               id="comment"
-              rows={6}
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              rows={4}
+              className="w-full p-2 text-sm border border-gray-300 rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Lasă un comentariu..."
             ></textarea>
             {errors.comment && (
-              <p className="text-red-600 text-xs">
-                Comentariul trebuie să aibă minim 2 caractere.
-              </p>
+              <p className="text-red-500 text-xs mt-1">Comentariul trebuie să aibă minim 2 caractere.</p>
             )}
           </div>
           <button
             type="submit"
-            className={`py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${
-              isSubmitting ? "opacity-50" : ""
+            className={`w-full py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
             }`}
             disabled={isSubmitting}
           >

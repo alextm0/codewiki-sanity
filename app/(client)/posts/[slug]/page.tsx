@@ -1,6 +1,6 @@
+import React from "react";
 import AddComment from "@/app/components/AddComment";
 import AllComments from "@/app/components/AllComments";
-import Header from "@/app/components/Header";
 import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
 import { Post } from "@/app/utils/interface";
@@ -10,13 +10,8 @@ import { Metadata } from "next";
 import { VT323 } from "next/font/google";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
-import React from "react";
 import Image from "next/image";
 import "@/app/(client)/markdown-styles.module.css";
-
-import ResourcesTable from "@/app/components/ResourcesTable";
-import ProblemSetTable from "@/app/components/ProblemSetTable";
-import PageDivider from "@/app/components/PageDivider";
 
 const dateFont = VT323({ weight: "400", subsets: ["latin"] });
 
@@ -49,6 +44,14 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
       _id,
       slug,
       name
+    },
+    author-> {
+      name,
+      image {
+        asset-> {
+          url
+        }
+      }
     },
     "comments": *[_type == "comment" && post._ref == ^._id ] | order(_createdAt ${commentsOrder}) {
       name,
@@ -99,30 +102,37 @@ const Page = async ({ params, searchParams }: Params) => {
 
   return (
     <div className="font-inter">
-      <Header title={post.title} />
-      <div className="text-center">
-        <span className={`${dateFont?.className} text-purple-500`}>
-          {new Date(post.publishedAt).toDateString()}
-        </span>
-        <div className="mt-5">
-          {post.tags?.map((tag) => (
-            <Link key={tag?._id} href={`/tag/${tag.slug.current}`}>
-              <span className="font-poppins mr-2 p-1 rounded-sm text-sm lowercase dark:bg-gray-950 border dark:border-gray-900">
-                {tag.name}
-              </span>
-            </Link>
-          ))}
+      <div className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl lg:text-4xl font-bold mb-2 pt-10">
+            {post.title}
+          </h1>
+          <div className="flex justify-center items-center space-x-2 text-gray-600 text-sm lg:text-base">
+            <span className={dateFont.className}>
+              {new Date(post.publishedAt).toDateString()}
+            </span>
+            <span>•</span>
+            <span>5 min read</span>
+          </div>
+          <div className="mt-4 space-x-2 flex justify-center flex-wrap">
+            {post.tags?.map((tag) => (
+              <Link key={tag._id} href={`/tag/${tag.slug.current}`}>
+                <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs lg:text-sm">
+                  {tag.name}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
-        <Toc headings={post.headings} />
 
         {post.coverImage?.asset?.url && (
-          <div className="my-8 mx-auto max-w-4xl relative overflow-hidden">
-            <div className="-mx-4 sm:-mx-8 md:-mx-12 lg:-mx-16">
+          <div className="relative overflow-hidden mb-8">
+            <div className="max-w-7xl mx-auto">
               <Image
                 src={post.coverImage.asset.url}
                 alt={post.coverImage.alt || "Cover Image"}
-                width={1300}
-                height={500}
+                width={1920}
+                height={1080}
                 layout="responsive"
                 objectFit="cover"
                 className="rounded-md"
@@ -131,14 +141,27 @@ const Page = async ({ params, searchParams }: Params) => {
           </div>
         )}
 
-        <div className={richTextStyles}>
-          <MarkdownRender mdString={markdownContent} />
-          <AddComment postId={post._id} />
-          <AllComments
-            comments={post.comments || []}
-            slug={post.slug?.current}
-            commentsOrder={commentsOrder}
-          />
+        <div className="flex flex-col lg:flex-row">
+          <aside className="lg:w-1/4 mb-6 lg:mb-0">
+            <div className="lg:sticky lg:top-0 pt-4 lg:pt-0 rounded-lg bg-white shadow-sm p-4 lg:block hidden">
+              <Toc headings={post.headings} />
+            </div>
+            {/* Mobile Table of Contents */}
+            <div className="block lg:hidden bg-white p-4 rounded-md shadow-md mb-6">
+              <Toc headings={post.headings} />
+            </div>
+          </aside>
+          <main className="lg:w-3/4 mx-auto">
+            <div className={richTextStyles}>
+              <MarkdownRender mdString={markdownContent} />
+              <AddComment postId={post._id} />
+              <AllComments
+                comments={post.comments || []}
+                slug={post.slug?.current}
+                commentsOrder={commentsOrder}
+              />
+            </div>
+          </main>
         </div>
       </div>
     </div>

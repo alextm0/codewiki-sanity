@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import CustomThemeProvider from "../providers/CustomThemeProvider";
 import Navbar from "../components/Navbar";
+import ThemeSwitcher from "../components/ThemeSwitcher"; // Import the ThemeSwitcher to apply light mode
 
 import { ViewTransitions } from "next-view-transitions";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       <html lang="en" className="font-poppins">
         <body className={`h-full`}>
           <CustomThemeProvider>
+            <ThemeSwitcher /> {/* Ensure ThemeSwitcher is included to enforce the light theme */}
             <Navbar />
             <main className="">{children}</main>
           </CustomThemeProvider>

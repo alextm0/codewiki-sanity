@@ -55,6 +55,21 @@
   font-style: normal;
 }
 
+.cover-image-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-image {
+  width: 100%;
+  height: auto;
+  max-height: 500px; /* Adjust based on your design requirements */
+  object-fit: cover;
+  object-position: center;
+}
+
+
 .no-border {
   border: none !important;
 }
