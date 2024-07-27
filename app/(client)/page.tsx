@@ -50,14 +50,14 @@ export default async function Home() {
   const posts: Post[] = await getPosts();
 
   return (
-    <div>
-      <div className="flex-grow bg-pattern bg-cover">
+    <div className="overflow-x-hidden">
+      <div className="bg-pattern bg-cover">
         <HeroSection />
         <PageDivider />
       </div>
       <Courses />
       <Features />
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="max-w-5xl mx-auto px-6">
         {posts && (
           <ArticlesSection headerTitle="Articole recente" blogs={{ data: posts }} />
         )}

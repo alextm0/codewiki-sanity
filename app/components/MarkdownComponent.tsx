@@ -43,7 +43,8 @@ const cleanHeading = (text: string) => {
 
 // Function to extract ResourcesTable data
 const extractResourcesTableData = (mdString: string) => {
-  const resourcesTableRegex = /<ResourcesTable\s+header="([^"]+)"\s+resource='([^']+)'/;
+  const resourcesTableRegex =
+    /<ResourcesTable\s+header="([^"]+)"\s+resource='([^']+)'/;
   const match = mdString.match(resourcesTableRegex);
 
   if (match) {
@@ -57,7 +58,8 @@ const extractResourcesTableData = (mdString: string) => {
 
 // Function to extract ProblemSetTable data
 const extractProblemSetTableData = (mdString: string) => {
-  const problemSetTableRegex = /<ProblemSetTable\s+problemSetName="([^"]+)"\s+problemSet='([^']+)'/;
+  const problemSetTableRegex =
+    /<ProblemSetTable\s+problemSetName="([^"]+)"\s+problemSet='([^']+)'/;
   const match = mdString.match(problemSetTableRegex);
 
   if (match) {
@@ -78,7 +80,10 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
   // Remove custom table tags from the processed markdown string
   const cleanedMdString = processedMdString
     .replace(/<ResourcesTable\s+header="[^"]+"\s+resource='[^']+'\/>/, "")
-    .replace(/<ProblemSetTable\s+problemSetName="[^"]+"\s+problemSet='[^']+'\/>/, "");
+    .replace(
+      /<ProblemSetTable\s+problemSetName="[^"]+"\s+problemSet='[^']+'\/>/,
+      ""
+    );
 
   const customComponents: CustomComponents = {
     code({ node, inline, className, children, ...props }: any) {
@@ -86,7 +91,10 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
       return !inline && match ? (
         <SyntaxHighlighter
           style={darcula}
-          className={styles["code-block"]}
+          className={classNames(
+            styles["code-block"],
+            "rounded-md my-4 p-4 overflow-x-auto max-w-xs md:max-w-full"
+          )}
           language={match[1]}
           PreTag="div"
           showInlineLineNumbers={true}
@@ -260,7 +268,10 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
   return (
     <div>
       {resourcesTableData && (
-        <ResourcesTable header={resourcesTableData.header} resource={resourcesTableData.resource} />
+        <ResourcesTable
+          header={resourcesTableData.header}
+          resource={resourcesTableData.resource}
+        />
       )}
 
       <ReactMarkdown
@@ -271,9 +282,12 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
       >
         {cleanedMdString}
       </ReactMarkdown>
-      
+
       {problemSetTableData && (
-        <ProblemSetTable problemSetName={problemSetTableData.problemSetName} problemSet={problemSetTableData.problemSet} />
+        <ProblemSetTable
+          problemSetName={problemSetTableData.problemSetName}
+          problemSet={problemSetTableData.problemSet}
+        />
       )}
     </div>
   );

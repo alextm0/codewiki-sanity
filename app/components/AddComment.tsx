@@ -29,9 +29,9 @@ const AddComment = ({ postId }: Props) => {
   };
 
   return (
-    <section className="mt-10 bg-gray-50 dark:bg-gray-900 py-8 px-4 rounded-md shadow-sm">
-      <div className="max-w-screen-sm mx-auto">
-        <h2 className="text-lg lg:text-xl font-bold text-center mb-4 text-gray-900 dark:text-white border-b-2 border-gray-200 pb-2">
+    <section className="mt-10 max-w-xs md:max-w-full bg-gray-50 dark:bg-gray-900 py-8 px-4 rounded-md shadow-sm">
+      <div className="max-w-screen-md mx-auto">
+        <h2 className="text-lg sm:text-xl font-bold text-center mb-4 text-gray-900 dark:text-white border-b-2 border-gray-200 pb-2">
           Lasă un comentariu
         </h2>
         <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-6">
@@ -102,3 +102,4 @@ const AddComment = ({ postId }: Props) => {
 };
 
 export default AddComment;
+

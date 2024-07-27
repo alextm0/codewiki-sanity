@@ -1,6 +1,6 @@
-import React from "react";
 import AddComment from "@/app/components/AddComment";
 import AllComments from "@/app/components/AllComments";
+import Header from "@/app/components/Header";
 import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
 import { Post } from "@/app/utils/interface";
@@ -10,6 +10,7 @@ import { Metadata } from "next";
 import { VT323 } from "next/font/google";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
+import React from "react";
 import Image from "next/image";
 import "@/app/(client)/markdown-styles.module.css";
 
@@ -67,9 +68,7 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
 
 export const revalidate = 60;
 
-export async function generateMetadata({
-  params,
-}: Params): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: Params): Promise<Metadata | undefined> {
   const post: Post = await getPost(params?.slug);
   if (!post) {
     return;
@@ -101,16 +100,12 @@ const Page = async ({ params, searchParams }: Params) => {
   const markdownContent = portableTextToMarkdown(post.body || "");
 
   return (
-    <div className="font-inter">
+    <div className="font-inter w-full max-w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-2 pt-10">
-            {post.title}
-          </h1>
-          <div className="flex justify-center items-center space-x-2 text-gray-600 text-sm lg:text-base">
-            <span className={dateFont.className}>
-              {new Date(post.publishedAt).toDateString()}
-            </span>
+        <div className="text-center mb-6 px-4 sm:px-6">
+          <h1 className="text-3xl lg:text-4xl font-bold mb-2 pt-10">{post.title}</h1>
+          <div className="flex justify-center items-center space-x-4 text-sm lg:text-base text-gray-600">
+            <span className={dateFont.className}>{new Date(post.publishedAt).toDateString()}</span>
             <span>•</span>
             <span>5 min read</span>
           </div>
@@ -142,12 +137,8 @@ const Page = async ({ params, searchParams }: Params) => {
         )}
 
         <div className="flex flex-col lg:flex-row">
-          <aside className="lg:w-1/4 mb-6 lg:mb-0">
-            <div className="lg:sticky lg:top-0 pt-4 lg:pt-0 rounded-lg bg-white shadow-sm p-4 lg:block hidden">
-              <Toc headings={post.headings} />
-            </div>
-            {/* Mobile Table of Contents */}
-            <div className="block lg:hidden bg-white p-4 rounded-md shadow-md mb-6">
+          <aside className="hidden lg:block lg:w-1/4">
+            <div className="sticky top-0 pt-4 rounded-lg">
               <Toc headings={post.headings} />
             </div>
           </aside>
@@ -155,11 +146,7 @@ const Page = async ({ params, searchParams }: Params) => {
             <div className={richTextStyles}>
               <MarkdownRender mdString={markdownContent} />
               <AddComment postId={post._id} />
-              <AllComments
-                comments={post.comments || []}
-                slug={post.slug?.current}
-                commentsOrder={commentsOrder}
-              />
+              <AllComments comments={post.comments || []} slug={post.slug?.current} commentsOrder={commentsOrder} />
             </div>
           </main>
         </div>

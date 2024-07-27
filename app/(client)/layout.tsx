@@ -32,12 +32,12 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en" className="font-poppins">
-        <body className={`h-full`}>
+      <html lang="en" className="font-poppins overflow-x-hidden">
+        <body className="h-full overflow-x-hidden">
           <CustomThemeProvider>
-            <ThemeSwitcher /> {/* Ensure ThemeSwitcher is included to enforce the light theme */}
+            <ThemeSwitcher />
             <Navbar />
-            <main className="">{children}</main>
+            <main className="overflow-x-hidden">{children}</main>
           </CustomThemeProvider>
         </body>
       </html>

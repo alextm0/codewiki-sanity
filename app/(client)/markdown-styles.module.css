@@ -5,6 +5,7 @@
 .markdown h5,
 .markdown h6 {
   margin-top: 2em;
+  margin-bottom: 0.5em; /* Adding margin-bottom for better spacing */
 }
 
 .markdown ul,
@@ -25,10 +26,8 @@
 }
 
 .markdown li {
-  /* margin-bottom: 0.5em; */
   display: list-item;
   align-items: flex-start;
-  /* gap: 0.5em; */
   position: relative;
 }
 
@@ -46,15 +45,13 @@
 }
 
 .markdown .code-block {
-  /* background-color: #282c34;
-  color: #f8f8f2; */
   padding: 1em;
   border-radius: 0.5em;
   margin: 1em 0;
-  overflow-x: auto;
-
+  overflow-x: auto; /* Ensure horizontal scrolling if needed */
   background-color: #2b2b2b;
   color: #f8f8f2;
+  font-size: 0.9em; /* Slightly reduce font size for better readability on mobile */
 }
 
 .markdown blockquote {
@@ -71,7 +68,6 @@
   border-bottom: 1px solid #0070f3;
 }
 
-/* Inline code */
 .markdown .inline-code {
   background-color: #F2F2F2;
   color: black;

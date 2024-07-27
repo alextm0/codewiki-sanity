@@ -15,7 +15,7 @@ interface ResourcesTableProps {
 
 const ResourcesTable: React.FC<ResourcesTableProps> = ({ header, resource }) => {
   return (
-    <div className='font-inter'>
+    <div className='font-inter max-w-xs md:max-w-full'>
       <h1 className='font-semibold text-gray-700 text-2xl mb-5'>
         {header}
       </h1>

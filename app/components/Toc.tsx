@@ -17,9 +17,9 @@ const Toc = ({ headings }: any) => {
 
   return (
     <div className="relative max-w-2xl mx-auto mt-8 px-10">
-      <div className="mb-10 w-full rounded-md border bg-white px-6 py-6 shadow-md lg:w-56">
-        <div className="pb-2 text-xl font-medium text-orange-600">Table of Contents</div>
-        <hr className="h-1 w-10 bg-orange-600" />
+      <div className="mb-10 w-full rounded-md border bg-white px-6 py-6 shadow-sm lg:w-56">
+        <div className="pb-2 text-xl font-medium text-gray-800">Table of Contents</div>
+        <hr className="h-1 w-10 bg-gray-800" />
         <nav className="mt-4">
           <ul>
             {headings.map((heading: any, index: any) => {
@@ -38,19 +38,19 @@ const Toc = ({ headings }: any) => {
                 return (
                   <li key={heading._key} className="mb-3">
                     <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleSection(slug)}>
-                      <span className="text-sm font-medium text-orange-600 hover:text-orange-800">{cleanText}</span>
+                      <span className="text-sm font-medium text-gray-700 hover:text-gray-900">{cleanText}</span>
                       <span className="text-gray-500">{isExpanded ? "−" : "+"}</span>
                     </div>
                     {isExpanded && (
-                      <ul className="mt-2">
+                      <ul className="mt-2 ml-4 border-l border-gray-200 pl-2">
                         {headings.slice(index + 1, endIndex).map((subHeading: any) => {
                           if (subHeading.style !== "h3") return null; // Only display h3 headers
                           const subText = subHeading.children[0].text;
                           const subSlug = subText.match(/\{#(.*?)\}/)?.[1] || slugify(subText);
                           const subCleanText = subText.replace(/\{#.*?\}/g, "").trim();
                           return (
-                            <li key={subHeading._key} className="mb-2 ml-4">
-                              <Link className="text-sm font-medium text-gray-600 hover:text-orange-600" href={`#${subSlug}`}>
+                            <li key={subHeading._key} className="mb-2">
+                              <Link className="text-sm font-medium text-gray-600 hover:text-gray-800" href={`#${subSlug}`}>
                                 <MarkdownRender mdString={subCleanText} />
                               </Link>
                             </li>

@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -10,7 +10,7 @@ export default function Hero() {
             <h1 className="font-righteous my-4 text-5xl leading-tight font-bold text-white">
               Învaţă, experimentează şi crează în informatică
             </h1>
-            <p className="font-poppins leading-normal text-xl mb-8 text-gray-500">
+            <p className="font-poppins leading-normal text-lg md:text-xl mb-8 text-gray-500">
               Explorează universul informaticii și începe-ți călătoria cu cele
               mai bune resurse de învățare online
             </p>
@@ -24,7 +24,7 @@ export default function Hero() {
           <div className="w-full md:w-3/5 py-6 text-center">
             {/* Dynamically switch image based on theme */}
             <Image
-              src={'/assets/Dark_HeroImage.svg'}
+              src={"/assets/Dark_HeroImage.svg"}
               alt="heroimage"
               width={500}
               height={500}
