@@ -3,6 +3,7 @@ import { TbDotsVertical } from "react-icons/tb";
 import Link from "next/link";
 
 interface Problem {
+  solutionSlug: string;
   source: string;
   name: string;
   link: string;
@@ -38,6 +39,9 @@ const ProblemSetTable: React.FC<ProblemSetTableProps> = ({
   const otherBadge = <span>...</span>;
 
   const ProblemSetRow = problemSet.map((problem) => {
+    console.log(problem);
+    
+
     let currentBadge = otherBadge;
     if (problem.badge === "hard") currentBadge = hardBadge;
     else if (problem.badge === "normal") currentBadge = normalBadge;
@@ -67,7 +71,7 @@ const ProblemSetTable: React.FC<ProblemSetTableProps> = ({
           {problem.badge === "hard" ||
           problem.badge === "normal" ||
           problem.badge === "easy" ? (
-            <Link href={`/solutie/${problem.name}`}>
+            <Link href={`/solutions/${problem.solutionSlug}`}>
               <TbDotsVertical />
             </Link>
           ) : (

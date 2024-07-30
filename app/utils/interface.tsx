@@ -42,3 +42,16 @@ export interface Category {
   topics: Topic[];
 }
 
+export interface Solution {
+  title: string;
+  slug: { current: string };
+  publishedAt: string;
+  problemLink: string;
+  body: any;
+  tags: Array<Tag>;
+  author: string | undefined;
+  difficulty: string | undefined;
+  relatedSolutions: Array<Solution>;
+  _id: string;
+}
+

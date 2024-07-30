@@ -21,8 +21,8 @@ const ResourcesTable: React.FC<ResourcesTableProps> = ({ header, resource }) => 
       </h1>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
+          <thead className="text-xs text-gray-700 uppercase">
+            <tr className='hover:bg-red-500'>
               <th scope="col" className="py-3 px-6 text-xs font-medium text-gray-600 bg-gray-200 border-b-[1px] border-gray-300">
                 RESOURCES
               </th>
@@ -32,7 +32,7 @@ const ResourcesTable: React.FC<ResourcesTableProps> = ({ header, resource }) => 
           </thead>
           <tbody>
             {resource.map((res, index) => (
-              <tr key={index} className="border-b">
+              <tr key={index} className="border-b hover:bg-gray-50">
                 <th scope="row" className="pl-6 font-medium flex items-center text-gray-900 whitespace-nowrap">
                   <a href={res.sourceLink} className='inline-block text-gray-600 relative after:absolute after:bg-gray-400 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300'>
                     {res.source}

@@ -1,6 +1,6 @@
+import React from "react";
 import AddComment from "@/app/components/AddComment";
 import AllComments from "@/app/components/AllComments";
-import Header from "@/app/components/Header";
 import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
 import { Post } from "@/app/utils/interface";
@@ -10,7 +10,6 @@ import { Metadata } from "next";
 import { VT323 } from "next/font/google";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
-import React from "react";
 import Image from "next/image";
 import "@/app/(client)/markdown-styles.module.css";
 
@@ -90,7 +89,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata | u
 
 const Page = async ({ params, searchParams }: Params) => {
   const commentsOrder = searchParams?.comments?.toString() || "desc";
-  const post: Post = await getPost(params?.slug, commentsOrder);
+  const post = await getPost(params?.slug, commentsOrder);
 
   if (!post) {
     notFound();
@@ -100,21 +99,19 @@ const Page = async ({ params, searchParams }: Params) => {
   const markdownContent = portableTextToMarkdown(post.body || "");
 
   return (
-    <div className="font-inter w-full max-w-full overflow-x-hidden">
+    <div className="font-inter w-full max-w-full">
       <div className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 px-4 sm:px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-2 pt-10">{post.title}</h1>
+          <h1 className="text-3xl lg:text-5xl font-bold mb-2 pt-10">{post.title}</h1>
           <div className="flex justify-center items-center space-x-4 text-sm lg:text-base text-gray-600">
-            <span className={dateFont.className}>{new Date(post.publishedAt).toDateString()}</span>
+            <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
             <span>•</span>
-            <span>5 min read</span>
+            <span>Author: Alexandru Toma</span>
           </div>
           <div className="mt-4 space-x-2 flex justify-center flex-wrap">
-            {post.tags?.map((tag) => (
+            {post.tags?.map((tag: any) => (
               <Link key={tag._id} href={`/tag/${tag.slug.current}`}>
-                <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs lg:text-sm">
-                  {tag.name}
-                </span>
+                <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs lg:text-sm">{tag.name}</span>
               </Link>
             ))}
           </div>
@@ -136,14 +133,14 @@ const Page = async ({ params, searchParams }: Params) => {
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row">
-          <aside className="hidden lg:block lg:w-1/4">
-            <div className="sticky top-0 pt-4 rounded-lg">
+        <div className="absolute max-w-7xl mx-auto mt-8 flex flex-col lg:flex-row">
+          <div className="lg:w-1/4 mb-8 lg:mb-0 lg:mr-8">
+            <div className="sticky top-8">
               <Toc headings={post.headings} />
             </div>
-          </aside>
+          </div>
           <main className="lg:w-3/4 mx-auto">
-            <div className={richTextStyles}>
+            <div className={`max-w-4xl mx-auto ${richTextStyles}`}>
               <MarkdownRender mdString={markdownContent} />
               <AddComment postId={post._id} />
               <AllComments comments={post.comments || []} slug={post.slug?.current} commentsOrder={commentsOrder} />
