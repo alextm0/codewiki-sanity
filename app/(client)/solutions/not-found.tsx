@@ -7,7 +7,7 @@ const NotFound = () => {
       <div className="flex flex-col items-center">
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white">Oops!</h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-          The page you're looking for doesn't exist.
+          The page you are looking for does not exist.
         </p>
         <p className="text-gray-600 dark:text-gray-400">
           It might have been moved or deleted.
