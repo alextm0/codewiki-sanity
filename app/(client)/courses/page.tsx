@@ -35,7 +35,7 @@ function StartLearningPage() {
                 a obține un loc la o facultate de informatică{" "}
               </p>
               {/* Features */}
-              <div className="text-gray-600 flex justify-center items-center">
+              <div className="text-gray-600 flex px-10 md:px-0 justify-center items-center">
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <div className="mr-2">
@@ -168,7 +168,7 @@ function StartLearningPage() {
               </p>
 
               {/* Features */}
-              <div className="text-gray-600 flex justify-center items-center">
+              <div className="text-gray-600 flex px-10 md:px-0 justify-center items-center">
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <div className="mr-2">
@@ -301,7 +301,7 @@ function StartLearningPage() {
                 excela la competițiile de programare{" "}
               </p>
               {/* Features */}
-              <div className="text-gray-600 flex justify-center items-center">
+              <div className="text-gray-600 flex px-10 md:px-0 justify-center items-center">
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <div className="mr-2">

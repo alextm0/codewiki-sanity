@@ -118,7 +118,7 @@ const Page = async ({ params, searchParams }: Params) => {
         </div>
 
         {post.coverImage?.asset?.url && (
-          <div className="relative overflow-hidden mb-8">
+          <div className="relative overflow-hidden mb-4 ">
             <div className="max-w-7xl mx-auto">
               <Image
                 src={post.coverImage.asset.url}
@@ -133,9 +133,9 @@ const Page = async ({ params, searchParams }: Params) => {
           </div>
         )}
 
-        <div className="absolute max-w-7xl mx-auto mt-8 flex flex-col lg:flex-row">
-          <div className="lg:w-1/4 mb-8 lg:mb-0 lg:mr-8">
-            <div className="sticky top-8">
+        <div className="absolute max-w-7xl mx-auto pl-2 pr-6 xl:px-0 sm:mt-8 flex flex-col lg:flex-row">
+          <div className="lg:w-1/4 lg:mr-8">
+            <div className="lg:sticky lg:top-8">
               <Toc headings={post.headings} />
             </div>
           </div>

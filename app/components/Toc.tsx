@@ -17,7 +17,7 @@ const Toc = ({ headings }: { headings: any[] }) => {
 
   return (
     <div className="relative max-w-2xl mx-auto mt-8 pr-10">
-      <div className="mb-10 w-full rounded-md border bg-white px-6 py-6  lg:w-56">
+      <div className="w-full rounded-md border bg-white px-6 py-6  lg:w-56">
         <div className="pb-2 text-lg font-semibold text-gray-700">Table of Contents</div>
         <hr className="h-1 w-10 bg-gray-500" />
         <nav className="mt-4">
