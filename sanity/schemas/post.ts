@@ -1,3 +1,4 @@
+import { noteBlock } from './customBlocks'; // Adjust the path according to your project structure
 import { Rule } from "sanity";
 
 export const post = {
@@ -17,6 +18,12 @@ export const post = {
       type: "slug",
       options: { source: "title" },
       validation: (Rule: Rule) => Rule.required().error("Required"),
+    },
+    {
+      name: "published",
+      title: "Published",
+      type: "boolean",
+      initialValue: true,  // Default to true if you want newly created posts to be published by default
     },
     {
       name: "publishedAt",
@@ -62,6 +69,7 @@ export const post = {
           type: "image",
           fields: [{ type: "text", name: "alt", title: "Alt" }],
         },
+        noteBlock, // Use the custom note block
       ],
     },
     {
@@ -69,6 +77,6 @@ export const post = {
       title: "Tags",
       type: "array",
       of: [{ type: "reference", to: [{ type: "tag" }] }],
-    },    
+    },
   ],
 };

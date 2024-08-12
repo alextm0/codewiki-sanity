@@ -8,6 +8,7 @@ interface PortableTextChild {
 }
 
 interface PortableTextBlock {
+  content: string;
   _type: string;
   style?: string; // Make style optional since custom blocks like resourcesTable won't have it
   children?: PortableTextChild[]; // Make children optional for custom blocks
@@ -27,10 +28,10 @@ interface PortableTextBlock {
 
 export function portableTextToMarkdown(blocks: PortableTextBlock[]): string {
   return blocks && blocks.map((block) => {
-      if (block._type === "resourcesTable") {
-        const header = block.header;
-        const resources = JSON.stringify(block.resource);
-        return `<resourcesTable header="${header}" resources='${resources}' />`;
+      if (block._type === "note" || block._type === "info" || block._type === "warning") {
+        const style = block.style;
+        const content = block.content || "";
+        return `!!! ${style ?? ''} "${(style?.charAt(0) ?? '').toUpperCase() + (style?.slice(1) ?? '')}"\n    ${content}`;
       }
 
       if (block._type === "image") {
@@ -44,20 +45,22 @@ export function portableTextToMarkdown(blocks: PortableTextBlock[]): string {
       }
 
       const children = block.children
-        .map((child) => {
-          const marks = child.marks ?? [];
-          if (marks.length > 0) {
-            const mark = block.markDefs?.find((def) => def._key === marks[0]);
-            if (mark && mark._type === "link") {
-              return `[${child.text}](${mark.href})`;
-            }
-            if (marks.includes("code")) {
-              return `\`${child.text}\``;
-            }
+      .map((child) => {
+        const marks = child.marks ?? [];
+        if (marks.length > 0) {
+
+          const mark = block.markDefs?.find((def) => def._key === marks[0]);
+          if (mark && mark._type === "link") {
+            return `[${child.text}](${mark.href})`;
           }
-          return child.text;
-        })
-        .join("");
+          if (marks.includes("code")) {
+            return `\`${child.text}\``;
+          }
+        }
+        return child.text;
+      })
+      .join("");
+    
 
       switch (block.style) {
         case "h1":

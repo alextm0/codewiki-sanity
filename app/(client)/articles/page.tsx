@@ -8,7 +8,7 @@ import ArticlesSection from "@/app/components/ArticlesGrid";
 
 async function getPosts() {
   const query = `
-  *[_type == "post"] {
+  *[_type == "post" && published == true] {
     title,
     slug,
     publishedAt,

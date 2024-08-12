@@ -8,13 +8,16 @@ interface Props {
   commentsOrder: string;
 }
 
-const AllComments = ({ comments, slug, commentsOrder }: Props) => {
+const AllComments = ({ comments, slug, commentsOrder }: Props) => {  
+  // Filter comments to only include those that are published
+  const publishedComments = comments.filter((comment) => comment.published);
+
   return (
     <div className=" max-w-xs md:max-w-full mt-10 px-4 sm:px-6 lg:px-8">
       <h3 className="text-lg sm:text-xl font-bold mb-4 text-gray-900 dark:text-white border-b pb-2">
         Toate Comentariile
       </h3>
-      {comments?.length === 0 ? (
+      {publishedComments.length === 0 ? (
         <p className="text-gray-600 dark:text-gray-400">
           Nu există comentarii încă. Fii primul care comentează!
         </p>
@@ -44,7 +47,7 @@ const AllComments = ({ comments, slug, commentsOrder }: Props) => {
               Cele mai noi
             </Link>
           </div>
-          {comments.map((comment) => (
+          {publishedComments.map((comment) => (
             <div
               key={comment?._id}
               className="mb-4 p-4 border rounded-md bg-gray-50 dark:bg-gray-800"

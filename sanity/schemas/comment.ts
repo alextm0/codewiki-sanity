@@ -28,6 +28,13 @@ export const comment = defineType({
       title: "Post",
       type: "reference",
       to: [{ type: "post" }],
-    }
+    },
+    {
+      name: "published",
+      title: "Published",
+      type: "boolean",
+      initialValue: false,
+      description: "Controls whether the comment is published and visible on the site",
+    },
   ],
- })
+});

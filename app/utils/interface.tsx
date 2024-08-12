@@ -14,6 +14,7 @@ export interface Post {
   _id: string;
   headings?: Array<HTMLHeadElement | string>;
   comments?: Array<Comment>;
+  published: boolean;  // Add this field
 }
 
 export interface Tag {
@@ -28,7 +29,9 @@ export interface Comment {
   comment: string;
   _createdAt: string;
   _id: string;
+  published: boolean; // New field
 }
+
 
 export interface Topic {
   _type: string;

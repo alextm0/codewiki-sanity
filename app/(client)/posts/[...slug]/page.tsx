@@ -3,17 +3,14 @@ import AddComment from "@/app/components/AddComment";
 import AllComments from "@/app/components/AllComments";
 import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
-import { Post } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { portableTextToMarkdown } from "@/app/utils/portableTextToMarkdown";
 import { Metadata } from "next";
-import { VT323 } from "next/font/google";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import "@/app/(client)/markdown-styles.module.css";
-
-const dateFont = VT323({ weight: "400", subsets: ["latin"] });
+import { slugify } from "@/app/utils/helpers";
 
 interface Params {
   params: {
@@ -26,9 +23,10 @@ interface Params {
 
 async function getPost(slug: string, commentsOrder: string = "desc") {
   const query = `
-  *[_type == "post" && slug.current == "${slug}"][0] {
+  *[_type == "post" && slug.current == "${slug}" && published == true][0] {
     title,
     slug,
+    published,
     publishedAt,
     excerpt,
     coverImage {
@@ -62,14 +60,45 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
   `;
 
   const post = await client.fetch(query);
-  return post;
+
+  if (!post) {
+    return null; // Return null if the post is not found
+  }
+
+  // Convert PortableText to Markdown
+  const markdownContent = portableTextToMarkdown(post?.body || "");
+
+  // Extract Markdown headers using a simple regex
+  const markdownHeadings = extractMarkdownHeadings(markdownContent);
+
+  // Combine Sanity headings and Markdown headings
+  const allHeadings = [...(post.headings || []), ...markdownHeadings];
+
+  return { ...post, markdownContent, allHeadings };
 }
 
-export const revalidate = 60;
+function extractMarkdownHeadings(markdownContent: string) {
+  const headingRegex = /^(#{1,6})\s+(.*)$/gm;
+  const headings = [];
+  let match;
+
+  while ((match = headingRegex.exec(markdownContent)) !== null) {
+    const level = match[1].length; // Determine heading level by the number of `#`
+    const text = match[2].trim();
+    const slug = slugify(text);
+    headings.push({ level, text, slug });
+  }
+
+  return headings;
+}
+
+export const revalidate = 1;
 
 export async function generateMetadata({ params }: Params): Promise<Metadata | undefined> {
-  const post: Post = await getPost(params?.slug);
-  if (!post) {
+  const post = await getPost(params?.slug);
+
+  if (!post || !post.title || !post.markdownContent) {
+    notFound();
     return;
   }
 
@@ -80,12 +109,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata | u
       title: post.title,
       description: post.excerpt,
       type: "article",
-      locale: "en_US",
-      url: `https://next-cms-blog-ce.vercel.app/${params.slug}`,
-      siteName: "DevBlook",
+      locale: "ro_RO",
+      url: `https://codewiki-sanity.vercel.app/${params.slug}`,
+      siteName: "CodeWiki",
     },
   };
 }
+
 
 const Page = async ({ params, searchParams }: Params) => {
   const commentsOrder = searchParams?.comments?.toString() || "desc";
@@ -96,8 +126,8 @@ const Page = async ({ params, searchParams }: Params) => {
     return null;
   }
 
-  const markdownContent = portableTextToMarkdown(post.body || "");
-
+  const { markdownContent, allHeadings } = post;    
+  
   return (
     <div className="font-inter w-full max-w-full">
       <div className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
@@ -106,7 +136,7 @@ const Page = async ({ params, searchParams }: Params) => {
           <div className="flex justify-center items-center space-x-4 text-sm lg:text-base text-gray-600">
             <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
             <span>•</span>
-            <span>Author: Alexandru Toma</span>
+            <span>Autor: Alexandru Toma</span>
           </div>
           <div className="mt-4 space-x-2 flex justify-center flex-wrap">
             {post.tags?.map((tag: any) => (
@@ -136,7 +166,9 @@ const Page = async ({ params, searchParams }: Params) => {
         <div className="absolute max-w-7xl mx-auto pl-2 pr-6 xl:px-0 sm:mt-8 flex flex-col lg:flex-row">
           <div className="lg:w-1/4 lg:mr-8">
             <div className="lg:sticky lg:top-8">
-              <Toc headings={post.headings} />
+              {
+                allHeadings.length > 0 && <Toc headings={allHeadings} />
+              }
             </div>
           </div>
           <main className="lg:w-3/4 mx-auto">
@@ -165,5 +197,4 @@ const richTextStyles = `
   prose-p:leading-7
   prose-li:list-disc
   prose-li:leading-7
-  prose-li:ml-4
 `;

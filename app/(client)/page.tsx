@@ -13,7 +13,7 @@ import "./globals.css";
 
 async function getPosts() {
   const query = `
-  *[_type == "post"] {
+  *[_type == "post" && published == true]{
     title,
     slug,
     publishedAt,

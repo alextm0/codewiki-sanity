@@ -39,9 +39,6 @@ const ProblemSetTable: React.FC<ProblemSetTableProps> = ({
   const otherBadge = <span>...</span>;
 
   const ProblemSetRow = problemSet.map((problem) => {
-    console.log(problem);
-    
-
     let currentBadge = otherBadge;
     if (problem.badge === "hard") currentBadge = hardBadge;
     else if (problem.badge === "normal") currentBadge = normalBadge;

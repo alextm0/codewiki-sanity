@@ -1,6 +1,9 @@
 export const slugify = (text: string) => {
-  // Remove LaTeX content and other unwanted characters
-  return text
+  // Extract only the text portion from markdown links, ignoring the URL
+  const linkText = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+  
+  // Slugify the cleaned text
+  return linkText
     .toString()
     .toLowerCase()
     .normalize("NFD")
