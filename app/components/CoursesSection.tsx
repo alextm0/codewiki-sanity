@@ -12,7 +12,7 @@ function Courses() {
       <div className="font-poppins container px-4 lg:px-8 mx-auto max-w-screen-xl text-gray-700 ">
         <div data-aos="flip-up" className="max-w-xl mx-auto text-center mt-24">
           <h1 className="font-bold text-darken my-3 text-2xl dark:text-white">
-            CodeWiki <span className="ml-2 mr-2"> | </span>{" "}
+            {/* CodeWiki <span className="ml-2 mr-2"> | </span>{" "} */}
             <span className="text-[#FF725E]">Investește în educația ta</span>
           </h1>
           <p className="leading-relaxed text-gray-500 dark:text-white">
@@ -45,28 +45,6 @@ function Courses() {
           >
             <div className="bg-[#FF725E] rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
               <Image
-                src={BacalaureatIcon}
-                alt=""
-                className="ml-1 w-8 h-8 mt-[3px] text-white"
-              />
-            </div>
-            <h1 className="font-medium text-xl mb-3 lg:px-14 text-darken">
-              Bacalaureat
-            </h1>
-            <p className="px-4 text-gray-500">
-              Poți beneficia de ghiduri studiu, subiecte din anii trecuți
-              rezolvate complet, cu explicații detaliate și feedback personalizat
-              la propriile soluții{" "}
-            </p>
-          </div>
-  
-          <div
-            data-aos="fade-up"
-            data-aos-delay="300"
-            className="bg-white shadow-xl p-6 text-center rounded-xl hover:shadow-2xl hover:shadow-orange-100"
-          >
-            <div className="bg-[#FF725E] rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
-              <Image
                 src={OlimpiadaIcon}
                 alt=""
                 className="w-[36px] h-[36px] mt-[2px]"
@@ -79,6 +57,28 @@ function Courses() {
               Oferim o varietate de materiale de învățare, astfel încât să poți
               învăța în ritmul tău ca să te poți simți pregătit pentru a excela la
               competițiile de programare
+            </p>
+          </div>
+
+          <div
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="bg-white shadow-xl p-6 text-center rounded-xl hover:shadow-2xl hover:shadow-orange-100"
+          >
+            <div className="bg-[#FF725E] rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12">
+              <Image
+                src={BacalaureatIcon}
+                alt=""
+                className="ml-1 w-8 h-8 mt-[3px] text-white"
+              />
+            </div>
+            <h1 className="font-medium text-xl mb-3 lg:px-14 text-darken">
+              Bacalaureat
+            </h1>
+            <p className="px-4 text-gray-500">
+              Poți beneficia de ghiduri studiu, subiecte din anii trecuți
+              rezolvate complet, cu explicații detaliate și feedback personalizat
+              la propriile soluții{" "}
             </p>
           </div>
         </div>

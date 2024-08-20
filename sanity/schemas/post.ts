@@ -35,7 +35,7 @@ export const post = {
       name: "excerpt",
       title: "Excerpt",
       type: "text",
-      validation: (Rule: Rule) => Rule.max(200).error("Max 200 characters"),
+      validation: (Rule: Rule) => Rule.max(250).error("Max 250 characters"),
     },
     {
       name: "coverImage",

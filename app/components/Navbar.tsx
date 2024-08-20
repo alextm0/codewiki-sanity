@@ -94,36 +94,36 @@ export default function Navbar() {
                       >
                         <DropdownTrigger>
                           <div className="font-medium text-gray-200 hover:text-gray-400 flex items-center gap-1 cursor-pointer">
-                            Categorii
+                            Olimpiada
                             <MdOutlineArrowDropDown />
                           </div>
                         </DropdownTrigger>
                         <DropdownMenu>
                           <DropdownItem
-                            key="olimpiada"
+                            key="olimpiada-incepator"
                             as={Link}
-                            href="/olimpiada"
+                            href="/olimpiada/incepator"
                           >
                             <div className="font-poppins font-medium flex gap-2 mb-2 text-gray-600 hover:text-[#EC6351]">
-                              <RiMedal2Fill /> Olimpiada
+                              <RiMedal2Fill /> Incepator
                             </div>
                           </DropdownItem>
                           <DropdownItem
-                            key="admitere"
+                            key="olimpiada-intermediar"
                             as={Link}
-                            href="/admitere"
+                            href="/olimpiada/intermediar"
                           >
                             <div className="font-poppins font-medium flex gap-2 mb-2 text-gray-600 hover:text-[#EC6351]">
-                              <FaUserGraduate /> Admitere
+                              <FaUserGraduate /> Intermediar
                             </div>
                           </DropdownItem>
                           <DropdownItem
-                            key="bacalaureat"
+                            key="olimpiada-avansat"
                             as={Link}
-                            href="/bacalaureat"
+                            href="/olimpiada/avansat"
                           >
                             <div className="font-poppins font-medium flex gap-2 text-gray-600 hover:text-[#EC6351]">
-                              <IoSchoolSharp /> Bacalaureat
+                              <IoSchoolSharp /> Avansat
                             </div>
                           </DropdownItem>
                         </DropdownMenu>
