@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions'
+import { Link } from 'next-view-transitions';
 import React from "react";
 
 interface Props {
@@ -9,13 +9,13 @@ interface Props {
 const Header = ({ title = "", tags = false }: Props) => {
   return (
     <header className="py-14 px-4 text-center border-b dark:border-orange-500">
-      <h2 className="text-gray-900 dark:text-white font-bold text-4xl">
+      <h2 className="text-text-900 dark:text-text-50 font-bold text-4xl">
         {title}
       </h2>
 
       {tags && (
         <div className="text-base mt-2">
-          <Link className='hover:text-[#FF725E]' href="/tag">#tags</Link>
+          <Link className="hover:text-primary-500" href="/tag">#tags</Link>
         </div>
       )}
     </header>

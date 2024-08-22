@@ -17,6 +17,11 @@ export const category = defineType({
       type: "string",
     },
     {
+      name: "description",
+      title: "Description",
+      type: "text",
+    },
+    {
       name: "topics",
       title: "Topics",
       type: "array",

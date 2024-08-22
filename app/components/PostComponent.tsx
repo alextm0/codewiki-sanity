@@ -1,10 +1,10 @@
-import { Link } from 'next-view-transitions';
+import { Link } from "next-view-transitions";
 import React from "react";
 import { Post } from "../utils/interface";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import Image from "next/image";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
-// import ArticleImage
+// Import ArticleImage
 import ArticleImage from "../../public/assets/ArticleImage.png";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 const BlogPostCard = ({ post }: Props) => {
   return (
-    <div className="bg-amber-50 dark:bg-white overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:shadow-lg hover:shadow-slate-400 rounded-xl md:w-80">
+    <div className="group bg-gradient-to-r from-background-50 to-background-100 dark:from-background-800 dark:to-background-700 overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:shadow-2xl rounded-xl md:w-80">
       <div className="relative h-48 w-full">
         {post?.coverImage ? (
           <Image
@@ -21,6 +21,7 @@ const BlogPostCard = ({ post }: Props) => {
             alt={post?.coverImage.alt || "Cover Image"}
             layout="fill"
             objectFit="cover"
+            className="rounded-t-xl"
           />
         ) : (
           <Image
@@ -28,41 +29,39 @@ const BlogPostCard = ({ post }: Props) => {
             alt="Cover Image"
             layout="fill"
             objectFit="cover"
+            className="rounded-t-xl"
           />
         )}
       </div>
 
       {/* Tags */}
-      <div className="pl-4 pt-4 text-sm font-medium bg-white">
-        <div className="flex items-center bg-white">
-          <div className="text-sm text-gray-600">
-            <div className="m-1 rounded text-xs">
-              {post?.tags?.map((tag) => (
-                <span
-                  key={tag._id}
-                  className="mr-2 p-1 rounded-lg text-xs lowercase text-[#EF4444] border"
-                >
-                  #{tag.name}
-                </span>
-              ))}
-            </div>
-          </div>
+      <div className="bg-white dark:bg-background-800 w-full px-4 pt-4">
+        <div className="flex flex-wrap gap-2">
+          {post?.tags?.map((tag) => (
+            <span
+              key={tag._id}
+              className="font-inter bg-secondary-100 dark:bg-secondary-800 text-secondary-500 dark:text-secondary-400 font-semibold px-3 py-1 rounded-full text-xs lowercase tracking-wide"
+            >
+              #{tag.name}
+            </span>
+          ))}
         </div>
       </div>
 
-      <div className="bg-white w-full px-4 pb-4 pt-1">
-        <div className="text-gray-900 text-xl font-bold font-quicksand">
+      <div className="bg-white dark:bg-background-800 w-full px-4 pb-6 pt-3 rounded-b-xl">
+        <div className="text-text-900 dark:text-text-50 text-xl font-bold font-quicksand">
           {post?.title}
         </div>
 
-        <p className="text-gray-600 font-light text-sm mt-2 mb-2 font-montserrat">
+        <p className="text-text-500 dark:text-text-400 font-light text-sm mt-2 mb-6">
           {post?.excerpt}
         </p>
 
         <div className="flex items-center">
-          <p className="text-purple-200 dark:text-slate-700 mt-5 ml-auto flex items-center gap-1 mr-3 font-medium">
+          <p className="text-primary-800 font-inter dark:text-secondary-500 mt-2 ml-auto flex items-center gap-1 font-medium">
             Citeste acum
-            <AiOutlineArrowRight className="mt-[2px]" />
+            {/* Simple Arrow Icon */}
+            <AiOutlineArrowRight className="mt-[2px] transition-transform duration-300 ease-in-out transform group-hover:translate-x-2" />
           </p>
         </div>
       </div>

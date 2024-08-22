@@ -2,6 +2,134 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --text-50:  #f7f7f7;  /* Very light gray, for subtle elements on dark backgrounds */
+    --text-100: #e1e1e1;  /* Light gray, for muted or secondary text */
+    --text-200: #cfcfcf;  /* Medium-light gray, good for less important text */
+    --text-300: #b1b1b1;  /* Medium gray, for secondary text elements */
+    --text-400: #9e9e9e;  /* Medium-dark gray, slightly more prominent text */
+    --text-500: #7e7e7e;  /* Standard text color, great for body text */
+    --text-600: #626262;  /* Darker gray, for headings and strong emphasis */
+    --text-700: #515151;  /* Dark gray, ideal for titles or important labels */
+    --text-800: #3b3b3b;  /* Very dark gray, use for primary text on light backgrounds */
+    --text-900: #222222;  /* Almost black, for maximum contrast */
+    --text-950: #111111;  /* Nearly black, for the most critical text elements */
+    
+    --background-50: #fafafa;
+    --background-100: #f5f5f5;    
+    --background-200: #cccccc;
+    --background-300: #b3b3b3;
+    --background-400: #999999;
+    --background-500: #808080;
+    --background-600: #666666;
+    --background-700: #4d4d4d;
+    --background-800: #333333;
+    --background-900: #1a1a1a;
+    --background-950: #0d0d0d;
+    
+    --primary-50: #e5e6ff;
+    --primary-100: #ccceff;
+    --primary-200: #999cff;
+    --primary-300: #666bff;
+    --primary-400: #333aff;
+    --primary-500: #0008ff;
+    --primary-600: #0007cc;
+    --primary-700: #000599;
+    --primary-800: #000366;
+    --primary-900: #000233;
+    --primary-950: #00011a;
+    
+    --secondary-50: #fff3f1;
+    --secondary-100: #ffe5e1;
+    --secondary-200: #ffcec7;
+    --secondary-300: #ffaca0;
+    --secondary-400: #ff725e;
+    --secondary-500: #f8523b;
+    --secondary-600: #e5361d;
+    --secondary-700: #c12914;
+    --secondary-800: #a02514;
+    --secondary-900: #842518;
+    --secondary-950: #480f07;
+    
+    
+    --accent-50: #fefde6;
+    --accent-100: #fdface;
+    --accent-200: #fbf59d;
+    --accent-300: #faf06b;
+    --accent-400: #f8eb3a;
+    --accent-500: #f6e609;
+    --accent-600: #c5b807;
+    --accent-700: #948a05;
+    --accent-800: #625c04;
+    --accent-900: #312e02;
+    --accent-950: #191701;
+  }
+  .dark {
+    --text-50: #010119;
+    --text-100: #010132;
+    --text-200: #030363;
+    --text-300: #040495;
+    --text-400: #0505c7;
+    --text-500: #0606f9;
+    --text-600: #3838fa;
+    --text-700: #6a6afb;
+    --text-800: #9c9cfc;
+    --text-900: #cdcdfe;
+    --text-950: #e6e6fe;
+    
+    --background-50: #00051a;
+    --background-100: #000a33;
+    --background-200: #001466;
+    --background-300: #001f99;
+    --background-400: #0029cc;
+    --background-500: #0033ff;
+    --background-600: #335cff;
+    --background-700: #6685ff;
+    --background-800: #99adff;
+    --background-900: #ccd6ff;
+    --background-950: #e5ebff;
+    
+    --primary-50: #00011a;
+    --primary-100: #000233;
+    --primary-200: #000366;
+    --primary-300: #000599;
+    --primary-400: #0007cc;
+    --primary-500: #0008ff;
+    --primary-600: #333aff;
+    --primary-700: #666bff;
+    --primary-800: #999cff;
+    --primary-900: #ccceff;
+    --primary-950: #e5e6ff;
+    
+    --secondary-50: #1a0300;
+    --secondary-100: #330600;
+    --secondary-200: #660c00;
+    --secondary-300: #991200;
+    --secondary-400: #cc1800;
+    --secondary-500: #ff1e00;
+    --secondary-600: #ff4b33;
+    --secondary-700: #ff7866;
+    --secondary-800: #ffa599;
+    --secondary-900: #ffd2cc;
+    --secondary-950: #ffe8e5;
+    
+    --accent-50: #191701;
+    --accent-100: #312e02;
+    --accent-200: #625c04;
+    --accent-300: #948a05;
+    --accent-400: #c5b807;
+    --accent-500: #f6e609;
+    --accent-600: #f8eb3a;
+    --accent-700: #faf06b;
+    --accent-800: #fbf59d;
+    --accent-900: #fdface;
+    --accent-950: #fefde6;
+    
+  }
+}
+
+
 @font-face {
   font-family: 'Poppins';
   src: url('../../public/fonts/Poppins-Regular.ttf') format('truetype');
@@ -110,4 +238,17 @@
 .dark .blockquote {
   border-color: #555;
   color: #bbb;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
 }

@@ -1,7 +1,5 @@
 import { client } from "@/sanity/lib/client";
 
-import Head from "next/head";
-
 import { Post } from "../utils/interface";
 import HeroSection from "../components/HeroSection";
 import Courses from "../components/CoursesSection";
@@ -35,7 +33,6 @@ async function getPosts() {
   return data;
 }
 
-
 export const revalidate = 60; // 1 minute
 
 export const metadata = {
@@ -44,13 +41,12 @@ export const metadata = {
 };
 
 export default async function Home() {
-  // TODO: Adjust the color of the page divider
   // TODO: Add metadata to the pages
   
   const posts: Post[] = await getPosts();
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden bg-background-50">
       <div className="bg-pattern bg-cover">
         <HeroSection />
         <PageDivider />

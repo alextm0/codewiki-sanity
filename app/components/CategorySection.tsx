@@ -14,6 +14,7 @@ interface Topic {
 interface CategoryPageProps {
   name: string;
   category: string;
+  description: string;
   topics: Topic[];
 }
 
@@ -21,6 +22,7 @@ const CategorySection: React.FC<CategoryPageProps> = ({
   name,
   category,
   topics,
+  description,
 }) => {
   if (!name || !category || !topics) {
     return null;
@@ -56,7 +58,7 @@ const CategorySection: React.FC<CategoryPageProps> = ({
                 {name}
               </h3>
               <span className="text-sm font-bold tracking-wider uppercase">
-                {category}
+                {description}
               </span>
             </div>
           </div>

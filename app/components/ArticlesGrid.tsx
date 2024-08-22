@@ -1,10 +1,8 @@
-"use client";
-
 import React from "react";
-import { Link } from 'next-view-transitions'
+import { Link } from "next-view-transitions";
 import BlogPostCard from "./PostComponent";
 import { Post } from "../utils/interface";
-import Header from "./Header";
+import { AiOutlineTags, AiOutlineReload } from "react-icons/ai"; // Importing a reload icon
 
 interface ArticlesProps {
   headerTitle: string;
@@ -15,15 +13,25 @@ interface ArticlesProps {
 
 const Articles: React.FC<ArticlesProps> = ({ headerTitle, blogs }) => {
   return (
-    <div className="mx-auto pt-10 pb-10">
-      <div className="text-center mb-5">
-        <h1 className="text-gray-900 dark:text-white font-quicksand font-bold text-4xl">
-          <Header title={headerTitle} tags />
+    <div className="mx-auto pt-10 pb-20 flex flex-col items-center">
+      {" "}
+      {/* Centering the content */}
+      <div className="text-center mb-8">
+        <h1 className="text-text-900 dark:text-text-50 font-bold text-4xl mb-2">
+          {headerTitle}
         </h1>
+        <div className="border-t border-gray-200 dark:border-gray-700 w-24 mx-auto mt-4 mb-6"></div>
+        <Link
+          href="/tag"
+          className="inline-flex items-center bg-gradient-to-r from-secondary-500 to-secondary-700 dark:from-secondary-500 text-white py-2 px-4 rounded-full hover:bg-primary-400 dark:hover:bg-secondary-600 transition ease-in-out duration-300 text-sm font-semibold transform hover:scale-105 hover:shadow-lg hover:-translate-y-1" // Added hover animations
+        >
+          <AiOutlineTags className="mr-2 transition-transform duration-300 ease-in-out transform group-hover:rotate-90" />{" "}
+          {/* Added icon rotation */}
+          View All Tags
+        </Link>
       </div>
-
       <div className="max-w-[1024px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 justify-center justify-items-center px-10 md:px-0 gap-10 md:gap-5 pt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center justify-items-center px-10 md:px-0 gap-10 md:gap-8 pt-10">
           {blogs.data &&
             blogs.data.map((blog, index) => (
               <Link
@@ -35,6 +43,12 @@ const Articles: React.FC<ArticlesProps> = ({ headerTitle, blogs }) => {
               </Link>
             ))}
         </div>
+      </div>
+      <div className="text-center mt-10 flex justify-center w-full">
+        <button className="px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-700 dark:from-secondary-400 dark:to-secondary-600 text-white rounded-full hover:shadow-xl hover:scale-105 transition transform ease-in-out duration-300 text-sm font-semibold flex items-center gap-2 active:bg-primary-800 dark:active:bg-secondary-700 active:scale-95">
+          <AiOutlineReload className="animate-spin-slow" />
+          Load More Posts
+        </button>
       </div>
     </div>
   );

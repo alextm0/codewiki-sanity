@@ -42,6 +42,7 @@ export interface Topic {
 export interface Category {
   name: string;
   category: string;
+  description: string;
   topics: Topic[];
 }
 

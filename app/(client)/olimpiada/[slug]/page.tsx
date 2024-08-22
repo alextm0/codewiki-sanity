@@ -10,6 +10,7 @@ async function getAllCategories(slug : any): Promise<Category[]> {
   *[_type == "category" && category == "${slug}"] | order(order asc) {
     name,
     category,
+    description,
     topics[] {
       _type,
       topicName,
@@ -42,6 +43,7 @@ export default async function Page({params} : Params) {
           name={category.name}
           category={category.category}
           topics={category.topics}
+          description={category.description}
         />
       ))}
     </div>

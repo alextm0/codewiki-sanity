@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import ThemeSwitcher from "../components/ThemeSwitcher"; // Import the ThemeSwitcher to apply light mode
 
 import { ViewTransitions } from "next-view-transitions";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
@@ -32,12 +33,13 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en" className="font-poppins overflow-x-hidden">
+      <html lang="en" className="font-poppins overflow-x-hidden bg-background-50">
         <body className="h-full overflow-x-hidden">
           <CustomThemeProvider>
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
             <Navbar />
             <main className="overflow-x-hidden">{children}</main>
+            <Footer />
           </CustomThemeProvider>
         </body>
       </html>

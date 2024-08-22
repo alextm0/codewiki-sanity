@@ -2,13 +2,11 @@
 
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { FaFileAlt, FaUserGraduate, FaQuestionCircle } from "react-icons/fa";
+import { FaUserGraduate } from "react-icons/fa";
 import { RiMedal2Fill } from "react-icons/ri";
 import { IoSchoolSharp } from "react-icons/io5";
-import ThemeSwitcher from "./ThemeSwitcher";
-
 import {
   Dropdown,
   DropdownTrigger,
@@ -52,7 +50,7 @@ export default function Navbar() {
             <div className="relative flex h-20 items-center justify-center">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-text-200 hover:bg-background-400 hover:text-text-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-200">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -65,7 +63,7 @@ export default function Navbar() {
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
                     <div className="flex items-center gap-3">
-                      <span className="font-righteous text-3xl text-white">
+                      <span className="font-righteous text-3xl text-text-50">
                         CodeWiki
                       </span>
                     </div>
@@ -76,35 +74,31 @@ export default function Navbar() {
                 <div className="hidden md:flex flex-1 items-center justify-center font-poppins">
                   <nav className="flex space-x-10 mr-28">
                     {/* Navigation links */}
-                    <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400 mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300">
+                    <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
                       <Link href="/articles">
-                        <div className="font-medium text-gray-200 hover:text-gray-400">
+                        <div className="font-medium text-text-50 hover:text-primary-100">
                           Articole
                         </div>
                       </Link>
                     </div>
 
                     {/* Dropdown Menu */}
-                    <div className="font-poppins relative after:absolute after:bg-gray-600 dark:after:bg-gray-400 mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300 cursor-pointer">
-                      <Dropdown
-                        classNames={{
-                          content:
-                            "p-4 rounded-md font-medium bg-white shadow-lg",
-                        }}
-                      >
+                    <div className="font-poppins relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500 cursor-pointer">
+                      <Dropdown>
                         <DropdownTrigger>
-                          <div className="font-medium text-gray-200 hover:text-gray-400 flex items-center gap-1 cursor-pointer">
+                          <div className="font-medium text-text-50 flex items-center gap-1 cursor-pointer hover:text-primary-100 transition-colors duration-300">
                             Olimpiada
                             <MdOutlineArrowDropDown />
                           </div>
                         </DropdownTrigger>
-                        <DropdownMenu>
+                        <DropdownMenu className="bg-text-50 shadow-lg rounded-lg py-4 px-4">
                           <DropdownItem
                             key="olimpiada-incepator"
                             as={Link}
                             href="/olimpiada/incepator"
+                            className="px-3 py-2 hover:bg-primary-50 rounded-md hover:text-secondary-500"
                           >
-                            <div className="font-poppins font-medium flex gap-2 mb-2 text-gray-600 hover:text-[#EC6351]">
+                            <div className="font-poppins font-medium flex gap-2 text-text-700">
                               <RiMedal2Fill /> Incepator
                             </div>
                           </DropdownItem>
@@ -112,8 +106,9 @@ export default function Navbar() {
                             key="olimpiada-intermediar"
                             as={Link}
                             href="/olimpiada/intermediar"
+                            className="px-3 py-2 hover:bg-primary-50 rounded-md"
                           >
-                            <div className="font-poppins font-medium flex gap-2 mb-2 text-gray-600 hover:text-[#EC6351]">
+                            <div className="font-poppins font-medium flex gap-2 text-text-700 ">
                               <FaUserGraduate /> Intermediar
                             </div>
                           </DropdownItem>
@@ -121,8 +116,9 @@ export default function Navbar() {
                             key="olimpiada-avansat"
                             as={Link}
                             href="/olimpiada/avansat"
+                            className="px-3 py-2 hover:bg-primary-50 rounded-md"
                           >
-                            <div className="font-poppins font-medium flex gap-2 text-gray-600 hover:text-[#EC6351]">
+                            <div className="font-poppins font-medium flex gap-2 text-text-700">
                               <IoSchoolSharp /> Avansat
                             </div>
                           </DropdownItem>
@@ -131,27 +127,15 @@ export default function Navbar() {
                     </div>
 
                     {/* Navigation link */}
-                    <div className="relative after:absolute after:bg-gray-600 dark:after:bg-gray-400 mt-2 after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300">
+                    <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
                       <Link href="/problems">
-                        <div className="text-base font-medium text-gray-200 hover:text-gray-400">
+                        <div className="text-base font-medium text-text-50 hover:text-primary-100">
                           Probleme
                         </div>
                       </Link>
                     </div>
                   </nav>
                 </div>
-
-                {/* Placeholder button to balance the layout */}
-                {/* <div className="hidden md:flex items-center">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div> */}
               </div>
             </div>
           </div>
@@ -165,8 +149,8 @@ export default function Navbar() {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      ? "bg-background-800 text-text-50"
+                      : "text-text-200 hover:bg-background-600 hover:text-text-50",
                     "block rounded-md px-3 py-2 text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}
