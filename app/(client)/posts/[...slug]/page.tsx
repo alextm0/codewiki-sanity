@@ -62,16 +62,11 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
   const post = await client.fetch(query);
 
   if (!post) {
-    return null; // Return null if the post is not found
+    return null;
   }
 
-  // Convert PortableText to Markdown
   const markdownContent = portableTextToMarkdown(post?.body || "");
-
-  // Extract Markdown headers using a simple regex
   const markdownHeadings = extractMarkdownHeadings(markdownContent);
-
-  // Combine Sanity headings and Markdown headings
   const allHeadings = [...(post.headings || []), ...markdownHeadings];
 
   return { ...post, markdownContent, allHeadings };
@@ -83,7 +78,7 @@ function extractMarkdownHeadings(markdownContent: string) {
   let match;
 
   while ((match = headingRegex.exec(markdownContent)) !== null) {
-    const level = match[1].length; // Determine heading level by the number of `#`
+    const level = match[1].length;
     const text = match[2].trim();
     const slug = slugify(text);
     headings.push({ level, text, slug });
@@ -116,24 +111,26 @@ export async function generateMetadata({ params }: Params): Promise<Metadata | u
   };
 }
 
-
 const Page = async ({ params, searchParams }: Params) => {
   const commentsOrder = searchParams?.comments?.toString() || "desc";
   const post = await getPost(params?.slug, commentsOrder);
+
+  // Console log the comments
+  console.log("Post", post.comments);
 
   if (!post) {
     notFound();
     return null;
   }
 
-  const { markdownContent, allHeadings } = post;    
-  
+  const { markdownContent, allHeadings } = post;
+
   return (
     <div className="font-inter w-full max-w-full">
       <div className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 px-4 sm:px-6">
           <h1 className="text-3xl lg:text-5xl font-bold mb-2 pt-10">{post.title}</h1>
-          <div className="flex justify-center items-center space-x-4 text-sm lg:text-base text-gray-600">
+          <div className="flex justify-center items-center space-x-4 text-sm lg:text-base text-text-500">
             <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
             <span>•</span>
             <span>Autor: Alexandru Toma</span>
@@ -141,7 +138,7 @@ const Page = async ({ params, searchParams }: Params) => {
           <div className="mt-4 space-x-2 flex justify-center flex-wrap">
             {post.tags?.map((tag: any) => (
               <Link key={tag._id} href={`/tag/${tag.slug.current}`}>
-                <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs lg:text-sm">{tag.name}</span>
+                <span className="font-inter bg-secondary-100 text-secondary-500 font-semibold px-3 py-1 rounded-full text-xs lowercase tracking-wide">{tag.name}</span>
               </Link>
             ))}
           </div>
@@ -163,12 +160,10 @@ const Page = async ({ params, searchParams }: Params) => {
           </div>
         )}
 
-        <div className="absolute max-w-7xl mx-auto pl-2 pr-6 xl:px-0 sm:mt-8 flex flex-col lg:flex-row">
+        <div className="max-w-7xl mx-auto pl-2 pr-6 xl:px-0 sm:mt-8 flex flex-col lg:flex-row">
           <div className="lg:w-1/4 lg:mr-8">
             <div className="lg:sticky lg:top-8">
-              {
-                allHeadings.length > 0 && <Toc headings={allHeadings} />
-              }
+              {allHeadings.length > 0 && <Toc headings={allHeadings} />}
             </div>
           </div>
           <main className="lg:w-3/4 mx-auto">

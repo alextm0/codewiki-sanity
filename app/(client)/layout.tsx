@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import CustomThemeProvider from "../providers/CustomThemeProvider";
 import Navbar from "../components/Navbar";
-import ThemeSwitcher from "../components/ThemeSwitcher"; // Import the ThemeSwitcher to apply light mode
-
-import { ViewTransitions } from "next-view-transitions";
+import ThemeSwitcher from "../components/ThemeSwitcher";
 import Footer from "../components/Footer";
+import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
@@ -33,12 +32,13 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en" className="font-poppins overflow-x-hidden bg-background-50">
-        <body className="h-full overflow-x-hidden">
+      <html lang="en" className="font-poppins overflow-x-hidden bg-background-50 h-full">
+        <body className="h-full flex flex-col">
           <CustomThemeProvider>
-            {/* <ThemeSwitcher /> */}
             <Navbar />
-            <main className="overflow-x-hidden">{children}</main>
+            <main className="flex-grow pb-20"> {/* Add padding bottom */}
+              {children}
+            </main>
             <Footer />
           </CustomThemeProvider>
         </body>

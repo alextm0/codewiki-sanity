@@ -16,7 +16,7 @@ export default function Hero() {
             </p>
             <Link
               href="/courses"
-              className="bg-gradient-to-r from-secondary-500 to-secondary-700 dark:from-accent-400 dark:to-accent-500 font-poppins mx-auto lg:mx-0 inline-flex font-bold px-8 py-3 my-8 text-base text-background-50 dark:text-background-900 transition transform duration-300 ease-in-out rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:bg-secondary-600 focus:outline-none focus:ring focus:ring-secondary-300"
+              className="bg-gradient-to-r from-secondary-500 to-secondary-600 dark:from-accent-400 dark:to-accent-500 font-poppins mx-auto lg:mx-0 inline-flex font-bold px-8 py-3 my-8 text-base text-background-50 dark:text-background-900 transition transform duration-300 ease-in-out rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:bg-secondary-600 focus:outline-none focus:ring focus:ring-secondary-300"
             >
               Începe aici
             </Link>

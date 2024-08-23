@@ -48,7 +48,7 @@ function Courses() {
           data-aos-delay="150"
           className="flex flex-col bg-white dark:bg-background-800 p-8 text-center rounded-xl border border-gray-200 dark:border-background-700 shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 group"
         >
-          <div className="bg-background-200 dark:bg-background-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 group-hover:bg-gradient-to-r group-hover:from-secondary-400 group-hover:to-secondary-600 group-hover:text-white transition-colors duration-300">
+          <div className="bg-background-200 dark:bg-background-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 group-hover:bg-gradient-to-r group-hover:from-primary-100 group-hover:to-primary-200 group-hover:text-white transition-colors duration-300">
             <Image
               src={OlimpiadaIcon}
               alt="Olimpiada Icon"

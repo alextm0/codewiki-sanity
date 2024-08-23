@@ -12,7 +12,7 @@ function Footer() {
   return (
     <footer className="relative bg-[#00044D] text-text-300">
       {/* Reversed PageDivider */}
-      <div className="rotate-180 mt-32">
+      <div className="rotate-180 pt-20">
         <PageDivider />
       </div>
 

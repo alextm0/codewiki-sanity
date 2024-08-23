@@ -8,6 +8,20 @@
   margin-bottom: 0.5em; /* Adding margin-bottom for better spacing */
 }
 
+.markdown h2 {
+  @apply text-text-800 text-3xl font-bold mt-8 mb-4;
+}
+
+.markdown h3 {
+  @apply text-text-700 text-2xl font-semibold mt-6 mb-3;
+}
+
+.markdown h4 {
+  @apply text-text-600 text-xl font-medium mt-4 mb-2;
+}
+
+
+
 .markdown ul,
 .markdown ol {
   margin-bottom: 1.5em;
@@ -63,9 +77,11 @@
 }
 
 .markdown a {
-  color: #0070f3;
-  text-decoration: none;
-  border-bottom: 1px solid #0070f3;
+  @apply text-primary-400 border-b-2 border-transparent pb-0.5 transition-all duration-300;
+}
+
+.markdown a:hover {
+  @apply text-primary-500 border-primary-300;
 }
 
 .markdown .inline-code {

@@ -76,15 +76,14 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
 
   const resourcesTableData = extractResourcesTableData(processedMdString);
   const problemSetTableData = extractProblemSetTableData(processedMdString);
-  
-  
+
   // Remove custom table tags from the processed markdown string
   const cleanedMdString = processedMdString
     .replace(/<ResourcesTable\s+header="[^"]+"\s+resource='[^']+'\/>/, "")
     .replace(
       /<ProblemSetTable\s+problemSetName="[^"]+"\s+problemSet='[^']+'\/>/,
       ""
-    );  
+    );
 
   const customComponents: CustomComponents = {
     code({ node, inline, className, children, ...props }: any) {
@@ -218,46 +217,55 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
     },
     p({ node, children }) {
       const childrenArray = React.Children.toArray(children);
-    
+
       // Convert children to string to check for special formatting
       const childrenText = childrenArray
-        .map(child => (typeof child === 'string' ? child : ''))
-        .join('');
-    
-      if (childrenText.startsWith("!!! note")) {
-        const title = childrenText.match(/!!! note "(.*?)"/)?.[1] || "Note";
-        const content = childrenText.replace(/!!! note "(.*?)"/, "").trim();
-        return (
-          <div className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 my-4">
-            <strong>{title}:</strong> {content}
-          </div>
-        );
-      }
-    
-      if (childrenText.startsWith("!!! info")) {
-        const title = childrenText.match(/!!! info "(.*?)"/)?.[1] || "Info";
-        const content = childrenText.replace(/!!! info "(.*?)"/, "").trim();
-        return (
-          <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-4">
-            <strong>{title}:</strong> {content}
-          </div>
-        );
-      }
-    
-      if (childrenText.startsWith("!!! warning")) {
-        const title = childrenText.match(/!!! warning "(.*?)"/)?.[1] || "Warning";
-        const content = childrenText.replace(/!!! warning "(.*?)"/, "").trim();
-        return (
-          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 my-4">
-            <strong>{title}:</strong> {content}
-          </div>
-        );
-      }
-    
+        .map((child) => (typeof child === "string" ? child : ""))
+        .join("");
+
+        if (childrenText.startsWith("!!! note")) {
+          const title = childrenText.match(/!!! note "(.*?)"/)?.[1] || "Note";
+          const content = childrenText.replace(/!!! note "(.*?)"/, "").trim();
+          return (
+            <div className="p-4 my-6 border-l-4 border-blue-400 bg-blue-50 text-blue-800 rounded-md shadow-sm not-prose">
+              <strong className="block text-blue-600 mb-1 text-base">{title}</strong>
+              <p className="text-sm leading-relaxed">{content}</p>
+            </div>
+          );
+        }
+        
+        if (childrenText.startsWith("!!! info")) {
+          const title = childrenText.match(/!!! info "(.*?)"/)?.[1] || "Info";
+          const content = childrenText.replace(/!!! info "(.*?)"/, "").trim();
+          return (
+            <div className="p-4 my-6 border-l-4 border-green-400 bg-green-50 text-green-800 rounded-md shadow-sm not-prose">
+              <strong className="block text-green-600 mb-1 text-base">{title}</strong>
+              <p className="text-sm leading-relaxed">{content}</p>
+            </div>
+          );
+        }
+        
+        if (childrenText.startsWith("!!! warning")) {
+          const title = childrenText.match(/!!! warning "(.*?)"/)?.[1] || "Warning";
+          const content = childrenText.replace(/!!! warning "(.*?)"/, "").trim();
+          return (
+            <div className="p-4 my-6 border-l-4 border-yellow-400 bg-yellow-50 text-yellow-800 rounded-md shadow-sm not-prose">
+              <strong className="block text-yellow-600 mb-1 text-base">{title}</strong>
+              <p className="text-sm leading-relaxed">{content}</p>
+            </div>
+          );
+        }
+        
+        
+
       // Render the paragraph while preserving the children structure
-      return <p className={classNames(styles.p, "my-2 leading-7")}>{childrenArray}</p>;
+      return (
+        <p className={classNames(styles.p, "my-2 leading-7")}>
+          {childrenArray}
+        </p>
+      );
     },
-    
+
     blockquote: ({ node, ...props }) => (
       <blockquote
         className={classNames(
@@ -274,7 +282,10 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
       />
     ),
     ul: ({ node, ...props }) => (
-      <ul className={classNames(styles.ul, "list-disc my-1 md:ml-4")} {...props} />
+      <ul
+        className={classNames(styles.ul, "list-disc my-1 md:ml-4")}
+        {...props}
+      />
     ),
     li: ({ node, ...props }) => (
       <li className={classNames(styles.li, "my-1 list-disc")} {...props} />
@@ -290,7 +301,9 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
     ),
     a: ({ node, ...props }) => (
       <a
-        className={classNames(styles.a, "text-blue-600 underline")}
+        className={classNames(
+          "text-primary-400 border-b-2 border-transparent pb-0.5 transition-all duration-300 hover:text-primary-500 hover:border-primary-300"
+        )}
         {...props}
       />
     ),

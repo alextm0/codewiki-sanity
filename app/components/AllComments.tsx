@@ -8,12 +8,11 @@ interface Props {
   commentsOrder: string;
 }
 
-const AllComments = ({ comments, slug, commentsOrder }: Props) => {  
-  // Filter comments to only include those that are published
-  const publishedComments = comments.filter((comment) => comment.published);
+const AllComments = ({ comments, slug, commentsOrder }: Props) => {
+  const publishedComments = comments
 
   return (
-    <div className=" max-w-xs md:max-w-full mt-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-xs md:max-w-full mt-10 px-4 sm:px-6 lg:px-8">
       <h3 className="text-lg sm:text-xl font-bold mb-4 text-gray-900 dark:text-white border-b pb-2">
         Toate Comentariile
       </h3>
@@ -28,9 +27,7 @@ const AllComments = ({ comments, slug, commentsOrder }: Props) => {
               scroll={false}
               href={`/posts/${slug}?comments=asc`}
               className={`mr-4 ${
-                commentsOrder === "asc"
-                  ? "text-blue-600"
-                  : "text-gray-600 hover:text-blue-600"
+                commentsOrder === "asc" ? "text-blue-600" : "text-gray-600 hover:text-blue-600"
               }`}
             >
               Cele mai vechi
@@ -39,23 +36,16 @@ const AllComments = ({ comments, slug, commentsOrder }: Props) => {
               scroll={false}
               href={`/posts/${slug}?comments=desc`}
               className={`mr-4 ${
-                commentsOrder === "desc"
-                  ? "text-blue-600"
-                  : "text-gray-600 hover:text-blue-600"
+                commentsOrder === "desc" ? "text-blue-600" : "text-gray-600 hover:text-blue-600"
               }`}
             >
               Cele mai noi
             </Link>
           </div>
           {publishedComments.map((comment) => (
-            <div
-              key={comment?._id}
-              className="mb-4 p-4 border rounded-md bg-gray-50 dark:bg-gray-800"
-            >
+            <div key={comment?._id} className="mb-4 p-4 border rounded-md bg-gray-50 dark:bg-gray-800">
               <div className="mb-2">
-                <strong className="text-gray-900 dark:text-white">
-                  {comment?.name}
-                </strong>{" "}
+                <strong className="text-gray-900 dark:text-white">{comment?.name}</strong>{" "}
                 <span className="text-gray-500 text-xs">
                   {new Date(comment?._createdAt).toLocaleString()}
                 </span>
@@ -70,5 +60,7 @@ const AllComments = ({ comments, slug, commentsOrder }: Props) => {
     </div>
   );
 };
+
+
 
 export default AllComments;
