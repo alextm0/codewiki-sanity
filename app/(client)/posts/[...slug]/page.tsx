@@ -1,8 +1,7 @@
-import React from "react";
-import AddComment from "@/app/components/AddComment";
-import AllComments from "@/app/components/AllComments";
+import React, { Suspense } from "react";
 import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
+import BlogPostSkeleton from "@/app/components/BlogPostSkeleton";
 import { client } from "@/sanity/lib/client";
 import { portableTextToMarkdown } from "@/app/utils/portableTextToMarkdown";
 import { Metadata } from "next";
@@ -11,6 +10,10 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import "@/app/(client)/markdown-styles.module.css";
 import { slugify } from "@/app/utils/helpers";
+import dynamic from "next/dynamic";
+
+const AddComment = dynamic(() => import("@/app/components/AddComment"));
+const AllComments = dynamic(() => import("@/app/components/AllComments"));
 
 interface Params {
   params: {
@@ -23,40 +26,40 @@ interface Params {
 
 async function getPost(slug: string, commentsOrder: string = "desc") {
   const query = `
-  *[_type == "post" && slug.current == "${slug}" && published == true][0] {
-    title,
-    slug,
-    published,
-    publishedAt,
-    excerpt,
-    coverImage {
-      asset-> {
-        url
-      },
-      alt
-    },
-    _id,
-    "headings": body[style in ["h2", "h3", "h4", "h5", "h6"]],
-    body,
-    tags[]-> {
-      _id,
+    *[_type == "post" && slug.current == "${slug}" && published == true][0] {
+      title,
       slug,
-      name
-    },
-    author-> {
-      name,
-      image {
+      published,
+      publishedAt,
+      excerpt,
+      coverImage {
         asset-> {
           url
+        },
+        alt
+      },
+      _id,
+      "headings": body[style in ["h2", "h3", "h4", "h5", "h6"]],
+      body,
+      tags[]-> {
+        _id,
+        slug,
+        name
+      },
+      author-> {
+        name,
+        image {
+          asset-> {
+            url
+          }
         }
+      },
+      "comments": *[_type == "comment" && post._ref == ^._id ] | order(_createdAt ${commentsOrder}) {
+        name,
+        comment,
+        _createdAt,
       }
-    },
-    "comments": *[_type == "comment" && post._ref == ^._id ] | order(_createdAt ${commentsOrder}) {
-      name,
-      comment,
-      _createdAt,
     }
-  }
   `;
 
   const post = await client.fetch(query);
@@ -87,7 +90,7 @@ function extractMarkdownHeadings(markdownContent: string) {
   return headings;
 }
 
-export const revalidate = 1;
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -113,15 +116,14 @@ export async function generateMetadata({
   };
 }
 
-const Page = async ({ params, searchParams }: Params) => {
-  const commentsOrder = searchParams?.comments?.toString() || "desc";
-  const post = await getPost(params?.slug, commentsOrder);
-
-  if (!post) {
-    notFound();
-    return null;
-  }
-
+// New Component for Blog Post Content
+const BlogPostContent = ({
+  post,
+  commentsOrder,
+}: {
+  post: any;
+  commentsOrder: string;
+}) => {
   const { markdownContent, allHeadings } = post;
 
   return (
@@ -154,7 +156,7 @@ const Page = async ({ params, searchParams }: Params) => {
         </div>
 
         {post.coverImage?.asset?.url && (
-          <div className="relative overflow-hidden mb-4 ">
+          <div className="relative overflow-hidden mb-4">
             <div className="max-w-7xl mx-auto">
               <Image
                 src={post.coverImage.asset.url}
@@ -164,6 +166,7 @@ const Page = async ({ params, searchParams }: Params) => {
                 layout="responsive"
                 objectFit="cover"
                 className="rounded-md"
+                priority
               />
             </div>
           </div>
@@ -178,17 +181,37 @@ const Page = async ({ params, searchParams }: Params) => {
           <main className="lg:w-3/4 mx-auto">
             <div className={`max-w-4xl mx-auto ${richTextStyles}`}>
               <MarkdownRender mdString={markdownContent} />
-              <AddComment postId={post._id} />
-              <AllComments
-                comments={post.comments || []}
-                slug={post.slug?.current}
-                commentsOrder={commentsOrder}
-              />
+              <Suspense fallback={<div>Loading comments...</div>}>
+                <AddComment postId={post._id} />
+                <AllComments
+                  comments={post.comments || []}
+                  slug={post.slug?.current}
+                  commentsOrder={commentsOrder}
+                />
+              </Suspense>
             </div>
           </main>
         </div>
       </div>
     </div>
+  );
+};
+
+const Page = async ({ params, searchParams }: Params) => {
+  const commentsOrder = searchParams?.comments?.toString() || "desc";
+
+  // Fetch the post data and wrap content in Suspense with BlogPostSkeleton fallback
+  const post = await getPost(params?.slug, commentsOrder);
+
+  if (!post) {
+    notFound();
+    return null;
+  }
+
+  return (
+    <Suspense fallback={<BlogPostSkeleton />}>
+      <BlogPostContent post={post} commentsOrder={commentsOrder} />
+    </Suspense>
   );
 };
 

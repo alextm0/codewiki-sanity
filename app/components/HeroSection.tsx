@@ -28,6 +28,7 @@ export default function Hero() {
               width={500}
               height={500}
               className="w-full md:w-3/5 ml-auto mr-auto mb-10 sm:mb-20 z-50"
+              loading="lazy"
             />
           </div>
         </div>

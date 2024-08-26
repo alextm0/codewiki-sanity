@@ -1,8 +1,9 @@
+// /app/layout.tsx
+
 import type { Metadata } from "next";
 import "./globals.css";
 import CustomThemeProvider from "../providers/CustomThemeProvider";
 import Navbar from "../components/Navbar";
-import ThemeSwitcher from "../components/ThemeSwitcher";
 import Footer from "../components/Footer";
 import { ViewTransitions } from "next-view-transitions";
 
@@ -32,11 +33,70 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en" className="font-poppins overflow-x-hidden bg-background-50 h-full">
+      <html lang="en" className="overflow-x-hidden bg-background-50 h-full">
+        <head>
+          {/* Preload key fonts */}
+          <link
+            rel="preload"
+            href="/fonts/Poppins-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Poppins-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Poppins-Medium.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Poppins-Italic.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Poppins-ExtraBold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Righteous-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Inter-VariableFont_opSz,wght.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Inter-Italic-VariableFont_opSz,wght.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        </head>
         <body className="h-full flex flex-col">
           <CustomThemeProvider>
             <Navbar />
-            <main className="flex-grow pb-20"> {/* Add padding bottom */}
+            <main className="flex-grow pb-20">
               {children}
             </main>
             <Footer />

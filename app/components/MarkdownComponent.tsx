@@ -319,8 +319,10 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
         width={700}
         height={700}
         className={styles.image}
+        loading="lazy" // Lazy load images
       />
     ),
+    
   };
 
   return (

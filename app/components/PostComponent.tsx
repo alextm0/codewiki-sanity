@@ -49,11 +49,11 @@ const BlogPostCard = ({ post }: Props) => {
       </div>
 
       <div className="bg-white dark:bg-background-800 w-full px-4 pb-6 pt-3 rounded-b-xl">
-        <div className="text-text-900 dark:text-text-50 text-xl font-bold font-quicksand">
+        <div className="text-text-900 dark:text-text-50 text-xl font-bold font-poppins">
           {post?.title}
         </div>
 
-        <p className="text-text-500 dark:text-text-400 font-light text-sm mt-2 mb-6">
+        <p className="text-text-500 font-poppins dark:text-text-400 font-light text-sm mt-2 mb-6">
           {post?.excerpt}
         </p>
 
