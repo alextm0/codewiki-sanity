@@ -89,7 +89,9 @@ function extractMarkdownHeadings(markdownContent: string) {
 
 export const revalidate = 1;
 
-export async function generateMetadata({ params }: Params): Promise<Metadata | undefined> {
+export async function generateMetadata({
+  params,
+}: Params): Promise<Metadata | undefined> {
   const post = await getPost(params?.slug);
 
   if (!post || !post.title || !post.markdownContent) {
@@ -115,9 +117,6 @@ const Page = async ({ params, searchParams }: Params) => {
   const commentsOrder = searchParams?.comments?.toString() || "desc";
   const post = await getPost(params?.slug, commentsOrder);
 
-  // Console log the comments
-  console.log("Post", post.comments);
-
   if (!post) {
     notFound();
     return null;
@@ -129,16 +128,26 @@ const Page = async ({ params, searchParams }: Params) => {
     <div className="font-inter w-full max-w-full">
       <div className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 px-4 sm:px-6">
-          <h1 className="text-3xl lg:text-5xl font-bold mb-2 pt-10">{post.title}</h1>
+          <h1 className="text-3xl lg:text-5xl font-bold mb-2 pt-10">
+            {post.title}
+          </h1>
           <div className="flex justify-center items-center space-x-4 text-sm lg:text-base text-text-500">
-            <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
+            <span>
+              {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
             <span>•</span>
             <span>Autor: Alexandru Toma</span>
           </div>
           <div className="mt-4 space-x-2 flex justify-center flex-wrap">
             {post.tags?.map((tag: any) => (
               <Link key={tag._id} href={`/tag/${tag.slug.current}`}>
-                <span className="font-inter bg-secondary-100 text-secondary-500 font-semibold px-3 py-1 rounded-full text-xs lowercase tracking-wide">{tag.name}</span>
+                <span className="font-inter bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs lg:text-sm font-semibold lowercase tracking-wide transition duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-700">
+                  {tag.name}
+                </span>
               </Link>
             ))}
           </div>
@@ -170,7 +179,11 @@ const Page = async ({ params, searchParams }: Params) => {
             <div className={`max-w-4xl mx-auto ${richTextStyles}`}>
               <MarkdownRender mdString={markdownContent} />
               <AddComment postId={post._id} />
-              <AllComments comments={post.comments || []} slug={post.slug?.current} commentsOrder={commentsOrder} />
+              <AllComments
+                comments={post.comments || []}
+                slug={post.slug?.current}
+                commentsOrder={commentsOrder}
+              />
             </div>
           </main>
         </div>

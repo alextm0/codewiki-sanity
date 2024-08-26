@@ -17,104 +17,110 @@ interface ProblemSetTableProps {
   problemSet: Problem[];
 }
 
+// Badge Component
+const Badge = ({ type }: { type: string }) => {
+  const badgeClasses: { [key: string]: string } = {
+    easy: "bg-green-100 text-green-800",
+    normal: "bg-blue-100 text-blue-800",
+    hard: "bg-red-100 text-red-800",
+  };
+
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold ${
+        badgeClasses[type] || "bg-gray-100 text-gray-800"
+      }`}
+    >
+      {type.charAt(0).toUpperCase() + type.slice(1)}
+    </span>
+  );
+};
+
 const ProblemSetTable: React.FC<ProblemSetTableProps> = ({
   problemSetName,
   problemSet,
 }) => {
-  const normalBadge = (
-    <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-      Normal
-    </span>
-  );
-  const easyBadge = (
-    <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-green-100 text-green-800">
-      Easy
-    </span>
-  );
-  const hardBadge = (
-    <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-red-100 text-red-800">
-      Hard
-    </span>
-  );
-  const otherBadge = <span>...</span>;
-
-  const ProblemSetRow = problemSet.map((problem) => {
-    let currentBadge = otherBadge;
-    if (problem.badge === "hard") currentBadge = hardBadge;
-    else if (problem.badge === "normal") currentBadge = normalBadge;
-    else if (problem.badge === "easy") currentBadge = easyBadge;
-
-    return (
-      <tr key={problem.name} className="border-b hover:bg-gray-50">
-        <th
-          scope="row"
-          className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+  const ProblemSetRow = problemSet.map((problem) => (
+    <tr
+      key={problem.name}
+      className="border-b hover:bg-gray-100 transition-colors duration-200"
+    >
+      <th
+        scope="row"
+        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
+      >
+        <a
+          href={problem.sourceLink}
+          className="inline-block text-gray-600 relative after:absolute after:bg-gray-400 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300"
         >
-          <a
-            href={problem.sourceLink}
-            className="inline-block text-gray-600 relative after:absolute after:bg-gray-400 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300"
-          >
-            {problem.source}
-          </a>
-        </th>
-        <td className="py-4 px-6">
-          <a href={problem.link} className="font-semibold text-[#2563eb]">
-            {problem.name}
-          </a>
-        </td>
-        <td className="py-4 px-6 text-gray-600">{currentBadge}</td>
-        <td className="py-4 px-6 text-gray-600">{problem.tags}</td>
-        <td className="py-4 px-6 text-2xl text-gray-600">
-          {problem.badge === "hard" ||
-          problem.badge === "normal" ||
-          problem.badge === "easy" ? (
-            <Link href={`/solutions/${problem.solutionSlug}`}>
-              <TbDotsVertical />
-            </Link>
-          ) : (
-            <></>
-          )}
-        </td>
-      </tr>
-    );
-  });
+          {problem.source}
+        </a>
+      </th>
+      <td className="py-4 px-6">
+        <a
+          href={problem.link}
+          className="inline-block text-primary-600 font-medium relative after:absolute after:bg-primary-400 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:text-primary-500"
+        >
+          {problem.name}
+        </a>
+      </td>
+      <td className="py-4 px-6">
+        <Badge type={problem.badge} />
+      </td>
+      <td className="py-4 px-6 text-gray-600">
+        {problem.tags.split(",").map((tag, index) => (
+          <Link key={index} href={`/tags/${tag.trim()}`} className="hover:underline">
+            {tag.trim()}
+            {index < problem.tags.split(",").length - 1 && ", "}
+          </Link>
+        ))}
+      </td>
+      <td className="py-4 px-6 text-2xl text-gray-600">
+        {["hard", "normal", "easy"].includes(problem.badge) && (
+          <Link href={`/solutions/${problem.solutionSlug}`}>
+            <TbDotsVertical className="hover:text-primary-600 transition-colors duration-200" />
+          </Link>
+        )}
+      </td>
+    </tr>
+  ));
 
   return (
-    <div className="font-inter max-w-xs md:max-w-full">
-      <h1 className="font-semibold text-gray-700 text-2xl mb-5">
+    <div className="font-inter max-w-xs md:max-w-full my-16">
+      <h2 className="font-bold text-gray-800 text-2xl mb-6">
         {problemSetName}
-      </h1>
+      </h2>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+        <table className="w-full text-sm text-left text-gray-700">
+          <thead className="text-xs uppercase bg-gray-100">
             <tr>
               <th
                 scope="col"
-                className="py-3 px-6 text-xs font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
+                className="py-4 px-6 font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
               >
-                Source
+                Sursa
               </th>
               <th
                 scope="col"
-                className="py-3 px-6 text-xs font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
+                className="py-4 px-6 font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
               >
-                Problem Name
+                Numele problemei
               </th>
               <th
                 scope="col"
-                className="py-3 px-6 text-xs font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
+                className="py-4 px-6 font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
               >
-                Difficulty
+                Dificultatea
               </th>
               <th
                 scope="col"
-                className="py-3 px-6 text-xs font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
+                className="py-4 px-6 font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
               >
                 Tags
               </th>
               <th
                 scope="col"
-                className="py-3 px-6 text-xs font-medium text-gray-600 bg-gray-200 border-b border-gray-300"
+                className="py-4 px-6 bg-gray-200 border-b border-gray-300"
               ></th>
             </tr>
           </thead>

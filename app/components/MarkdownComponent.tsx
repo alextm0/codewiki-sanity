@@ -223,40 +223,45 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
         .map((child) => (typeof child === "string" ? child : ""))
         .join("");
 
-        if (childrenText.startsWith("!!! note")) {
-          const title = childrenText.match(/!!! note "(.*?)"/)?.[1] || "Note";
-          const content = childrenText.replace(/!!! note "(.*?)"/, "").trim();
-          return (
-            <div className="p-4 my-6 border-l-4 border-blue-400 bg-blue-50 text-blue-800 rounded-md shadow-sm not-prose">
-              <strong className="block text-blue-600 mb-1 text-base">{title}</strong>
-              <p className="text-sm leading-relaxed">{content}</p>
-            </div>
-          );
-        }
-        
-        if (childrenText.startsWith("!!! info")) {
-          const title = childrenText.match(/!!! info "(.*?)"/)?.[1] || "Info";
-          const content = childrenText.replace(/!!! info "(.*?)"/, "").trim();
-          return (
-            <div className="p-4 my-6 border-l-4 border-green-400 bg-green-50 text-green-800 rounded-md shadow-sm not-prose">
-              <strong className="block text-green-600 mb-1 text-base">{title}</strong>
-              <p className="text-sm leading-relaxed">{content}</p>
-            </div>
-          );
-        }
-        
-        if (childrenText.startsWith("!!! warning")) {
-          const title = childrenText.match(/!!! warning "(.*?)"/)?.[1] || "Warning";
-          const content = childrenText.replace(/!!! warning "(.*?)"/, "").trim();
-          return (
-            <div className="p-4 my-6 border-l-4 border-yellow-400 bg-yellow-50 text-yellow-800 rounded-md shadow-sm not-prose">
-              <strong className="block text-yellow-600 mb-1 text-base">{title}</strong>
-              <p className="text-sm leading-relaxed">{content}</p>
-            </div>
-          );
-        }
-        
-        
+      if (childrenText.startsWith("!!! note")) {
+        const title = childrenText.match(/!!! note "(.*?)"/)?.[1] || "Note";
+        const content = childrenText.replace(/!!! note "(.*?)"/, "").trim();
+        return (
+          <div className="p-4 my-6 border-l-4 border-blue-400 bg-blue-50 text-blue-800 rounded-md shadow-sm not-prose">
+            <strong className="block text-blue-600 mb-1 text-base">
+              {title}
+            </strong>
+            <p className="text-sm leading-relaxed">{content}</p>
+          </div>
+        );
+      }
+
+      if (childrenText.startsWith("!!! info")) {
+        const title = childrenText.match(/!!! info "(.*?)"/)?.[1] || "Info";
+        const content = childrenText.replace(/!!! info "(.*?)"/, "").trim();
+        return (
+          <div className="p-4 my-6 border-l-4 border-green-400 bg-green-50 text-green-800 rounded-md shadow-sm not-prose">
+            <strong className="block text-green-600 mb-1 text-base">
+              {title}
+            </strong>
+            <p className="text-sm leading-relaxed">{content}</p>
+          </div>
+        );
+      }
+
+      if (childrenText.startsWith("!!! warning")) {
+        const title =
+          childrenText.match(/!!! warning "(.*?)"/)?.[1] || "Warning";
+        const content = childrenText.replace(/!!! warning "(.*?)"/, "").trim();
+        return (
+          <div className="p-4 my-6 border-l-4 border-yellow-400 bg-yellow-50 text-yellow-800 rounded-md shadow-sm not-prose">
+            <strong className="block text-yellow-600 mb-1 text-base">
+              {title}
+            </strong>
+            <p className="text-sm leading-relaxed">{content}</p>
+          </div>
+        );
+      }
 
       // Render the paragraph while preserving the children structure
       return (
@@ -320,13 +325,6 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
 
   return (
     <div>
-      {resourcesTableData && (
-        <ResourcesTable
-          header={resourcesTableData.header}
-          resource={resourcesTableData.resource}
-        />
-      )}
-
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex, rehypeRaw]}
@@ -335,6 +333,13 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
       >
         {cleanedMdString}
       </ReactMarkdown>
+
+      {resourcesTableData && (
+        <ResourcesTable
+          header={resourcesTableData.header}
+          resource={resourcesTableData.resource}
+        />
+      )}
 
       {problemSetTableData && (
         <ProblemSetTable
