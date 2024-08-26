@@ -23,12 +23,13 @@ export default function Hero() {
           </div>
           <div className="w-full md:w-3/5 py-6 text-center">
             <Image
-              src={"/assets/Dark_HeroImage.svg"}
+              src="/assets/Dark_HeroImage.svg"
               alt="heroimage"
               width={500}
               height={500}
               className="w-full md:w-3/5 ml-auto mr-auto mb-10 sm:mb-20 z-50"
-              loading="lazy"
+              loading="lazy" // Already implemented
+              sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw" // Add responsive sizes
             />
           </div>
         </div>

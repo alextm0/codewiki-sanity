@@ -15,25 +15,18 @@ const BlogPostCard = ({ post }: Props) => {
   return (
     <div className="group bg-gradient-to-r from-background-50 to-background-100 dark:from-background-800 dark:to-background-700 overflow-hidden shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:shadow-2xl rounded-xl md:w-80">
       <div className="relative h-48 w-full">
-        {post?.coverImage ? (
+        {post?.coverImage && (
           <Image
             src={post?.coverImage.asset.url}
             alt={post?.coverImage.alt || "Cover Image"}
             layout="fill"
             objectFit="cover"
             className="rounded-t-xl"
-          />
-        ) : (
-          <Image
-            src={ArticleImage}
-            alt="Cover Image"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-t-xl"
+            loading="lazy" // Lazy load images
+            sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw" // Add responsive sizes
           />
         )}
       </div>
-
       {/* Tags */}
       <div className="bg-white dark:bg-background-800 w-full px-4 pt-4">
         <div className="flex flex-wrap gap-2">

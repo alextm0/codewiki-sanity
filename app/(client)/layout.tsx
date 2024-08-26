@@ -80,14 +80,14 @@ export default function RootLayout({
           />
           <link
             rel="preload"
-            href="/fonts/Inter-VariableFont_opSz,wght.woff2"
+            href="/assets/fonts/Inter-VariableFont_opSz,wght.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="preload"
-            href="/fonts/Inter-Italic-VariableFont_opSz,wght.woff2"
+            href="/assets/fonts/Inter-Italic-VariableFont_opSz,wght.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
@@ -96,9 +96,7 @@ export default function RootLayout({
         <body className="h-full flex flex-col">
           <CustomThemeProvider>
             <Navbar />
-            <main className="flex-grow pb-20">
-              {children}
-            </main>
+            <main className="flex-grow pb-20">{children}</main>
             <Footer />
           </CustomThemeProvider>
         </body>

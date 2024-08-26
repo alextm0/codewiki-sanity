@@ -11,7 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        pattern: "url('/assets/bg-pattern.png')",
+        pattern: "url('/assets/optimized-bg-pattern.png')",
       },
       colors: {
         text: {
