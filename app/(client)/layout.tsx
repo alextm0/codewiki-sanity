@@ -79,9 +79,44 @@ export default function RootLayout({
             crossOrigin="anonymous"
           />
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="preload"
+            href="/fonts/Inter/Inter_18pt-Regular.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
           />
+          <link
+            rel="preload"
+            href="/fonts/Inter/Inter_18pt-Bold.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/Inter/Inter_18pt-Medium.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
+          />
+          {/* Semibold, avoid italics */}
+          <link
+            rel="preload"
+            href="/fonts/Inter/Inter_18pt-SemiBold.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
+          />
+          {/* Preload key images */}
+
+          <link
+            rel="preload"
+            href="/assets/optimized-bg-pattern.png"
+            as="image"
+            type="image/png"
+            crossOrigin="anonymous"
+          />
+          
         </head>
         <body className="h-full flex flex-col">
           <CustomThemeProvider>

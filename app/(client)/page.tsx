@@ -40,9 +40,7 @@ export const metadata = {
   description: "codewiki.tech - a competitive programming blog",
 };
 
-export default async function Home() {
-  // TODO: Add metadata to the pages
-  
+export default async function Home() {  
   const posts: Post[] = await getPosts();
 
   return (
