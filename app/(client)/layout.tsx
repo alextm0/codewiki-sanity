@@ -79,18 +79,8 @@ export default function RootLayout({
             crossOrigin="anonymous"
           />
           <link
-            rel="preload"
-            href="/assets/fonts/Inter-VariableFont_opSz,wght.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/assets/fonts/Inter-Italic-VariableFont_opSz,wght.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
           />
         </head>
         <body className="h-full flex flex-col">
