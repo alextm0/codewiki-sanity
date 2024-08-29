@@ -48,7 +48,7 @@ export default async function Page() {
       </Head>
 
       <div className="mx-auto max-w-5xl px-6">
-        {posts && <ArticlesSection headerTitle="Articole recente" blogs={{ data: posts }} />}
+        {posts && <ArticlesSection headerTitle="Cele mai recente articole" blogs={{ data: posts }} />}
       </div>
     </div>
   )

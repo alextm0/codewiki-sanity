@@ -227,7 +227,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
         const title = childrenText.match(/!!! note "(.*?)"/)?.[1] || "Note";
         const content = childrenText.replace(/!!! note "(.*?)"/, "").trim();
         return (
-          <div className="p-4 my-6 border-l-4 border-blue-400 bg-blue-50 text-blue-800 rounded-md shadow-sm not-prose">
+          <div className="p-4 my-10 border-l-4 border-blue-400 bg-blue-50 text-blue-800 rounded-md shadow-sm not-prose">
             <strong className="block text-blue-600 mb-1 text-base">
               {title}
             </strong>
@@ -240,7 +240,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
         const title = childrenText.match(/!!! info "(.*?)"/)?.[1] || "Info";
         const content = childrenText.replace(/!!! info "(.*?)"/, "").trim();
         return (
-          <div className="p-4 my-6 border-l-4 border-green-400 bg-green-50 text-green-800 rounded-md shadow-sm not-prose">
+          <div className="p-4 my-10 border-l-4 border-green-400 bg-green-50 text-green-800 rounded-md shadow-sm not-prose">
             <strong className="block text-green-600 mb-1 text-base">
               {title}
             </strong>
@@ -254,7 +254,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
           childrenText.match(/!!! warning "(.*?)"/)?.[1] || "Warning";
         const content = childrenText.replace(/!!! warning "(.*?)"/, "").trim();
         return (
-          <div className="p-4 my-6 border-l-4 border-yellow-400 bg-yellow-50 text-yellow-800 rounded-md shadow-sm not-prose">
+          <div className="p-4 my-10 border-l-4 border-yellow-400 bg-yellow-50 text-yellow-800 rounded-md shadow-sm not-prose">
             <strong className="block text-yellow-600 mb-1 text-base">
               {title}
             </strong>

@@ -53,7 +53,7 @@ export default async function Home() {
       <Features />
       <div className="max-w-5xl mx-auto px-6">
         {posts && (
-          <ArticlesSection headerTitle="Articole recente" blogs={{ data: posts }} />
+          <ArticlesSection headerTitle="Cele mai recente articole" blogs={{ data: posts }} />
         )}
       </div>
     </div>

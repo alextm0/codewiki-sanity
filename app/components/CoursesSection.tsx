@@ -11,11 +11,12 @@ function Courses() {
       <div data-aos="flip-up" className="max-w-xl mx-auto text-center mt-32">
         <h1 className="font-bold text-text-900 my-3 text-3xl md:text-4xl dark:text-text-100">
           <span className="bg-gradient-to-r from-secondary-500 to-secondary-700 text-transparent bg-clip-text">
-            Investește în educația ta
+            Incepe chiar acum!
           </span>
         </h1>
         <p className="font-inter leading-relaxed text-text-700 dark:text-text-400 mt-4">
-          Alege metoda de învățare potrivită nevoilor și dorințelor tale!
+          Găsește abordarea perfectă pentru tine și începe să înveți cu
+          încredere!
         </p>
       </div>
 
@@ -25,15 +26,19 @@ function Courses() {
           className="flex flex-col bg-white dark:bg-background-800 p-8 text-center rounded-xl border border-gray-200 dark:border-background-700 shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 group"
         >
           <div className="bg-background-200 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 group-hover:bg-gradient-to-r group-hover:from-primary-100 group-hover:to-primary-200 group-hover:text-white transition-colors duration-300">
-            <Image src={AdmitereIcon} alt="Admitere Icon" className="w-8 h-8 invert" />
+            <Image
+              src={AdmitereIcon}
+              alt="Admitere Icon"
+              className="w-8 h-8 invert"
+            />
           </div>
           <h1 className="font-medium text-xl mb-4 lg:px-10 text-text-800 dark:text-text-100">
-            Admitere
+            Începător
           </h1>
           <p className="font-inter flex-grow px-6 text-text-500 dark:text-text-400 mb-6">
-            Indiferent de nivelul tău de pregătire, vei găsi materiale utile
-            care să te ajute să te pregătești și să-ți maximizezi șansele de a
-            obține un loc la o facultate de informatică.
+            Nu știi de unde să începi? Materialele noastre pentru începători îți
+            oferă tot ce ai nevoie pentru a înțelege conceptele de bază în
+            programare și pentru a-ți dezvolta gândirea logică.
           </p>
           <Link
             href="/admitere"
@@ -56,12 +61,13 @@ function Courses() {
             />
           </div>
           <h1 className="font-medium text-xl mb-4 lg:px-10 text-text-800 dark:text-text-100">
-            Olimpiadă
+            Intermediar
           </h1>
           <p className="font-inter flex-grow px-6 text-text-500 dark:text-text-400 mb-6">
-            Oferim o varietate de materiale de învățare, astfel încât să poți
-            învăța în ritmul tău ca să te poți simți pregătit pentru a excela la
-            competițiile de programare.
+            Dacă ai deja o bază în programare și vrei să avansezi, cursurile și
+            articolele noastre pentru nivel intermediar îți vor oferi
+            provocările de care ai nevoie pentru a-ți testa abilitățile și a
+            învăța noi strategii.
           </p>
           <Link
             href="/olimpiada"
@@ -84,12 +90,12 @@ function Courses() {
             />
           </div>
           <h1 className="font-medium text-xl mb-4 lg:px-10 text-text-800 dark:text-text-100">
-            Bacalaureat
+            Avansat
           </h1>
           <p className="font-inter text-base flex-grow px-6 text-text-500 dark:text-text-400 mb-6">
-            Poți beneficia de ghiduri studiu, subiecte din anii trecuți
-            rezolvate complet, cu explicații detaliate și feedback personalizat
-            la propriile soluții.
+            Vrei să fii printre cei mai buni? Accesează materiale avansate,
+            subiecte rezolvate din concursuri anterioare și concepte complexe
+            care te vor ajuta să te pregătești pentru performanțe de top.
           </p>
           <Link
             href="/bacalaureat"
