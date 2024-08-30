@@ -1,6 +1,6 @@
 'use client';
 
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { ThemeProvider } from 'next-themes';
 import { ReactNode } from 'react';
 
 interface CustomThemeProviderProps {
@@ -8,7 +8,15 @@ interface CustomThemeProviderProps {
 }
 
 const CustomThemeProvider = ({ children }: CustomThemeProviderProps) => {
-  return <NextThemesProvider attribute="class">{children}</NextThemesProvider>;
+  return (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      forcedTheme="light"  // Force theme to be light
+    >
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default CustomThemeProvider;

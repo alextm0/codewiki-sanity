@@ -29,32 +29,26 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
 const ThemeSwitcher = () => {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { setTheme } = useTheme();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+    setTheme('light');  // Force set the theme to light on component mount
+  }, [setTheme]);
 
   return (
     <button
-      onClick={toggleTheme}
-      className="p-2 bg-background text-primary rounded"
+      className="p-2 bg-gray-200 text-black rounded"
+      disabled
     >
-      {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+      Light Mode Enabled
     </button>
   );
 };
 
 export default ThemeSwitcher;
+
 
