@@ -1,14 +1,16 @@
-import React from "react";
-import { Link } from 'next-view-transitions'
+"use client"; // Convert to a client component
+
+import React, { useState } from "react";
+import { Link } from 'next-view-transitions';
 import { v4 as uuidv4 } from "uuid";
 import Rating from "./Rating";
 import { slugify } from "../utils/helpers";
-// import Rating from "./Rating";
 
 interface Topic {
   _type: string;
   topicName: string;
   details: string;
+  stars: number;
 }
 
 interface CategoryPageProps {
@@ -26,27 +28,7 @@ const CategorySection: React.FC<CategoryPageProps> = ({
 }) => {
   if (!name || !category || !topics) {
     return null;
-  }  
-
-  const topicArray = topics.map((topic) => (
-    <div
-      key={uuidv4()}
-      className="font-poppins flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-violet-400"
-    >
-      <Link key={`/${category}/${topic.topicName}`} href={`/posts/${slugify(topic.topicName)}`}>
-        <div>
-          <div className="text-xl font-semibold tracking-wide text-gray-800 dark:text-gray-300">
-            {topic.topicName}
-          </div>
-          <div className="mt-4">
-            <Rating stars={4} onBlogPost={true} />
-          </div>
-        </div>
-      </Link>
-
-      <div className="mt-3 text-gray-500">{topic.details}</div>
-    </div>
-  ));
+  }
 
   return (
     <section className="text-gray-500">
@@ -54,7 +36,7 @@ const CategorySection: React.FC<CategoryPageProps> = ({
         <div className="grid gap-4 mx-4 sm:grid-cols-12">
           <div className="col-span-12 sm:col-span-3">
             <div className="text-center sm:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0">
-              <h3 className="text-gray-800 dark:text-gray-300 text-3xl font-semibold before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-violet-400">
+              <h3 className="text-gray-800 dark:text-gray-300 text-3xl font-semibold before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-primary-200">
                 {name}
               </h3>
               <span className="text-sm font-bold tracking-wider uppercase">
@@ -63,8 +45,38 @@ const CategorySection: React.FC<CategoryPageProps> = ({
             </div>
           </div>
           <div className="relative col-span-12 px-4 space-y-6 sm:col-span-9">
-            <div className="ml-10 col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-400">
-              {topicArray}
+            <div className="ml-10 col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8">
+              {/* Improved line design */}
+              <div className="sm:before:absolute sm:before:top-0 sm:before:bottom-0 sm:before:w-1 sm:before:-left-3 before:bg-gradient-to-b before:from-primary-200 before:to-primary-200 before:rounded-full  sm:before:border-violet-400 sm:before:shadow-lg sm:before:opacity-75">
+                {topics.map((topic) => {
+                  const [hover, setHover] = useState(false); // Manage hover state here
+
+                  return (
+                    <Link
+                      key={uuidv4()}
+                      href={`/posts/${slugify(topic.topicName)}`}
+                      className="block"
+                      onMouseEnter={() => setHover(true)}
+                      onMouseLeave={() => setHover(false)}
+                    >
+                      <div className="font-poppins flex flex-col p-6 mb-6 rounded-lg shadow-sm hover:shadow-lg hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 transition-transform duration-500 ease-in-out transform hover:-translate-y-1 hover:border-l-4 hover:border-primary-00">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 w-4 h-4 mr-4 rounded-full bg-primary-200"></div>
+                          <div className="text-xl font-semibold tracking-wide text-gray-800 dark:text-gray-300">
+                            {topic.topicName}
+                          </div>
+                        </div>
+                        <div className="mt-2">
+                          <Rating stars={topic.stars} onHover={hover} onBlogPost={true} />
+                        </div>
+                        <div className="mt-3 text-gray-500 font-inter">
+                          {topic.details}
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

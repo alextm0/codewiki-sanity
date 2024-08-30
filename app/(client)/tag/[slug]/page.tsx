@@ -59,7 +59,7 @@ const Page = async ({ params }: Params) => {
   const posts: Array<Post> = await getPostsByTag(params.slug);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-900 px-4 py-16">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-background-50 dark:bg-gray-900 px-4 py-16">
       {posts && posts.length > 0 ? (
         <div className="mx-auto max-w-5xl px-6">
           <ArticlesSection
@@ -82,14 +82,14 @@ const Page = async ({ params }: Params) => {
             să explorați alte secțiuni ale site-ului nostru.
           </p>
           <Link href="/">
-            <a className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300">
+            <div className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300">
               Înapoi la Acasă
-            </a>
+            </div>
           </Link>
           <Link href="/tags">
-            <a className="mt-4 text-blue-600 hover:text-blue-700 hover:underline transition-all duration-300">
+            <div className="mt-4 text-blue-600 hover:text-blue-700 hover:underline transition-all duration-300">
               Explorează alte taguri
-            </a>
+            </div>
           </Link>
         </div>
       )}

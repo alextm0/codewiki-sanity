@@ -14,8 +14,10 @@ async function getAllCategories(slug : any): Promise<Category[]> {
     topics[] {
       _type,
       topicName,
-      details
+      details,
+      stars
     },
+
     order
   }
   `;

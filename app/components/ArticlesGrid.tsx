@@ -45,10 +45,10 @@ const Articles: React.FC<ArticlesProps> = ({ headerTitle, blogs }) => {
         </div>
       </div>
       <div className="text-center mt-10 flex justify-center w-full">
-        <button className="font-poppins px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-700 dark:from-secondary-400 dark:to-secondary-600 text-white rounded-full hover:shadow-xl hover:scale-105 transition transform ease-in-out duration-300 text-sm font-medium flex items-center gap-2 active:bg-primary-800 dark:active:bg-secondary-700 active:scale-95">
+        {/* <button className="font-poppins px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-700 dark:from-secondary-400 dark:to-secondary-600 text-white rounded-full hover:shadow-xl hover:scale-105 transition transform ease-in-out duration-300 text-sm font-medium flex items-center gap-2 active:bg-primary-800 dark:active:bg-secondary-700 active:scale-95">
           <AiOutlineReload className="animate-spin-slow" />
           Incarca mai multe
-        </button>
+        </button> */}
       </div>
     </div>
   );

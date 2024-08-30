@@ -37,6 +37,7 @@ export interface Topic {
   _type: string;
   topicName: string;
   details: string;
+  stars: number;
 }
 
 export interface Category {
