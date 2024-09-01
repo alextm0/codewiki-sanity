@@ -7,6 +7,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ViewTransitions } from "next-view-transitions";
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
   title: {
@@ -121,7 +123,10 @@ export default function RootLayout({
         <body className="h-full flex flex-col">
           <CustomThemeProvider>
             <Navbar />
-            <main className="flex-grow pb-20">{children}</main>
+            <main className="flex-grow pb-20">
+              {children}
+              <SpeedInsights />
+            </main>
             <Footer />
           </CustomThemeProvider>
         </body>
