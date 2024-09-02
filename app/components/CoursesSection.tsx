@@ -41,7 +41,7 @@ function Courses() {
             programare și pentru a-ți dezvolta gândirea logică.
           </p>
           <Link
-            href="/admitere"
+            href="/olimpiada/incepator"
             className="mt-auto mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg"
           >
             Află mai multe
@@ -70,7 +70,7 @@ function Courses() {
             învăța noi strategii.
           </p>
           <Link
-            href="/olimpiada"
+            href="/olimpiada/intermediar"
             className="mt-6 mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg"
           >
             Află mai multe
@@ -98,7 +98,7 @@ function Courses() {
             care te vor ajuta să te pregătești pentru performanțe de top.
           </p>
           <Link
-            href="/bacalaureat"
+            href="/olimpiada/avansat"
             className="mt-auto mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg"
           >
             Află mai multe
