@@ -10,6 +10,8 @@ import { ViewTransitions } from "next-view-transitions";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
   title: {
@@ -146,6 +148,7 @@ export default function RootLayout({
             <Footer />
           </CustomThemeProvider>
         </body>
+        <GoogleAnalytics gaId="G-KFCH7S7CYH" />
       </html>
     </ViewTransitions>
   );
