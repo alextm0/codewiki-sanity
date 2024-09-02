@@ -15,7 +15,7 @@ import {
 } from "@nextui-org/react";
 
 const navigation = [
-  { name: "Articole", href: "/articles", current: false },
+  { name: "Articole", href: "/articole", current: false },
   {
     name: "Olimpiada",
     href: "/olimpiada",
@@ -34,7 +34,7 @@ const navigation = [
     icon: <IoSchoolSharp />,
     current: false,
   },
-  { name: "Probleme", href: "/problems", current: false },
+  { name: "Probleme", href: "/probleme", current: false },
 ];
 
 function classNames(...classes: any) {
@@ -75,7 +75,7 @@ export default function Navbar() {
                   <nav className="flex space-x-10 mr-28">
                     {/* Navigation links */}
                     <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
-                      <Link href="/articles">
+                      <Link href="/articole">
                         <div className="font-medium text-text-50 hover:text-primary-100">
                           Articole
                         </div>
@@ -128,7 +128,7 @@ export default function Navbar() {
 
                     {/* Navigation link */}
                     <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
-                      <Link href="/problems">
+                      <Link href="/probleme">
                         <div className="text-base font-medium text-text-50 hover:text-primary-100">
                           Probleme
                         </div>

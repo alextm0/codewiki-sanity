@@ -11,10 +11,11 @@ export default function Hero() {
               Pregătește-te pentru olimpiada de Informatică !
             </h1>
             <p className="font-poppins leading-normal text-lg md:text-base mb-8 text-text-500">
-            Accesează ghiduri detaliate, articole explicative și exemple de probleme rezolvate, toate organizate pe niveluri de dificultate.
+              Accesează ghiduri detaliate, articole explicative și exemple de
+              probleme rezolvate, toate organizate pe niveluri de dificultate.
             </p>
             <Link
-              href="/courses"
+              href="/invata"
               className="bg-gradient-to-r from-secondary-500 to-secondary-600 dark:from-accent-400 dark:to-accent-500 font-poppins mx-auto lg:mx-0 inline-flex font-bold px-8 py-3 my-8 text-base text-background-50 dark:text-background-900 transition transform duration-300 ease-in-out rounded-full shadow-lg hover:shadow-2xl hover:scale-105 active:bg-secondary-600 focus:outline-none focus:ring focus:ring-secondary-300"
             >
               Descoperă resursele

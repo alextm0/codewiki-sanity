@@ -116,7 +116,7 @@ export default function RootLayout({
             href="/assets/optimized-bg-pattern.png"
             as="image"
             type="image/png"
-            crossOrigin="anonymous"
+            crossOrigin="use-credentials"
           />
           
         </head>
