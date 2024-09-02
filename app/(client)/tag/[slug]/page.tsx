@@ -86,7 +86,7 @@ const Page = async ({ params }: Params) => {
               Înapoi la Acasă
             </div>
           </Link>
-          <Link href="/tags">
+          <Link href="/tag">
             <div className="mt-4 text-blue-600 hover:text-blue-700 hover:underline transition-all duration-300">
               Explorează alte taguri
             </div>

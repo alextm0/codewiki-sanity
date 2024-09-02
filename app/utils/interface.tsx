@@ -32,6 +32,13 @@ export interface Comment {
   published: boolean; // New field
 }
 
+export interface FeedbackComment {
+  name: string;
+  comment: string;
+  _createdAt: string;
+  _id: string;
+  published: boolean; // New field
+}
 
 export interface Topic {
   _type: string;

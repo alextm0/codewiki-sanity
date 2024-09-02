@@ -47,7 +47,7 @@ export default function Navbar() {
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative flex h-20 items-center justify-center">
+            <div className="relative flex h-20 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-text-200 hover:bg-background-400 hover:text-text-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-200">
@@ -60,6 +60,7 @@ export default function Navbar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center md:justify-between sm:items-stretch sm:justify-start">
+                {/* Logo */}
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
                     <div className="flex items-center gap-3">
@@ -72,69 +73,72 @@ export default function Navbar() {
 
                 {/* Navigation Links - centered */}
                 <div className="hidden md:flex flex-1 items-center justify-center font-poppins">
-                  <nav className="flex space-x-10 mr-28">
+                  <nav className="flex space-x-10">
                     {/* Navigation links */}
-                    <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
-                      <Link href="/articole">
-                        <div className="font-medium text-text-50 hover:text-primary-100">
-                          Articole
-                        </div>
-                      </Link>
-                    </div>
+                    <Link href="/articole">
+                      <div className="relative font-medium text-text-50 hover:text-primary-100">
+                        Articole
+                      </div>
+                    </Link>
 
                     {/* Dropdown Menu */}
-                    <div className="font-poppins relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500 cursor-pointer">
-                      <Dropdown>
-                        <DropdownTrigger>
-                          <div className="font-medium text-text-50 flex items-center gap-1 cursor-pointer hover:text-primary-100 transition-colors duration-300">
-                            Olimpiada
-                            <MdOutlineArrowDropDown />
+                    <Dropdown>
+                      <DropdownTrigger>
+                        <div className="relative font-medium text-text-50 flex items-center gap-1 cursor-pointer hover:text-primary-100 transition-colors duration-300">
+                          Olimpiada
+                          <MdOutlineArrowDropDown />
+                        </div>
+                      </DropdownTrigger>
+                      <DropdownMenu className="bg-text-50 shadow-lg rounded-lg py-4 px-4">
+                        <DropdownItem
+                          key="olimpiada-incepator"
+                          as={Link}
+                          href="/olimpiada/incepator"
+                          className="px-3 py-2 hover:bg-primary-50 rounded-md hover:text-secondary-500"
+                        >
+                          <div className="font-poppins font-medium flex gap-2 text-text-700">
+                            <RiMedal2Fill /> Incepator
                           </div>
-                        </DropdownTrigger>
-                        <DropdownMenu className="bg-text-50 shadow-lg rounded-lg py-4 px-4">
-                          <DropdownItem
-                            key="olimpiada-incepator"
-                            as={Link}
-                            href="/olimpiada/incepator"
-                            className="px-3 py-2 hover:bg-primary-50 rounded-md hover:text-secondary-500"
-                          >
-                            <div className="font-poppins font-medium flex gap-2 text-text-700">
-                              <RiMedal2Fill /> Incepator
-                            </div>
-                          </DropdownItem>
-                          <DropdownItem
-                            key="olimpiada-intermediar"
-                            as={Link}
-                            href="/olimpiada/intermediar"
-                            className="px-3 py-2 hover:bg-primary-50 rounded-md"
-                          >
-                            <div className="font-poppins font-medium flex gap-2 text-text-700 ">
-                              <FaUserGraduate /> Intermediar
-                            </div>
-                          </DropdownItem>
-                          <DropdownItem
-                            key="olimpiada-avansat"
-                            as={Link}
-                            href="/olimpiada/avansat"
-                            className="px-3 py-2 hover:bg-primary-50 rounded-md"
-                          >
-                            <div className="font-poppins font-medium flex gap-2 text-text-700">
-                              <IoSchoolSharp /> Avansat
-                            </div>
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                    </div>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="olimpiada-intermediar"
+                          as={Link}
+                          href="/olimpiada/intermediar"
+                          className="px-3 py-2 hover:bg-primary-50 rounded-md"
+                        >
+                          <div className="font-poppins font-medium flex gap-2 text-text-700 ">
+                            <FaUserGraduate /> Intermediar
+                          </div>
+                        </DropdownItem>
+                        <DropdownItem
+                          key="olimpiada-avansat"
+                          as={Link}
+                          href="/olimpiada/avansat"
+                          className="px-3 py-2 hover:bg-primary-50 rounded-md"
+                        >
+                          <div className="font-poppins font-medium flex gap-2 text-text-700">
+                            <IoSchoolSharp /> Avansat
+                          </div>
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
 
                     {/* Navigation link */}
-                    <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
-                      <Link href="/probleme">
-                        <div className="text-base font-medium text-text-50 hover:text-primary-100">
-                          Probleme
-                        </div>
-                      </Link>
-                    </div>
+                    <Link href="/probleme">
+                      <div className="relative text-base font-medium text-text-50 hover:text-primary-100">
+                        Probleme
+                      </div>
+                    </Link>
                   </nav>
+                </div>
+
+                {/* Subtle Enhanced Button on the Right */}
+                <div className="hidden md:flex items-center justify-end">
+                  <Link href="/contact">
+                    <button className="bg-primary-300 text-white px-5 py-2 rounded-md shadow-md hover:bg-primary-400 transition-all duration-200 transform hover:scale-105">
+                      Contactează-ne
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

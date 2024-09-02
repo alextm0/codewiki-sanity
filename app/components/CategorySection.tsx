@@ -54,7 +54,7 @@ const CategorySection: React.FC<CategoryPageProps> = ({
                 {topics.map((topic, index) => (
                   <Link
                     key={uuidv4()}
-                    href={`/posts/${slugify(topic.topicName)}`}
+                    href={`/articol/${slugify(topic.topicName)}`}
                     className="block"
                     onMouseEnter={() => setHoverIndex(index)}
                     onMouseLeave={() => setHoverIndex(null)}

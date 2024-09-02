@@ -151,14 +151,6 @@ export default function RootLayout({
           ></Script>
         </head>
         <body className="h-full flex flex-col">
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-NCFGTGC"
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            ></iframe>
-          </noscript>
 
           <CustomThemeProvider>
             <Navbar />
