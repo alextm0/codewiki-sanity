@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import { ViewTransitions } from "next-view-transitions";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
@@ -119,19 +120,21 @@ export default function RootLayout({
             crossOrigin="use-credentials"
           />
 
-          {/* Google Analytics Tag */}
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-KFCH7S7CYH"
-          ></script>
-          <script>
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-KFCH7S7CYH');
-            `}
-          </script>
+          <Script
+            id="gtm"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `<!-- Google tag (gtag.js) -->
+                        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCH7S7CYH"></script>
+                        <script>
+                          window.dataLayer = window.dataLayer || [];
+                          function gtag(){dataLayer.push(arguments);}
+                          gtag('js', new Date());
+
+                          gtag('config', 'G-KFCH7S7CYH');
+                        </script>`,
+            }}
+          ></Script>
         </head>
         <body className="h-full flex flex-col">
           <CustomThemeProvider>
