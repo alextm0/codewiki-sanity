@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { ViewTransitions } from "next-view-transitions";
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
@@ -118,7 +118,20 @@ export default function RootLayout({
             type="image/png"
             crossOrigin="use-credentials"
           />
-          
+
+          {/* Google Analytics Tag */}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-KFCH7S7CYH"
+          ></script>
+          <script>
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-KFCH7S7CYH');
+            `}
+          </script>
         </head>
         <body className="h-full flex flex-col">
           <CustomThemeProvider>

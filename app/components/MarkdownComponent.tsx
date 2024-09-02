@@ -306,6 +306,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({ mdString }) => {
     ),
     a: ({ node, ...props }) => (
       <a
+        target="_blank"
         className={classNames(
           "text-primary-400 border-b-2 border-transparent pb-0.5 transition-all duration-300 hover:text-primary-500 hover:border-primary-300"
         )}
