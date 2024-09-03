@@ -1,8 +1,8 @@
 import { defineType } from "sanity";
 
 export const noteBlock = defineType({
-  name: "note",
-  title: "Note",
+  name: "noteBlock",  // Renamed to 'noteBlock' to avoid conflict
+  title: "Note Block",
   type: "object",
   fields: [
     {

@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -13,6 +13,16 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
+
+import DashboardIcon from "@/public/assets/navbar-icons/dashboard.svg";
+import BookmarkIcon from "@/public/assets/navbar-icons/bookmark.svg";
+import ProblemIcon from "@/public/assets/navbar-icons/problems.svg";
+import ContactIcon from "@/public/assets/navbar-icons/contact.svg";
+
+import IncepatorIcon from "@/public/assets/dropdown-icons/incepator.svg";
+import IntermediarIcon from "@/public/assets/dropdown-icons/intermediar.svg";
+import AvansatIcon from "@/public/assets/dropdown-icons/avansat.svg";
+
 
 const navigation = [
   { name: "Articole", href: "/articole", current: false },
@@ -60,7 +70,6 @@ export default function Navbar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center md:justify-between sm:items-stretch sm:justify-start">
-                {/* Logo */}
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
                     <div className="flex items-center gap-3">
@@ -75,68 +84,101 @@ export default function Navbar() {
                 <div className="hidden md:flex flex-1 items-center justify-center font-poppins">
                   <nav className="flex space-x-10">
                     {/* Navigation links */}
-                    <Link href="/articole">
-                      <div className="relative font-medium text-text-50 hover:text-primary-100">
-                        Articole
-                      </div>
-                    </Link>
+                    <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
+                      <Link href="/articole">
+                        <div className="font-medium text-text-50 hover:text-primary-100 flex items-center gap-2">
+                          <Image
+                            src={BookmarkIcon}
+                            className=""
+                            alt="bookmark-icon"
+                            width={20}
+                            height={20}
+                          />
+                          Articole
+                        </div>
+                      </Link>
+                    </div>
 
                     {/* Dropdown Menu */}
-                    <Dropdown>
-                      <DropdownTrigger>
-                        <div className="relative font-medium text-text-50 flex items-center gap-1 cursor-pointer hover:text-primary-100 transition-colors duration-300">
-                          Olimpiada
-                          <MdOutlineArrowDropDown />
-                        </div>
-                      </DropdownTrigger>
-                      <DropdownMenu className="bg-text-50 shadow-lg rounded-lg py-4 px-4">
-                        <DropdownItem
-                          key="olimpiada-incepator"
-                          as={Link}
-                          href="/olimpiada/incepator"
-                          className="px-3 py-2 hover:bg-primary-50 rounded-md hover:text-secondary-500"
-                        >
-                          <div className="font-poppins font-medium flex gap-2 text-text-700">
-                            <RiMedal2Fill /> Incepator
+                    <div className="font-poppins relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500 cursor-pointer">
+                      <Dropdown>
+                        <DropdownTrigger>
+                          <div className="font-medium text-text-50 flex items-center gap-2 cursor-pointer hover:text-primary-100 transition-colors duration-300">
+                            <Image
+                              src={DashboardIcon}
+                              className=""
+                              alt="dashboard-icon"
+                              width={20}
+                              height={20}
+                            />
+                            Olimpiada
+                            <MdOutlineArrowDropDown />
                           </div>
-                        </DropdownItem>
-                        <DropdownItem
-                          key="olimpiada-intermediar"
-                          as={Link}
-                          href="/olimpiada/intermediar"
-                          className="px-3 py-2 hover:bg-primary-50 rounded-md"
-                        >
-                          <div className="font-poppins font-medium flex gap-2 text-text-700 ">
-                            <FaUserGraduate /> Intermediar
-                          </div>
-                        </DropdownItem>
-                        <DropdownItem
-                          key="olimpiada-avansat"
-                          as={Link}
-                          href="/olimpiada/avansat"
-                          className="px-3 py-2 hover:bg-primary-50 rounded-md"
-                        >
-                          <div className="font-poppins font-medium flex gap-2 text-text-700">
-                            <IoSchoolSharp /> Avansat
-                          </div>
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>
+                        </DropdownTrigger>
+                        <DropdownMenu className="bg-text-50 shadow-lg rounded-lg py-4 px-4">
+                          <DropdownItem
+                            key="olimpiada-incepator"
+                            as={Link}
+                            href="/olimpiada/incepator"
+                            className="px-3 py-2 hover:bg-primary-50 rounded-md hover:text-secondary-500"
+                          >
+                            <div className="font-poppins font-medium flex gap-4 text-text-700 items-center">
+                              <Image src={IncepatorIcon} className="text-text-700" alt="Incepator Icon" width={20} height={20} /> Incepator
+                            </div>
+                          </DropdownItem>
+                          <DropdownItem
+                            key="olimpiada-intermediar"
+                            as={Link}
+                            href="/olimpiada/intermediar"
+                            className="px-3 py-2 hover:bg-primary-50 rounded-md"
+                          >
+                            <div className="font-poppins font-medium flex gap-4 text-text-700 items-center">
+                              <Image src={IntermediarIcon} className="text-text-700" alt="Intermediar Icon" width={20} height={20} /> Intermediar
+                            </div>
+                          </DropdownItem>
+                          <DropdownItem
+                            key="olimpiada-avansat"
+                            as={Link}
+                            href="/olimpiada/avansat"
+                            className="px-3 py-2 hover:bg-primary-50 rounded-md"
+                          >
+                            <div className="font-poppins font-medium flex gap-4 text-text-700 items-center">
+                              <Image src={AvansatIcon} className="text-text-700" alt="Avansat Icon" width={20} height={20} /> Avansat
+                            </div>
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </div>
 
                     {/* Navigation link */}
-                    <Link href="/probleme">
-                      <div className="relative text-base font-medium text-text-50 hover:text-primary-100">
-                        Probleme
-                      </div>
-                    </Link>
+                    <div className="relative after:absolute after:bg-primary-200 mt-2 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500">
+                      <Link href="/probleme">
+                        <div className="text-base font-medium text-text-50 hover:text-primary-100 flex items-center gap-2">
+                          <Image
+                            src={ProblemIcon}
+                            className=""
+                            alt="problem-icon"
+                            width={20}
+                            height={20}
+                          />
+                          Probleme
+                        </div>
+                      </Link>
+                    </div>
                   </nav>
                 </div>
 
-                {/* Subtle Enhanced Button on the Right */}
-                <div className="hidden md:flex items-center justify-end">
+                {/* Enhanced Button on the Right */}
+                <div className="hidden md:flex md:gap-2 items-center justify-end">
                   <Link href="/contact">
-                    <button className="bg-primary-300 text-white px-5 py-2 rounded-md shadow-md hover:bg-primary-400 transition-all duration-200 transform hover:scale-105">
-                      Contactează-ne
+                    <button className="bg-gradient-to-r from-primary-100 to-primary-100 text-text-900 font-poppins text-[16px] px-4 py-2 rounded-lg hover:shadow-lg transition-transform duration-300 hover:scale-105 flex items-center gap-2">
+                      {/* <Image
+                        src={ContactIcon}
+                        width={20}
+                        height={20}
+                        alt="mail-icon"
+                      /> */}
+                      Contact
                     </button>
                   </Link>
                 </div>

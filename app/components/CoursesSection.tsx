@@ -4,6 +4,12 @@ import { Link } from "next-view-transitions";
 import BacalaureatIcon from "@/public/assets/bacalaureat-icon.svg";
 import AdmitereIcon from "@/public/assets/admitere-icon.svg";
 import OlimpiadaIcon from "@/public/assets/olimpiada-icon.svg";
+import RightArrow from "@/public/assets/right-arrow.svg";
+import ButtonArrow from "@/public/assets/courses-icons/button-arrow.svg";
+
+import IncepatorIcon from "@/public/assets/courses-icons/incepator.svg";
+import IntermediarIcon from "@/public/assets/courses-icons/intermediar.svg";
+import AvansatIcon from "@/public/assets/courses-icons/avansat.svg";
 
 function Courses() {
   return (
@@ -14,7 +20,7 @@ function Courses() {
             Incepe chiar acum!
           </span>
         </h1>
-        <p className="font-inter leading-relaxed text-text-700 dark:text-text-400 mt-4">
+        <p className="font-inter leading-relaxed text-text-700 dark:text-text-400">
           Găsește abordarea perfectă pentru tine și începe să înveți cu
           încredere!
         </p>
@@ -25,11 +31,14 @@ function Courses() {
           data-aos="fade-up"
           className="flex flex-col bg-white dark:bg-background-800 p-8 text-center rounded-xl border border-gray-200 dark:border-background-700 shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 group"
         >
-          <div className="bg-background-200 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 group-hover:bg-gradient-to-r group-hover:from-primary-100 group-hover:to-primary-200 group-hover:text-white transition-colors duration-300">
+          {/* Updated hover effect for the icon */}
+          <div className="bg-background-200 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 transition-transform duration-300 group-hover:scale-105 group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-blue-400">
             <Image
-              src={AdmitereIcon}
+              src={IncepatorIcon}
               alt="Admitere Icon"
-              className="w-8 h-8 invert"
+              width={32}
+              height={32}
+              className="transform scale-90 group-hover:scale-100 transition-transform duration-300"
             />
           </div>
           <h1 className="font-medium text-xl mb-4 lg:px-10 text-text-800 dark:text-text-100">
@@ -42,22 +51,33 @@ function Courses() {
           </p>
           <Link
             href="/olimpiada/incepator"
-            className="mt-auto mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg"
+            className="mt-auto mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg flex items-center group"
           >
             Află mai multe
+            <Image
+              src={ButtonArrow}
+              width={16}
+              height={16}
+              alt="right-arrow"
+              className="ml-2 transform transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+            />
           </Link>
         </div>
 
+        {/* Similar updates for other cards */}
         <div
           data-aos="fade-up"
           data-aos-delay="150"
           className="flex flex-col bg-white dark:bg-background-800 p-8 text-center rounded-xl border border-gray-200 dark:border-background-700 shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 group"
         >
-          <div className="bg-background-200 dark:bg-background-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 group-hover:bg-gradient-to-r group-hover:from-primary-100 group-hover:to-primary-200 group-hover:text-white transition-colors duration-300">
+          {/* Updated hover effect for the icon */}
+          <div className="bg-background-200 dark:bg-background-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 transition-transform duration-300 group-hover:scale-105 group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400">
             <Image
-              src={OlimpiadaIcon}
+              src={IntermediarIcon}
               alt="Olimpiada Icon"
-              className="w-[36px] h-[36px] mt-[2px] invert"
+              width={36}
+              height={36}
+              className="transform scale-90 group-hover:scale-100 transition-transform duration-300"
             />
           </div>
           <h1 className="font-medium text-xl mb-4 lg:px-10 text-text-800 dark:text-text-100">
@@ -71,9 +91,16 @@ function Courses() {
           </p>
           <Link
             href="/olimpiada/intermediar"
-            className="mt-6 mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg"
+            className="mt-6 mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg flex items-center group"
           >
             Află mai multe
+            <Image
+              src={ButtonArrow}
+              width={16}
+              height={16}
+              alt="right-arrow"
+              className="ml-2 transform transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+            />
           </Link>
         </div>
 
@@ -82,11 +109,14 @@ function Courses() {
           data-aos-delay="300"
           className="flex flex-col bg-white dark:bg-background-800 p-8 text-center rounded-xl border border-gray-200 dark:border-background-700 shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 group"
         >
-          <div className="bg-background-200 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 group-hover:bg-gradient-to-r group-hover:from-primary-100 group-hover:to-primary-200 group-hover:text-white transition-colors duration-300">
+          {/* Updated hover effect for the icon */}
+          <div className="bg-background-200 rounded-full w-16 h-16 flex items-center justify-center mx-auto shadow-lg transform -translate-y-12 transition-transform duration-300 group-hover:scale-105 group-hover:bg-gradient-to-r  group-hover:from-orange-400 group-hover:to-red-400">
             <Image
-              src={BacalaureatIcon}
+              src={AvansatIcon}
               alt="Bacalaureat Icon"
-              className="ml-1 w-8 h-8 mt-[3px] invert"
+              width={32}
+              height={32}
+              className="transform scale-90 group-hover:scale-100 transition-transform duration-300"
             />
           </div>
           <h1 className="font-medium text-xl mb-4 lg:px-10 text-text-800 dark:text-text-100">
@@ -99,9 +129,16 @@ function Courses() {
           </p>
           <Link
             href="/olimpiada/avansat"
-            className="mt-auto mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg"
+            className="mt-auto mx-auto bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-sm font-medium py-2 px-8 rounded-full transition-all duration-300 ease-in-out hover:from-secondary-600 hover:to-secondary-700 hover:shadow-lg flex items-center group"
           >
             Află mai multe
+            <Image
+              src={ButtonArrow}
+              width={16}
+              height={16}
+              alt="right-arrow"
+              className="ml-2 transform transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+            />
           </Link>
         </div>
       </div>

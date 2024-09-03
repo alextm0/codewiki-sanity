@@ -38,6 +38,7 @@ export interface FeedbackComment {
   _createdAt: string;
   _id: string;
   published: boolean; // New field
+  
 }
 
 export interface Topic {

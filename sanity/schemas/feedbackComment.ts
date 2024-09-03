@@ -31,7 +31,9 @@ export const feedbackComment = defineType({
         list: [
           { title: 'Raportează o problemă', value: 'problem' },
           { title: 'Sugerează un articol', value: 'suggestion' },
+          { title: "Altceva", value: "other" },
         ],
+        layout: 'radio',
       },
       readOnly: true,
       validation: (Rule) => Rule.required().error('Tipul feedback-ului este obligatoriu.'),
@@ -43,6 +45,20 @@ export const feedbackComment = defineType({
       readOnly: true,
       validation: (Rule) =>
         Rule.required().min(10).error('Mesajul trebuie să aibă minim 10 caractere.'),
+    },
+    {
+      name: "createdAt",
+      title: "Created At",
+      type: "datetime",
+      readOnly: true,
+      initialValue: () => new Date().toISOString(),
+    },
+    {
+      name: "published",
+      title: "Published",
+      type: "boolean",
+      readOnly: true,
+      initialValue: false,
     }
   ],
 });

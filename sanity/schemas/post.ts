@@ -69,7 +69,7 @@ export const post = {
           type: "image",
           fields: [{ type: "text", name: "alt", title: "Alt" }],
         },
-        noteBlock, // Use the custom note block
+        { type: "noteBlock" }, // This should be the unique name
       ],
     },
     {

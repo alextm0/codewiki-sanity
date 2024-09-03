@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "next-view-transitions";
 import BlogPostCard from "./PostComponent";
 import { Post } from "../utils/interface";
-import { AiOutlineTags, AiOutlineReload } from "react-icons/ai"; // Importing a reload icon
+import { AiOutlineTags } from "react-icons/ai"; // Importing a reload icon
 
 interface ArticlesProps {
   headerTitle: string;
@@ -23,9 +23,9 @@ const Articles: React.FC<ArticlesProps> = ({ headerTitle, blogs }) => {
         <div className="border-t border-gray-200 dark:border-gray-700 w-24 mx-auto mt-4 mb-6"></div>
         <Link
           href="/tag"
-          className="font-poppins font-medium inline-flex items-center bg-gradient-to-r from-secondary-500 to-secondary-700 dark:from-secondary-500 text-white py-2 px-4 rounded-full hover:bg-primary-400 dark:hover:bg-secondary-600 transition ease-in-out duration-300 text-sm transform hover:scale-105 hover:shadow-lg hover:-translate-y-1" // Added hover animations
+          className="font-poppins font-medium inline-flex gap-2 items-center bg-gradient-to-r from-secondary-500 to-secondary-700 dark:from-secondary-500 text-white py-2 px-4 rounded-full hover:bg-primary-400 dark:hover:bg-secondary-600 transition ease-in-out duration-300 text-sm transform hover:scale-105 hover:shadow-lg hover:-translate-y-1" // Added hover animations
         >
-          <AiOutlineTags className="mr-2 transition-transform duration-300 ease-in-out transform group-hover:rotate-90" />{" "}
+          <AiOutlineTags className="h-4 w-4 transition-transform duration-300 ease-in-out transform group-hover:rotate-90" />{" "}
           {/* Added icon rotation */}
           Vezi toate etichetele
         </Link>

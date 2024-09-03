@@ -300,3 +300,9 @@
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
 }
+
+/* CSS for smaller placeholder text */
+.placeholder-text-sm::placeholder {
+  font-size: 0.875rem; /* Adjust the size as needed */
+  color: #9e9e9e; /* Optional: change color for better visibility */
+}
