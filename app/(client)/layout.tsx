@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     url: "https://codewiki-sanity.vercel.app/",
     siteName: "CodeWiki",
   },
+  icons: '/favicon.ico',
 };
 
 export default function RootLayout({

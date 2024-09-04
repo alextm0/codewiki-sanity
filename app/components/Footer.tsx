@@ -61,38 +61,50 @@ function Footer() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/privacy-policy"
+                <a
+                  href="/privacy-policy.html" // Path to your HTML file
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="relative after:absolute after:bg-primary-200 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500 hover:text-primary-300 transition-colors duration-300 ease-in-out"
                 >
                   Politica de confidențialitate
-                </Link>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/terms-and-conditions.html" // Path către fișierul HTML creat
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative after:absolute after:bg-primary-200 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500 hover:text-primary-300 transition-colors duration-300 ease-in-out"
+                >
+                  Termeni și condiții
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Gmail Contact and Google Form */}
+          {/* Gmail Contact, Google Form, and Button */}
           <div className="text-center md:text-left">
             <h2 className="text-xl font-semibold text-text-100 mb-4">
               Contact
             </h2>
             <div className="flex items-center space-x-2">
               <FaEnvelope className="w-5 h-5 text-primary-200" />
-              <a
+              <Link
                 href="mailto:codewiki.blog@gmail.com"
                 className="hover:text-primary-300 transition-colors duration-300 ease-in-out"
               >
                 codewiki.blog@gmail.com
-              </a>
+              </Link>
             </div>
             <div className="mt-4">
               <a
-                href="https://forms.gle/exemplulink" // Înlocuiește cu linkul tău real
-                target="_blank"
+                href="/contact"
                 rel="noopener noreferrer"
                 className="text-primary-300 hover:text-primary-400 transition-colors duration-300 ease-in-out"
               >
-                Ai găsit o problemă sau ai o sugestie de articol? Trimite-ne feedbackul tău!
+                Ai găsit o problemă sau ai o sugestie de articol? Trimite-ne
+                feedbackul tău!
               </a>
             </div>
           </div>
