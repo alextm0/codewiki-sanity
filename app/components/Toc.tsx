@@ -25,7 +25,7 @@ const Toc = ({ headings }: { headings: any[] }) => {
   };
 
   return (
-    <div className="relative max-w-2xl mx-auto mt-8 pr-10">
+    <div className="relative max-w-2xl mx-auto mt-8 sm:pr-10">
       <div className="w-full rounded-lg border border-gray-200 bg-background-50 dark:bg-background-800 dark:border-background-600 px-6 py-6 lg:w-64 shadow-md">
         <div className="pb-2 text-base font-inter font-medium text-text-800 dark:text-text-200">Cuprins</div>
         <hr className="h-0.5 w-16 bg-primary-500 dark:bg-primary-400 rounded" />

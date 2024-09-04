@@ -24,42 +24,54 @@ export default async function sitemap():Promise<MetadataRoute.Sitemap> {
   const posts: Post[] = await getPosts();
 
   const postUrls = posts.map((post) => ({
-    url: `https://codewiki-sanity.vercel.app/posts/${post.slug.current}`,
+    url: `https://www.codewiki.blog/articol/${post.slug.current}`,
     lastModified: new Date(post.publishedAt),
     priority: 0.64,
   }))
 
   return [
     {
-      url: `https://codewiki-sanity.vercel.app/`,
+      url: `https://www.codewiki.blog/`,
       lastModified: new Date(),
       priority: 1.0,
       changeFrequency: "weekly",
     },
     {
-      url: "https://codewiki-sanity.vercel.app/tag",
+      url: "https://www.codewiki.blog/tag",
       lastModified: new Date(),
       priority: 0.7,
       changeFrequency: "weekly",
     },
     {
-      url: "https://codewiki-sanity.vercel.app/articles",
+      url: "https://www.codewiki.blog/articole",
       lastModified: new Date(),
     },
     {
-      url: "https://codewiki-sanity.vercel.app/olimpiada/incepator",
-      lastModified: new Date(),
-      priority: 0.8,
-      changeFrequency: "daily",
-    },
-    {
-      url: "https://codewiki-sanity.vercel.app/olimpiada/intermediar",
+      url: "https://www.codewiki.blog/olimpiada/incepator",
       lastModified: new Date(),
       priority: 0.8,
       changeFrequency: "daily",
     },
     {
-      url: "https://codewiki-sanity.vercel.app/olimpiada/avansat",
+      url: "https://www.codewiki.blog/olimpiada/intermediar",
+      lastModified: new Date(),
+      priority: 0.8,
+      changeFrequency: "daily",
+    },
+    {
+      url: "https://www.codewiki.blog/olimpiada/avansat",
+      lastModified: new Date(),
+      priority: 0.8,
+      changeFrequency: "daily",
+    },
+    {
+      url: "https://www.codewiki.blog/contact",
+      lastModified: new Date(),
+      priority: 0.8,
+      changeFrequency: "daily",
+    },
+    {
+      url: "https://www.codewiki.blog/invata",
       lastModified: new Date(),
       priority: 0.8,
       changeFrequency: "daily",

@@ -13,14 +13,14 @@ function Footer() {
   return (
     <footer className="relative bg-[#00044D] text-text-300">
       {/* Reversed PageDivider */}
-      <div className="rotate-180 pt-20">
+      <div className="relative -mt-[1px] pt-12 sm:pt-20 overflow-hidden rotate-180">
         <PageDivider />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 max-w-screen-xl pt-12 pb-8">
-        <div className="grid md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 lg:px-8 max-w-screen-xl sm:pt-12 pb-8">
+        <div className="grid md:grid-cols-4 gap-8 text-center md:text-left">
           {/* Logo and Description */}
-          <div className="text-center md:text-left">
+          <div className="md:text-left">
             <h2 className="text-2xl font-semibold text-text-100 mb-4">
               CodeWiki
             </h2>
@@ -31,7 +31,7 @@ function Footer() {
           </div>
 
           {/* Footer Links */}
-          <div>
+          <div className="text-center md:text-left">
             <h2 className="text-xl font-semibold text-text-100 mb-4">
               Legături utile
             </h2>
@@ -62,7 +62,7 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href="/privacy-policy.html" // Path to your HTML file
+                  href="/privacy-policy.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative after:absolute after:bg-primary-200 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500 hover:text-primary-300 transition-colors duration-300 ease-in-out"
@@ -72,7 +72,7 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href="/terms-and-conditions.html" // Path către fișierul HTML creat
+                  href="/terms-and-conditions.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative after:absolute after:bg-primary-200 after:bottom-[-4px] after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-500 hover:text-primary-300 transition-colors duration-300 ease-in-out"
@@ -88,7 +88,7 @@ function Footer() {
             <h2 className="text-xl font-semibold text-text-100 mb-4">
               Contact
             </h2>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-center md:justify-start space-x-2">
               <FaEnvelope className="w-5 h-5 text-primary-200" />
               <Link
                 href="mailto:codewiki.blog@gmail.com"

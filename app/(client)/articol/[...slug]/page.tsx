@@ -176,7 +176,7 @@ const BlogPostContent = ({
           </div>
         )}
 
-        <div className="max-w-7xl mx-auto pl-2 pr-6 xl:px-0 sm:mt-8 flex flex-col lg:flex-row">
+        <div className="max-w-7xl mx-auto px-4 sm:pl-2 sm:pr-6 xl:px-0 sm:mt-8 flex flex-col lg:flex-row">
           <div className="lg:w-1/4 lg:mr-8">
             <div className="lg:sticky lg:top-8">
               {allHeadings.length > 0 && <Toc headings={allHeadings} />}

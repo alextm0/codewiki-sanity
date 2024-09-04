@@ -23,28 +23,80 @@ import IncepatorIcon from "@/public/assets/dropdown-icons/incepator.svg";
 import IntermediarIcon from "@/public/assets/dropdown-icons/intermediar.svg";
 import AvansatIcon from "@/public/assets/dropdown-icons/avansat.svg";
 
+import IncepatorIconWhite from "@/public/assets/dropdown-icons/incepator-white.svg";
+import IntermediarIconWhite from "@/public/assets/dropdown-icons/intermediar-white.svg";
+import AvansatIconWhite from "@/public/assets/dropdown-icons/avansat-white.svg";
 
 const navigation = [
-  { name: "Articole", href: "/articole", current: false },
+  { 
+    name: "Articole", 
+    href: "/articole",
+    icon: (
+      <Image
+        src={BookmarkIcon}
+        width={24}
+        height={24}
+        alt="Articole Icon"
+      />
+    ),
+    current: false 
+  },
   {
-    name: "Olimpiada",
-    href: "/olimpiada",
-    icon: <RiMedal2Fill />,
+    name: "Incepator",
+    href: "/olimpiada/incepator",
+    icon: (
+      <Image
+        src={IncepatorIconWhite}
+        width={24}
+        height={24}
+        alt="Incepator Icon"
+      />
+    ),
     current: false,
   },
   {
-    name: "Admitere",
-    href: "/admitere",
-    icon: <FaUserGraduate />,
+    name: "Intermediar",
+    href: "/olimpiada/intermediar",
+    icon: (
+      <Image
+        src={IntermediarIconWhite}
+        width={24}
+        height={24}
+        alt="Intermediar Icon"
+      />
+    ),
     current: false,
   },
   {
-    name: "Bacalaureat",
-    href: "/bacalaureat",
-    icon: <IoSchoolSharp />,
+    name: "Avansat",
+    href: "/olimpiada/avansat",
+    icon: (
+      <Image src={AvansatIconWhite} width={24} height={24} alt="Avansat Icon" />
+    ),
     current: false,
   },
-  { name: "Probleme", href: "/probleme", current: false },
+  { name: "Probleme", href: "/probleme", current: false, icon: (
+    <Image
+      src={ProblemIcon}
+      width={24}
+      height={24}
+      alt="Probleme Icon"
+    />
+  )
+  },
+  { 
+    name: "Contact", 
+    href: "/contact",
+    icon: (
+      <Image
+        src={ContactIcon}
+        width={24}
+        height={24}
+        alt="Contact Icon"
+      />
+    ),
+    current: false
+  },
 ];
 
 function classNames(...classes: any) {
@@ -187,7 +239,7 @@ export default function Navbar() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            <div className="space-y-1 px-2 pb-3 pt-2 ">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
@@ -202,7 +254,7 @@ export default function Navbar() {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.icon ? (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-4">
                       {item.icon}
                       {item.name}
                     </div>

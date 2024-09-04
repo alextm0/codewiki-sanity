@@ -31,7 +31,7 @@ const Articles: React.FC<ArticlesProps> = ({ headerTitle, blogs }) => {
         </Link>
       </div>
       <div className="max-w-[1024px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center justify-items-center px-10 md:px-0 gap-10 md:gap-8 pt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center justify-items-center px-4 md:px-0 gap-10 md:gap-8 pt-10">
           {blogs.data &&
             blogs.data.map((blog, index) => (
               <Link

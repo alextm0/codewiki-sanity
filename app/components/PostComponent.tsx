@@ -46,6 +46,7 @@ const BlogPostCard = ({ post }: Props) => {
           />
         )}
       </div>
+
       {/* Tags */}
       <div className="bg-white dark:bg-background-800 w-full px-4 pt-4">
         <div className="flex flex-wrap gap-2">
@@ -59,9 +60,10 @@ const BlogPostCard = ({ post }: Props) => {
           ))}
         </div>
       </div>
+      
       <div className="bg-white dark:bg-background-800 w-full px-4 pb-6 pt-3 rounded-b-xl">
         {/* Fixed height for title */}
-        <div className="text-text-900 dark:text-text-50 text-xl font-bold font-poppins h-[56px] flex items-center">
+        <div className="text-text-900 dark:text-text-50 text-xl font-bold font-poppins  flex items-center">
           {post?.title}
         </div>
 

@@ -47,8 +47,8 @@ const CategorySection: React.FC<CategoryPageProps> = ({
               </span>
             </div>
           </div>
-          <div className="relative col-span-12 px-4 space-y-6 sm:col-span-9">
-            <div className="ml-10 col-span-12 space-y-12 relative px-4 sm:col-span-8 sm:space-y-8">
+          <div className="relative col-span-12 pl-2 sm:px-4 space-y-6 sm:col-span-9">
+            <div className="sm:ml-10 col-span-12 space-y-12 relative sm:px-4 sm:col-span-8 sm:space-y-8">
               {/* Improved line design */}
               <div className="sm:before:absolute sm:before:top-0 sm:before:bottom-0 sm:before:w-1 sm:before:-left-3 before:bg-gradient-to-b before:from-primary-200 before:to-primary-200 before:rounded-full  sm:before:border-violet-400 sm:before:shadow-lg sm:before:opacity-75">
                 {topics.map((topic, index) => (

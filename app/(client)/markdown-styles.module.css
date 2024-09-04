@@ -9,29 +9,24 @@
 }
 
 .markdown h2 {
-  @apply text-text-800 text-3xl font-bold mt-8 mb-4;
+  @apply text-text-800 text-start sm:text-justify text-3xl font-bold mt-8 mb-4;
 }
 
 .markdown h3 {
-  @apply text-text-700 text-2xl font-semibold mt-6 mb-3;
+  @apply text-text-700 text-start sm:text-justify text-2xl font-semibold mt-6 mb-3;
 }
 
 .markdown h4 {
-  @apply text-text-600 text-xl font-medium mt-4 mb-2;
+  @apply text-text-600 text-start sm:text-justify text-xl font-medium mt-4 mb-2;
 }
-
-
 
 .markdown ul,
 .markdown ol {
-  margin-bottom: 1.5em;
-  padding-left: 1.5em;
+  @apply mb-6 sm:pl-6;
 }
 
 .markdown ol {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
+  @apply flex flex-col gap-6 sm:gap-2;
 }
 
 .markdown ul {
