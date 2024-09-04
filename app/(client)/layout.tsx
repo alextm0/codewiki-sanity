@@ -13,24 +13,25 @@ import Script from "next/script";
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://codewiki-sanity.vercel.app/"),
+  metadataBase: new URL("https://www.codewiki.blog/"),
   title: {
-    default: "CodeWiki - Competitive Programming Blog",
-    template: "%s | CodeWiki - Competitive Programming Blog",
+    default: "CodeWiki - Blog de Programare Competitivă și Algoritmi",
+    template: "%s | CodeWiki - Programare Competitivă și Algoritmi",
   },
   description:
-    "CodeWiki is a comprehensive blog for students focused on competitive programming, offering tutorials, problem-solving techniques, and programming contests preparation.",
+    "CodeWiki este un blog complet dedicat elevilor care vor să învețe programare competitivă. Oferim tutoriale detaliate, tehnici de rezolvare a problemelor, și pregătire pentru olimpiada de informatica.",
   openGraph: {
-    title: "CodeWiki - Competitive Programming Blog",
+    title: "CodeWiki - Blog de Programare Competitivă și Algoritmi",
     description:
-      "Explore CodeWiki for the best resources on competitive programming. Learn, practice, and excel in programming contests with our expert tutorials and guides.",
+      "Descoperă CodeWiki pentru cele mai bune resurse despre programare competitivă. Învață, exersează și excelează în concursurile de programare cu tutorialele și ghidurile noastre experte.",
     type: "website",
-    locale: "en_US",
-    url: "https://codewiki-sanity.vercel.app/",
+    locale: "ro_RO",
+    url: "https://www.codewiki.blog/",
     siteName: "CodeWiki",
   },
   icons: '/favicon.ico',
 };
+
 
 export default function RootLayout({
   children,

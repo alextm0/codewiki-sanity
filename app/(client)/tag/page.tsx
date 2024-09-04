@@ -22,9 +22,19 @@ async function getAllTags() {
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Tags",
-  description: "Search for posts by tags on the blog",
+  title: "Toate Tag-urile - CodeWiki",
+  description: "Explorează toate tag-urile disponibile pe blogul CodeWiki și găsește articole și soluții relevante pentru programarea competitivă.",
+  openGraph: {
+    title: "Toate Tag-urile - CodeWiki",
+    description: "Caută și explorează toate tag-urile disponibile pe CodeWiki pentru a găsi articole și soluții despre programarea competitivă și algoritmi.",
+    type: "website",
+    locale: "ro_RO",
+    url: "https://www.codewiki.blog/tags",
+    siteName: "CodeWiki",
+  },
+  keywords: "tag-uri programare, tag-uri blog, olimpiada de informatica, probleme olimpiada de informatica, ghid pregatire olimpiada informatica, articole programare, CodeWiki, programare competitivă, algoritmi",
 };
+
 
 const TagsPage = async () => {
   const tags: Tag[] = await getAllTags();

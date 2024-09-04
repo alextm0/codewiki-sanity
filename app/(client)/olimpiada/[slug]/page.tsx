@@ -25,7 +25,31 @@ async function getAllCategories(slug : any): Promise<Category[]> {
   return categories;
 }
 
-export const revalidate = 1;
+export const revalidate = 60;
+
+function capitalizeFirstLetter(str : string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export async function generateMetadata({ params }: Params) {
+  const categories = await getAllCategories(params.slug);
+  const title = `${capitalizeFirstLetter(params.slug)} | Pregătire pentru Olimpiada de Informatică | CodeWiki`;
+  const description = `Descoperă tehnici de programare pentru pregătire pentru olimpiada de informatică la nivel ${params.slug}. Învață și îmbunătățește-ți abilitățile de programare cu resursele noastre.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: "ro_RO",
+      url: `https://www.codewiki.blog/olimpiada/${params.slug}`,
+      siteName: "CodeWiki",
+    },
+    keywords: categories.map(category => category.name).join(', '),
+  };
+}
 
 interface Params {
   params: {

@@ -1,6 +1,12 @@
 import ContactForm from '@/app/components/ContactForm';
 import React from 'react';
 
+export const metadata = {
+  title: 'Contactează-ne - CodeWiki',
+  description: 'Descoperă articole detaliate despre programare competitivă pe CodeWiki. Învață algoritmi, structuri de date și pregătește-te pentru concursuri de programare cu ghidurile și tutorialele noastre experte.',
+  keywords: 'blog informatica, blog olimpiada informatica, articole olimpiada informatica, tutoriale algoritmi, olimpiada de informatica, structuri de date, pregătire olimpiada de informatica, informatică, olimpiada, CodeWiki, codewiki',
+};
+
 const ContactPage: React.FC = () => {
   return (
     <main className="flex items-center justify-center min-h-screen bg-background-50 px-4 py-8">

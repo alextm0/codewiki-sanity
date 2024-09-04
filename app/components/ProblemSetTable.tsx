@@ -77,7 +77,7 @@ const ProblemSetTable: React.FC<ProblemSetTableProps> = ({
       </td>
       <td className="py-4 px-6 text-2xl text-gray-600">
         {["hard", "normal", "easy"].includes(problem.badge) && (
-          <Link href={`/solutions/${problem.solutionSlug}`}>
+          <Link href={`/solutie/${problem.solutionSlug}`}>
             <TbDotsVertical className="hover:text-primary-600 transition-colors duration-200" />
           </Link>
         )}

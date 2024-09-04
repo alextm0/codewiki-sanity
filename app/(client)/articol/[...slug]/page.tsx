@@ -54,9 +54,10 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
           }
         }
       },
-      "comments": *[_type == "comment" && post._ref == ^._id ] | order(_createdAt ${commentsOrder}) {
+      "comments": *[_type == "comment" && post._ref == ^._id && published == true] | order(_createdAt ${commentsOrder}) {
         name,
         comment,
+        published,
         _createdAt,
       }
     }
@@ -103,20 +104,23 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: `${post.title} | CodeWiki - Articol de Programare Competitivă`,
+    description: post.excerpt || "Descoperă un nou articol legat de programare competitivă pe CodeWiki. Învățați tehnici și algoritmi pentru a vă pregăti pentru concursuri de programare.",
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: post.excerpt || "Citește acest articol pe CodeWiki pentru a învăța mai multe despre programare competitivă și algoritmi.",
       type: "article",
       locale: "ro_RO",
-      url: `https://codewiki-sanity.vercel.app/${params.slug}`,
+      url: `https://www.codewiki.blog/articol/${params.slug}`,
       siteName: "CodeWiki",
+      images: [post.coverImage],
     },
+    // Meta tag-uri pentru cuvinte cheie, folosite pentru SEO
+    keywords: post.tags?.join(', ') || "programare competitivă, algoritmi, olimpiada informatica, concursuri de programare, pregatire pentru olimpiada de informatica",
   };
 }
 
-// New Component for Blog Post Content
+
 const BlogPostContent = ({
   post,
   commentsOrder,
@@ -129,7 +133,7 @@ const BlogPostContent = ({
   return (
     <div className="font-inter w-full max-w-full">
       <div className="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto text-center mb-6 px-4 sm:px-6">
           <h1 className="text-3xl lg:text-5xl font-bold mb-2 pt-10">
             {post.title}
           </h1>
@@ -200,7 +204,6 @@ const BlogPostContent = ({
 const Page = async ({ params, searchParams }: Params) => {
   const commentsOrder = searchParams?.comments?.toString() || "desc";
 
-  // Fetch the post data and wrap content in Suspense with BlogPostSkeleton fallback
   const post = await getPost(params?.slug, commentsOrder);
 
   if (!post) {

@@ -36,9 +36,10 @@ async function getPosts() {
 export const revalidate = 60; // 1 minute
 
 export const metadata = {
-  title: "CodeWiki",
-  description: "codewiki.tech - a competitive programming blog",
+  title: "CodeWiki - Articole de Programare Competitivă",
+  description: "CodeWiki este un blog de programare competitivă ce oferă articole detaliate, tutoriale de algoritmi, și resurse pentru pregătirea concursurilor de programare. Învățați cum să rezolvați probleme complexe și să vă pregătiți pentru olimpiadele de informatică.",
 };
+
 
 export default async function Home() {  
   const posts: Post[] = await getPosts();
