@@ -68,7 +68,7 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
   if (!post) {
     return null;
   }
-
+  
   const markdownContent = portableTextToMarkdown(post?.body || "");
   const markdownHeadings = extractMarkdownHeadings(markdownContent);
   const allHeadings = [...(post.headings || []), ...markdownHeadings];
@@ -91,7 +91,7 @@ function extractMarkdownHeadings(markdownContent: string) {
   return headings;
 }
 
-export const revalidate = 60;
+export const revalidate = 60; 
 
 export async function generateMetadata({
   params,
@@ -119,7 +119,6 @@ export async function generateMetadata({
     keywords: post.tags?.join(', ') || "programare competitivă, algoritmi, olimpiada informatica, concursuri de programare, pregatire pentru olimpiada de informatica",
   };
 }
-
 
 const BlogPostContent = ({
   post,

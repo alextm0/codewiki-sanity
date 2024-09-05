@@ -8,34 +8,73 @@ interface PortableTextChild {
 }
 
 interface PortableTextBlock {
-  content: string;
+  _key?: string;
   _type: string;
-  style?: string; // Make style optional since custom blocks like resourcesTable won't have it
-  children?: PortableTextChild[]; // Make children optional for custom blocks
+  style?: string;
+  children?: PortableTextChild[];
   markDefs?: { _key: string; _type: string; href: string }[];
-  header?: string; // Add header field for resourcesTable
-  resource?: {
-    source: string;
-    title: string;
-    link: string;
-    description: string;
-  }[]; // Add resource field for resourcesTable
-
+  level?: number;
+  listItem?: string;
+  content?: string;
   // Add fields for image block
   asset?: { _ref: string };
   alt?: string;
+  items?: PortableTextBlock[]; // For nested unordered lists
+  subItems?: PortableTextBlock[]; // Recursive sub-items
+}
+
+function processListItems(blocks: PortableTextBlock[]): string {
+  let result = "";
+  let currentLevel = 0;
+
+  blocks.forEach((block) => {
+    if (block.listItem) {
+      const level = block.level || 1;
+      const prefix = "  ".repeat(level - 1) + "- ";
+
+      if (level > currentLevel) {
+        result += "\n" + "  ".repeat(currentLevel) + "\n";
+      } else if (level < currentLevel) {
+        result += "\n";
+      }
+
+      currentLevel = level;
+
+      const childrenText = block.children
+        ? block.children.map((child) => child.text).join("")
+        : "";
+      result += `${prefix}${childrenText}\n`;
+    }
+  });
+
+  return result;
 }
 
 export function portableTextToMarkdown(blocks: PortableTextBlock[]): string {
-  return blocks && blocks.map((block) => {
+  let listBlocks: PortableTextBlock[] = [];
+  let markdown = blocks
+    .map((block) => {
+      if (block.listItem) {
+        // Collect list items in a separate array
+        listBlocks.push(block);
+        return "";
+      }
+
+      // Process collected list items and reset the array
+      if (listBlocks.length > 0) {
+        const listMarkdown = processListItems(listBlocks);
+        listBlocks = [];
+        return listMarkdown;
+      }
+
       if (block._type === "note" || block._type === "info" || block._type === "warning") {
         const style = block.style;
         const content = block.content || "";
-        return `!!! ${style ?? ''} "${(style?.charAt(0) ?? '').toUpperCase() + (style?.slice(1) ?? '')}"\n    ${content}`;
+        return `!!! ${style ?? ""} "${(style?.charAt(0) ?? "").toUpperCase() + (style?.slice(1) ?? "")}"\n    ${content}`;
       }
 
       if (block._type === "image") {
-        const imageUrl = block.asset?._ref ? urlForImage({ _ref: block.asset._ref }).url() : '';
+        const imageUrl = block.asset?._ref ? urlForImage({ _ref: block.asset._ref }).url() : "";
         const altText = block.alt || "";
         return `![${altText}](${imageUrl})`;
       }
@@ -45,22 +84,20 @@ export function portableTextToMarkdown(blocks: PortableTextBlock[]): string {
       }
 
       const children = block.children
-      .map((child) => {
-        const marks = child.marks ?? [];
-        if (marks.length > 0) {
-
-          const mark = block.markDefs?.find((def) => def._key === marks[0]);
-          if (mark && mark._type === "link") {
-            return `[${child.text}](${mark.href})`;
+        .map((child) => {
+          const marks = child.marks ?? [];
+          if (marks.length > 0) {
+            const mark = block.markDefs?.find((def) => def._key === marks[0]);
+            if (mark && mark._type === "link") {
+              return `[${child.text}](${mark.href})`;
+            }
+            if (marks.includes("code")) {
+              return `\`${child.text}\``;
+            }
           }
-          if (marks.includes("code")) {
-            return `\`${child.text}\``;
-          }
-        }
-        return child.text;
-      })
-      .join("");
-    
+          return child.text;
+        })
+        .join("");
 
       switch (block.style) {
         case "h1":
@@ -88,4 +125,11 @@ export function portableTextToMarkdown(blocks: PortableTextBlock[]): string {
       }
     })
     .join("\n\n");
+
+  // Process any remaining list items
+  if (listBlocks.length > 0) {
+    markdown += processListItems(listBlocks);
+  }
+
+  return markdown;
 }

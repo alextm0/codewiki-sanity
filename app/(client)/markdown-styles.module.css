@@ -89,3 +89,26 @@
 .markdown strong {
   font-weight: bold;
 }
+
+/* -------- */
+
+.markdown ul {
+  list-style-type: disc; /* Default bullet style */
+  margin-bottom: 1em; /* Space between list items */
+  margin-left: 1.2em; /* Indentation for the list */
+}
+
+.markdown ul ul {
+  list-style-type: circle; /* Second level uses circle bullets */
+  margin-left: 1.5em; /* Further indentation for nested list */
+}
+
+.markdown ul ul ul {
+  list-style-type: square; /* Third level uses square bullets */
+  margin-left: 1.8em; /* Further indentation for deeper nested list */
+}
+
+.markdown li {
+  margin-bottom: 0.5em; /* Space between list items */
+}
+
