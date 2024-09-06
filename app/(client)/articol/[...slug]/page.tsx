@@ -91,7 +91,7 @@ function extractMarkdownHeadings(markdownContent: string) {
   return headings;
 }
 
-export const revalidate = 60; 
+export const revalidate = 1; 
 
 export async function generateMetadata({
   params,

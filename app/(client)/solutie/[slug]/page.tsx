@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
-export const revalidate = 60;
+export const revalidate = 1;
 
 const SolutionPage = async ({ params }: Params) => {
   const solution = await getSolution(params.slug);
