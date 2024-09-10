@@ -1,4 +1,3 @@
-import { noteBlock } from './customBlocks'; // Adjust the path according to your project structure
 import { Rule } from "sanity";
 
 export const post = {
@@ -13,6 +12,12 @@ export const post = {
       validation: (Rule: Rule) => Rule.required().error("Required"),
     },
     {
+      name: "author",
+      title: "Author",
+      type: "string",
+      validation: (Rule: Rule) => Rule.required().error("Required"),
+    },
+    {
       name: "slug",
       title: "Slug",
       type: "slug",
@@ -23,7 +28,7 @@ export const post = {
       name: "published",
       title: "Published",
       type: "boolean",
-      initialValue: true,  // Default to true if you want newly created posts to be published by default
+      initialValue: true,
     },
     {
       name: "publishedAt",
@@ -60,23 +65,19 @@ export const post = {
       },
     },
     {
-      name: "body",
-      title: "Body",
-      type: "array",
-      of: [
-        { type: "block" },
-        {
-          type: "image",
-          fields: [{ type: "text", name: "alt", title: "Alt" }],
-        },
-        { type: "noteBlock" }, // This should be the unique name
-      ],
-    },
-    {
       name: "tags",
       title: "Tags",
       type: "array",
       of: [{ type: "reference", to: [{ type: "tag" }] }],
+    },
+
+    {
+      name: "markdownFile",
+      title: "Markdown File",
+      type: "file",
+      options: {
+        accept: ".md",
+      },
     },
   ],
 };

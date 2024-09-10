@@ -1,101 +1,28 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
+import fs from 'fs';
+import path from 'path';
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import { Link } from "next-view-transitions";
+
+// Components
 import MarkdownRender from "@/app/components/MarkdownComponent";
 import Toc from "@/app/components/Toc";
 import BlogPostSkeleton from "@/app/components/BlogPostSkeleton";
-import { client } from "@/sanity/lib/client";
-import { portableTextToMarkdown } from "@/app/utils/portableTextToMarkdown";
-import { Metadata } from "next";
-import { Link } from "next-view-transitions";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import "@/app/(client)/markdown-styles.module.css";
-import { slugify } from "@/app/utils/helpers";
-import dynamic from "next/dynamic";
 
+// Utilities
+import { client } from "@/sanity/lib/client";
+import { extractMarkdownHeadings } from "@/app/utils/extractMarkdownHeadings";
+import "@/app/(client)/markdown-styles.module.css";
+
+// Dynamic imports for comments
 const AddComment = dynamic(() => import("@/app/components/AddComment"));
 const AllComments = dynamic(() => import("@/app/components/AllComments"));
 
-interface Params {
-  params: {
-    slug: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}
-
-async function getPost(slug: string, commentsOrder: string = "desc") {
-  const query = `
-    *[_type == "post" && slug.current == "${slug}" && published == true][0] {
-      title,
-      slug,
-      published,
-      publishedAt,
-      excerpt,
-      coverImage {
-        asset-> {
-          url
-        },
-        alt
-      },
-      _id,
-      "headings": body[style in ["h2", "h3", "h4", "h5", "h6"]],
-      body,
-      tags[]-> {
-        _id,
-        slug,
-        name
-      },
-      author-> {
-        name,
-        image {
-          asset-> {
-            url
-          }
-        }
-      },
-      "comments": *[_type == "comment" && post._ref == ^._id && published == true] | order(_createdAt ${commentsOrder}) {
-        name,
-        comment,
-        published,
-        _createdAt,
-      }
-    }
-  `;
-
-  const post = await client.fetch(query);
-
-  if (!post) {
-    return null;
-  }
-  
-  const markdownContent = portableTextToMarkdown(post?.body || "");
-  const markdownHeadings = extractMarkdownHeadings(markdownContent);
-  const allHeadings = [...(post.headings || []), ...markdownHeadings];
-
-  return { ...post, markdownContent, allHeadings };
-}
-
-function extractMarkdownHeadings(markdownContent: string) {
-  const headingRegex = /^(#{1,6})\s+(.*)$/gm;
-  const headings = [];
-  let match;
-
-  while ((match = headingRegex.exec(markdownContent)) !== null) {
-    const level = match[1].length;
-    const text = match[2].trim();
-    const slug = slugify(text);
-    headings.push({ level, text, slug });
-  }
-
-  return headings;
-}
-
-export const revalidate = 1; 
-
-export async function generateMetadata({
-  params,
-}: Params): Promise<Metadata | undefined> {
+// Helper: Generate metadata for SEO
+export async function generateMetadata({ params }: Params): Promise<Metadata | undefined> {
   const post = await getPost(params?.slug);
 
   if (!post || !post.title || !post.markdownContent) {
@@ -105,7 +32,7 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} | CodeWiki - Articol de Programare Competitivă`,
-    description: post.excerpt || "Descoperă un nou articol legat de programare competitivă pe CodeWiki. Învățați tehnici și algoritmi pentru a vă pregăti pentru concursuri de programare.",
+    description: post.excerpt || "Descoperă un nou articol legat de programare competitivă pe CodeWiki.",
     openGraph: {
       title: post.title,
       description: post.excerpt || "Citește acest articol pe CodeWiki pentru a învăța mai multe despre programare competitivă și algoritmi.",
@@ -115,18 +42,76 @@ export async function generateMetadata({
       siteName: "CodeWiki",
       images: [post.coverImage],
     },
-    // Meta tag-uri pentru cuvinte cheie, folosite pentru SEO
-    keywords: post.tags?.join(', ') || "programare competitivă, algoritmi, olimpiada informatica, concursuri de programare, pregatire pentru olimpiada de informatica",
+    keywords: post.tags?.join(", ") || "programare competitivă, algoritmi, olimpiada informatica, concursuri de programare, pregatire pentru olimpiada de informatica",
   };
 }
 
-const BlogPostContent = ({
-  post,
-  commentsOrder,
-}: {
-  post: any;
-  commentsOrder: string;
-}) => {
+async function getPost(slug: string, commentsOrder: string = "desc") {
+  const query = `
+    *[_type == "post" && slug.current == "${slug}" && published == true][0] {
+      title,
+      slug,
+      author,
+      published,
+      publishedAt,
+      excerpt,
+      markdownFile {
+        asset -> {
+          url
+        }
+      },
+      coverImage {
+        asset-> {
+          url
+        },
+        alt
+      },
+      _id,
+      tags[]-> {
+        _id,
+        slug,
+        name
+      },
+      "comments": *[_type == "comment" && post._ref == ^._id && published == true] | order(_createdAt ${commentsOrder}) {
+        name,
+        comment,
+        published,
+        _createdAt,
+      },
+    }
+  `;
+
+  const post = await client.fetch(query);
+
+  if (!post) return null;
+
+  const localMarkdownPath = path.join(process.cwd(), 'content', `${slug}.md`);
+  let markdownContent = "";
+
+  // Check for local markdown file, fallback to Sanity markdown file URL
+  if (fs.existsSync(localMarkdownPath)) {
+    markdownContent = fs.readFileSync(localMarkdownPath, 'utf-8');
+  } else if (post.markdownFile?.asset?.url) {
+    const res = await fetch(post.markdownFile.asset.url);
+    markdownContent = await res.text();
+  }
+
+  // Extract headings from markdown content
+  const allHeadings = extractMarkdownHeadings(markdownContent);
+
+  return { ...post, markdownContent, allHeadings };
+}
+
+type Params = {
+  params: {
+    slug: string;
+  };
+  searchParams: {
+    comments: string;
+  };
+};
+
+const BlogPostContent = ({ post, commentsOrder }: { post: any; commentsOrder: string }) => {
   const { markdownContent, allHeadings } = post;
 
   return (
@@ -137,15 +122,9 @@ const BlogPostContent = ({
             {post.title}
           </h1>
           <div className="flex justify-center items-center space-x-4 text-sm lg:text-base text-text-500">
-            <span>
-              {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
+            <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
             <span>•</span>
-            <span>Autor: Alexandru Toma</span>
+            <span>Autor: {post.author}</span>
           </div>
           <div className="mt-4 space-x-2 flex justify-center flex-wrap">
             {post.tags?.map((tag: any) => (
@@ -186,11 +165,7 @@ const BlogPostContent = ({
               <MarkdownRender mdString={markdownContent} />
               <Suspense fallback={<div>Loading comments...</div>}>
                 <AddComment postId={post._id} />
-                <AllComments
-                  comments={post.comments || []}
-                  slug={post.slug?.current}
-                  commentsOrder={commentsOrder}
-                />
+                <AllComments comments={post.comments || []} slug={post.slug?.current} commentsOrder={commentsOrder} />
               </Suspense>
             </div>
           </main>
@@ -202,7 +177,6 @@ const BlogPostContent = ({
 
 const Page = async ({ params, searchParams }: Params) => {
   const commentsOrder = searchParams?.comments?.toString() || "desc";
-
   const post = await getPost(params?.slug, commentsOrder);
 
   if (!post) {
@@ -231,3 +205,4 @@ const richTextStyles = `
   prose-li:list-disc
   prose-li:leading-7
 `;
+

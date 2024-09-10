@@ -1,5 +1,6 @@
 export interface Post {
   title: string;
+  author: string;
   slug: { current: string };
   publishedAt: string;
   excerpt: string;
@@ -9,12 +10,16 @@ export interface Post {
     };
     alt: string;
   };
-  body: any;
   tags: Array<Tag>;
   _id: string;
   headings?: Array<HTMLHeadElement | string>;
   comments?: Array<Comment>;
   published: boolean;  // Add this field
+  markdownFile?: {
+    asset: {
+      url: string;
+    };
+  };
 }
 
 export interface Tag {
