@@ -21,6 +21,10 @@ import "@/app/(client)/markdown-styles.module.css";
 const AddComment = dynamic(() => import("@/app/components/AddComment"));
 const AllComments = dynamic(() => import("@/app/components/AllComments"));
 
+// Revalidate every second
+
+const revalidate = 1;
+
 // Helper: Generate metadata for SEO
 export async function generateMetadata({ params }: Params): Promise<Metadata | undefined> {
   const post = await getPost(params?.slug);
