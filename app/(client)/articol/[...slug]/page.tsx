@@ -87,13 +87,19 @@ async function getPost(slug: string, commentsOrder: string = "desc") {
 
   if (!post) return null;
 
-  const localMarkdownPath = path.join(process.cwd(), 'content', `${slug}.md`);
+  // const localMarkdownPath = path.join(process.cwd(), 'content', `${slug}.md`);
   let markdownContent = "";
 
-  // Check for local markdown file, fallback to Sanity markdown file URL
-  if (fs.existsSync(localMarkdownPath)) {
-    markdownContent = fs.readFileSync(localMarkdownPath, 'utf-8');
-  } else if (post.markdownFile?.asset?.url) {
+  if (process.env.NODE_ENV === 'development') {
+    // If in development, check for a local markdown file
+    const localMarkdownPath = path.join(process.cwd(), 'content', `${slug}.md`);
+    if (fs.existsSync(localMarkdownPath)) {
+      markdownContent = fs.readFileSync(localMarkdownPath, 'utf-8');
+    }
+  }
+
+  // If no local markdown file, fetch from Sanity
+  if (!markdownContent && post.markdownFile?.asset?.url) {
     const res = await fetch(post.markdownFile.asset.url);
     markdownContent = await res.text();
   }
