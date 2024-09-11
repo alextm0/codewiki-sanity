@@ -78,6 +78,6 @@ export const post = {
       options: {
         accept: ".md",
       },
-    },
+    },    
   ],
 };

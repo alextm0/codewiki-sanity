@@ -36,7 +36,7 @@ const Articles: React.FC<ArticlesProps> = ({ headerTitle, blogs }) => {
             blogs.data.map((blog, index) => (
               <Link
                 key={index}
-                href={`/articol/${blog.slug.current}`}
+                href={`/articol/${blog?.slug?.current}`} // !!! check this out
                 className="cursor-pointer"
               >
                 <BlogPostCard post={blog} />

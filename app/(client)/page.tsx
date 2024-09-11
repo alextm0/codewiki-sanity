@@ -11,7 +11,7 @@ import "./globals.css";
 
 async function getPosts() {
   const query = `
-  *[_type == "post" && published == true]{
+  *[_type == "post" && published == true] | order(publishedAt desc) {
     title,
     slug,
     publishedAt,
@@ -32,6 +32,7 @@ async function getPosts() {
   const data = await client.fetch(query);
   return data;
 }
+
 
 export const revalidate = 60; // 1 minute
 
