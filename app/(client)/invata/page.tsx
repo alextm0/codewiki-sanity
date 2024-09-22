@@ -6,7 +6,7 @@ import AdmitereIcon from "@/public/assets/admitere-icon.svg";
 import BacalaureatIcon from "@/public/assets/bacalaureat-icon.svg";
 import OlimpiadaIcon from "@/public/assets/olimpiada-icon.svg";
 
-import CoursesSection from '@/app/components/CoursesSection';
+import CoursesSection from '@/app/components/features/CoursesSection';
 
 export const metadata = {
   title: 'Învață informatica pentru olimpiada si concursuri | CodeWiki',

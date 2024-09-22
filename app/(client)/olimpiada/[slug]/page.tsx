@@ -1,38 +1,20 @@
 import React from "react";
-import { client } from "@/sanity/lib/client";
-import { Category } from "@/app/utils/interface";
-import CategorySection from "@/app/components/CategorySection";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import CategorySection from "@/app/components/features/CategorySection";
+import { useCategories } from "@/app/hooks/useCategories";
+import config from "@/app/config";
+import { capitalizeFirstLetter } from "@/app/utils/string-utils";
 
-import { v4 as uuidv4 } from 'uuid';
+export const revalidate = config.revalidate.default;
 
-async function getAllCategories(slug : any): Promise<Category[]> {
-  const query = `
-  *[_type == "category" && category == "${slug}"] | order(order asc) {
-    name,
-    category,
-    description,
-    topics[] {
-      _type,
-      topicName,
-      details,
-      stars
-    },
-
-    order
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const validSlugs = ["incepator", "intermediar", "avansat"];
+  if (!validSlugs.includes(params.slug)) {
+    notFound();
   }
-  `;
-  const categories = await client.fetch(query);
-  return categories;
-}
 
-export const revalidate = 60;
-
-function capitalizeFirstLetter(str : string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-export async function generateMetadata({ params }: Params) {
-  const categories = await getAllCategories(params.slug);
+  const categories = await useCategories(params.slug);
   const title = `${capitalizeFirstLetter(params.slug)} | Pregătire pentru Olimpiada de Informatică | CodeWiki`;
   const description = `Descoperă tehnici de programare pentru pregătire pentru olimpiada de informatică la nivel ${params.slug}. Învață și îmbunătățește-ți abilitățile de programare cu resursele noastre.`;
 
@@ -51,21 +33,19 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
-interface Params {
-  params: {
-    slug: string;
-  };
-}
+export default async function Page({ params }: Params) {
+  const validSlugs = ["incepator", "intermediar", "avansat"];
+  if (!validSlugs.includes(params.slug)) {
+    notFound();
+  }
 
-export default async function Page({params} : Params) {
-
-  const categories = await getAllCategories(params.slug);
+  const categories = await useCategories(params.slug);
 
   return (
     <div>
       {categories.map((category) => (
         <CategorySection
-          key={uuidv4()}
+          key={category.name}
           name={category.name}
           category={category.category}
           topics={category.topics}
@@ -74,4 +54,10 @@ export default async function Page({params} : Params) {
       ))}
     </div>
   );
+}
+
+interface Params {
+  params: {
+    slug: string;
+  };
 }

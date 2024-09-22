@@ -1,13 +1,14 @@
 import { client } from "@/sanity/lib/client";
 
 import { Post } from "../utils/interface";
-import HeroSection from "../components/HeroSection";
-import Courses from "../components/CoursesSection";
-import Features from "../components/Features";
-import ArticlesSection from "../components/ArticlesGrid";
-import PageDivider from "../components/PageDivider";
+import HeroSection from "../components/features/HeroSection";
+import Courses from "../components/features/CoursesSection";
+import Features from "../components/features/Features";
+import ArticlesGrid from "../components/blog/ArticlesGrid";
+import PageDivider from "../components/ui/PageDivider";
 
 import "./globals.css";
+import config from "../config";
 
 async function getPosts() {
   const query = `
@@ -33,8 +34,7 @@ async function getPosts() {
   return data;
 }
 
-
-export const revalidate = 60; // 1 minute
+export const revalidate = config.revalidate.default;
 
 export const metadata = {
   title: "CodeWiki - Blog despre programare competitivă",
@@ -55,7 +55,7 @@ export default async function Home() {
       <Features />
       <div className="max-w-5xl mx-auto px-6">
         {posts && (
-          <ArticlesSection headerTitle="Cele mai recente articole" blogs={{ data: posts }} />
+          <ArticlesGrid headerTitle="Cele mai recente articole" posts={posts} />
         )}
       </div>
     </div>

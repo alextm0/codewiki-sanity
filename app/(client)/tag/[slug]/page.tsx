@@ -1,49 +1,23 @@
-import Header from "@/app/components/Header";
-import PostComponent from "@/app/components/PostComponent";
-import { Post } from "@/app/utils/interface";
-import { client } from "@/sanity/lib/client";
 import React from "react";
-import ArticlesSection from "@/app/components/ArticlesGrid";
-import { FaRegSadTear } from "react-icons/fa"; // Import an icon for visual effect
-import Link from "next/link"; // Import Link for navigation
+import { Metadata } from "next";
+import { FaRegSadTear } from "react-icons/fa";
+import Link from "next/link";
+import config from "@/app/config";
+import ArticlesGrid from "@/app/components/blog/ArticlesGrid";
+import { usePostsByTag } from "@/app/hooks/usePostsByTag";
 
-async function getPostsByTag(tag: string) {
-  const query = `
-  *[_type == "post" && references(*[_type == "tag" && slug.current == "${tag}"]._id)]{
-    title,
-    slug,
-    publishedAt,
-    excerpt,
-    coverImage {
-      asset-> {
-        url
-      },
-      alt
-    },
-    tags[]-> {
-      _id,
-      slug,
-      name
-    }
-  }
-  `;
+export const revalidate = config.revalidate.articleList;
 
-  const posts = await client.fetch(query);
-  return posts;
-}
-
-export const revalidate = 60;
-
-export async function generateMetadata({ params }: Params) {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
-    title: `#${params.slug}`,
-    description: `Posts with the tag ${params.slug}`,
+    title: `#${params.slug} - CodeWiki`,
+    description: `Articole cu tag-ul ${params.slug} pe CodeWiki`,
     openGraph: {
-      title: `#${params.slug}`,
-      description: `Posts with the tag ${params.slug}`,
+      title: `#${params.slug} - CodeWiki`,
+      description: `Articole cu tag-ul ${params.slug} pe CodeWiki`,
       type: "website",
-      locale: "en_US",
-      url: `https://codewiki-sanity.vercel.app/${params.slug}`,
+      locale: "ro_RO",
+      url: `https://www.codewiki.blog/tag/${params.slug}`,
       siteName: "CodeWiki",
     },
   };
@@ -55,18 +29,13 @@ interface Params {
   };
 }
 
-const Page = async ({ params }: Params) => {
-  const posts: Array<Post> = await getPostsByTag(params.slug);
+export default async function TagPage({ params }: Params) {
+  const posts = await usePostsByTag(params.slug);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-background-50 dark:bg-gray-900 px-4 py-16">
-      {posts && posts.length > 0 ? (
-        <div className="mx-auto max-w-5xl px-6">
-          <ArticlesSection
-            headerTitle={`#${params.slug}`}
-            blogs={{ data: posts }}
-          />
-        </div>
+    <div className="max-w-5xl mx-auto px-6 mt-10">
+      {posts.length > 0 ? (
+        <ArticlesGrid posts={posts} headerTitle={`Articole cu tag-ul #${params.slug}`} />
       ) : (
         <div className="flex flex-col items-center text-center">
           <FaRegSadTear className="text-7xl text-blue-600 mb-6" />
@@ -95,6 +64,4 @@ const Page = async ({ params }: Params) => {
       )}
     </div>
   );
-};
-
-export default Page;
+}

@@ -1,4 +1,4 @@
-import ContactForm from '@/app/components/ContactForm';
+import ContactForm from '@/app/components/form/ContactForm';
 import React from 'react';
 
 export const metadata = {
