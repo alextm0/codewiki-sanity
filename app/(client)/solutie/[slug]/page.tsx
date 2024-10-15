@@ -1,6 +1,6 @@
 import React from "react";
 import { client } from "@/sanity/lib/client";
-import MarkdownRender from "@/app/components/MarkdownComponent";
+import MarkdownRender from "@/app/components/markdown/MarkdownComponent";
 import { notFound } from "next/navigation";
 import "@/app/(client)/markdown-styles.module.css";
 import { portableTextToMarkdown } from "@/app/utils/portableTextToMarkdown";
