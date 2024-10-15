@@ -1,6 +1,7 @@
 import { Link } from 'next-view-transitions';
 import React from 'react';
 import NotFoundSVG from '@/public/assets/not-found.svg';
+import Image from 'next/image';
 
 const NotFound = () => {
   return (
@@ -8,7 +9,7 @@ const NotFound = () => {
       <div className="flex flex-col items-center space-y-6">
         {/* NotFound SVG */}
         <div className="w-64 h-64">
-          <img src={NotFoundSVG.src} alt="Not Found" className="w-full h-full object-cover" />
+          <Image src={NotFoundSVG.src} alt="Not Found" className="w-full h-full object-cover" />
         </div>
         
         {/* Main Message */}

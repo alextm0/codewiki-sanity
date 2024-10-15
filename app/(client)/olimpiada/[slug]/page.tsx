@@ -14,7 +14,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     notFound();
   }
 
-  const categories = await useCategories(params.slug);
   const title = `${capitalizeFirstLetter(params.slug)} | Pregătire pentru Olimpiada de Informatică | CodeWiki`;
   const description = `Descoperă tehnici de programare pentru pregătire pentru olimpiada de informatică la nivel ${params.slug}. Învață și îmbunătățește-ți abilitățile de programare cu resursele noastre.`;
 
@@ -29,7 +28,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url: `https://www.codewiki.blog/olimpiada/${params.slug}`,
       siteName: "CodeWiki",
     },
-    keywords: categories.map(category => category.name).join(', '),
   };
 }
 
