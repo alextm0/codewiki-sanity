@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPostSkeleton from "@/app/components/ui/BlogPostSkeleton";
-import { getPost } from "@/app/utils/postUtils"; // Import the server-side function
+import { getPost } from "@/app/utils/postUtils";
 import "@/app/(client)/markdown-styles.module.css";
 import BlogHeader from "@/app/components/blog/BlogHeader";
 import CoverImage from "@/app/components/blog/CoverImage";

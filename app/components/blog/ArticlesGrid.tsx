@@ -30,7 +30,7 @@ const ArticlesGrid: React.FC<ArticlesGridProps> = ({ headerTitle, posts }) => {
           {posts.map((post, index) => (
             <Link
               key={index}
-              href={`/articol/${post.slug.current}`}
+              href={`/articol/${post?.slug?.current}`}
               className="cursor-pointer w-full"
             >
               <BlogPostCard post={post} />
