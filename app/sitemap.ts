@@ -24,7 +24,7 @@ export default async function sitemap():Promise<MetadataRoute.Sitemap> {
   const posts: Post[] = await getPosts();
 
   const postUrls = posts.map((post) => ({
-    url: `https://www.codewiki.blog/articol/${post.slug.current}`,
+    url: `https://www.codewiki.blog/articol/${post?.slug?.current}`,
     lastModified: new Date(post.publishedAt),
     priority: 0.64,
   }))
